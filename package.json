@@ -5,8 +5,9 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
-    "lint": "eslint .",
-    "format": "prettier --write ."
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "dzmitry zhukouski",
@@ -21,6 +22,7 @@
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-react": "^7.37.4",
+    "husky": "^9.1.7",
     "prettier": "^3.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
