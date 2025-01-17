@@ -12,3 +12,4 @@ coverage
 *.swp
 *.bak
 .vscode
+*storybook.log

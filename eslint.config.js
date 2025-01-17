@@ -39,6 +39,6 @@ module.exports = [
     },
   },
   {
-    ignores: ['**/*.js', '**/*.jsx', '**/*.d.ts', '**/*.config.js', '.prettierrc.js'],
+    ignores: ['node_modules/**', 'dist/**', '**/*.js'],
   },
 ];
