@@ -1,5 +1,5 @@
-@use '../../assets/style/vars.scss' as *;
-@use '../../assets/style/mixins.scss' as mixins;
+@use '../../style/vars.scss' as *;
+@use '../../style/mixins.scss' as mixins;
 
 $transition-duration: 250ms;
 $transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
