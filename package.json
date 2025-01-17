@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
-    "lint": "lint-staged",
+    "lint-staged": "lint-staged",
+    "eslint": "eslint \"src/**/*.{ts,tsx}\"",
     "format": "prettier --write .",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",

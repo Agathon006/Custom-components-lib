@@ -11,7 +11,6 @@ export type ButtonProps = {
   size?: ButtonSize;
   variant?: ButtonVariant;
 };
-
 const Button: FC<ButtonProps> = ({
   children,
   size = 'medium',
