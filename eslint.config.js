@@ -44,6 +44,7 @@ module.exports = [
       'dist/**',
       '.storybook/**',
       'src/stories/**',
+      'commitlint.config.js',
       '.prettierrc.js',
       'eslint.config.js',
       'webpack.config.js',
