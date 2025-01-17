@@ -1,6 +1,6 @@
 type ClassNames = { [key: string]: boolean };
 
-function makeClassName(...args: (string | ClassNames | string[] | null | undefined)[]): string {
+export function clsx(...args: (string | ClassNames | string[] | null | undefined)[]): string {
   const classes: string[] = [];
 
   for (const arg of args) {
@@ -23,5 +23,3 @@ function makeClassName(...args: (string | ClassNames | string[] | null | undefin
 
   return classes.join(' ');
 }
-
-export default makeClassName;

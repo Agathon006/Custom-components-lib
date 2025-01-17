@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import './Button.scss';
 
-import makeClassName from '../../utils/makeClassName';
+import { clsx } from '../../utils/clsx';
 
 type ButtonSize = 'small' | 'medium' | 'big';
 type ButtonVariant = 'text' | 'contained' | 'outlined';
@@ -12,13 +12,13 @@ export type ButtonProps = {
   variant?: ButtonVariant;
 } & React.ComponentPropsWithoutRef<'button'>;
 
-const Button: FC<ButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
   children,
   size = 'medium',
   variant = 'contained',
   ...props
 }) => {
-  const cssClasses = makeClassName('button', {
+  const cssClasses = clsx('button', {
     'button-small': size === 'small',
     'button-big': size === 'big',
     'button-text': variant === 'text',
@@ -31,5 +31,3 @@ const Button: FC<ButtonProps> = ({
     </button>
   );
 };
-
-export default Button;
