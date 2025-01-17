@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import './Button.scss';
 
+import makeClassName from '../../utils/makeClassName';
+
 type ButtonSize = 'small' | 'medium' | 'big';
 type ButtonVariant = 'text' | 'contained' | 'outlined';
 
@@ -16,22 +18,15 @@ const Button: FC<ButtonProps> = ({
   variant = 'contained',
   ...props
 }) => {
-  const rootClasses = ['button'];
-
-  if (size === 'small') {
-    rootClasses.push('button-small');
-  } else if (size === 'big') {
-    rootClasses.push('button-big');
-  }
-
-  if (variant === 'text') {
-    rootClasses.push('button-text');
-  } else if (variant === 'outlined') {
-    rootClasses.push('button-outlined');
-  }
+  const cssClasses = makeClassName('button', {
+    'button-small': size === 'small',
+    'button-big': size === 'big',
+    'button-text': variant === 'text',
+    'button-outlined': variant === 'outlined',
+  });
 
   return (
-    <button {...props} className={rootClasses.join(' ')}>
+    <button {...props} className={cssClasses}>
       {children}
     </button>
   );
