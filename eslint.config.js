@@ -7,6 +7,7 @@ const compat = new FlatCompat({
 });
 
 module.exports = [
+  ...compat.extends('plugin:storybook/recommended'),
   ...compat.extends('eslint:recommended'),
   ...compat.extends('plugin:react/recommended'),
   ...compat.extends('plugin:@typescript-eslint/recommended'),
@@ -40,14 +41,12 @@ module.exports = [
   },
   {
     ignores: [
-      'node_modules/**',
-      'dist/**',
-      '.storybook/**',
-      'src/stories/**',
-      'commitlint.config.js',
-      '.prettierrc.js',
-      'eslint.config.js',
-      'webpack.config.js',
-    ],
+      'node_modules/**',    
+      'dist/**',               
+      '.storybook/**',          
+      'src/stories/**',    
+      '*.config.js',
+      '.*.js',
+    ]
   },
 ];
