@@ -1,0 +1,101 @@
+@use '../../style/vars.scss' as *;
+@use '../../style/mixins.scss' as mixins;
+
+$transition-duration: 250ms;
+$transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+$transition:
+  background-color $transition-duration $transition-timing 0ms,
+  box-shadow $transition-duration $transition-timing 0ms,
+  border-color $transition-duration $transition-timing 0ms;
+
+@mixin shadow-default() {
+  box-shadow:
+    0px 3px 1px -2px rgba(var(--color-black), 0.2),
+    0px 2px 2px 0px rgba(var(--color-black), 0.14),
+    0px 1px 5px 0px rgba(var(--color-black), 0.12);
+}
+
+@mixin shadow-hover() {
+  box-shadow:
+    0px 2px 4px -1px rgba(var(--color-black), 0.2),
+    0px 4px 5px 0px rgba(var(--color-black), 0.14),
+    0px 1px 10px 0px rgba(var(--color-black), 0.12);
+}
+
+@mixin shadow-active() {
+  box-shadow:
+    0px 5px 5px -3px rgba(var(--color-black), 0.2),
+    0px 8px 10px 1px rgba(var(--color-black), 0.14),
+    0px 3px 14px 2px rgba(var(--color-black), 0.12);
+}
+
+.button {
+  @include mixins.text-m;
+  letter-spacing: 0.02857em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: $transition;
+  padding: 6px 16px;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+
+  @include shadow-default();
+
+  &:hover {
+    background-color: #1565c0;
+    @include shadow-hover();
+  }
+
+  &:active {
+    @include shadow-active();
+  }
+
+  &:disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  &.button-small {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  &.button-big {
+    font-size: 1rem;
+    padding: 8px 24px;
+  }
+  &.button-text {
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--color-primary);
+
+    &:hover {
+      background-color: var(--color-primary-dark);
+    }
+  }
+  &.button-outlined {
+    border: 1px solid rgba(var(--color-black), 0.23);
+    background-color: transparent;
+    color: var(--color-primary);
+    box-shadow: none;
+
+    &:hover {
+      border: 1px solid var(--color-primary);
+      background-color: var(--color-primary-dark);
+    }
+  }
+}
