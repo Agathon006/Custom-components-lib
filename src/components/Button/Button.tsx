@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './Button.css';
+import './Button.scss';
 
 type ButtonSize = 'small' | 'medium' | 'big';
 type ButtonVariant = 'text' | 'contained' | 'outlined';
