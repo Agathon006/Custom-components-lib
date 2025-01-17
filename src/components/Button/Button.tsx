@@ -10,7 +10,8 @@ export type ButtonProps = {
   children?: React.ReactNode;
   size?: ButtonSize;
   variant?: ButtonVariant;
-};
+} & React.ComponentPropsWithoutRef<'button'>;
+
 const Button: FC<ButtonProps> = ({
   children,
   size = 'medium',
