@@ -39,6 +39,14 @@ module.exports = [
     },
   },
   {
-    ignores: ['node_modules/**', 'dist/**', '**/*.js', '**/*.stories.tsx'],
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      '.storybook/**',
+      'src/stories/**',
+      '.prettierrc.js',
+      'eslint.config.js',
+      'webpack.config.js',
+    ],
   },
 ];

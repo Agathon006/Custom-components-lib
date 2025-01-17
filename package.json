@@ -5,9 +5,8 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
-    "lint-staged": "lint-staged",
-    "eslint": "eslint \"src/**/*.{ts,tsx}\"",
-    "format": "prettier --write .",
+    "eslint": "eslint . --fix",
+    "format": "npx prettier --write .",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -57,8 +56,11 @@
     "dist"
   ],
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "eslint"
+    "*.{json, js, ts, jsx, tsx, html, css, scss, sass}": [
+      "prettier --write"
+    ],
+    "*.{js, ts, jsx, tsx}": [
+      "eslint --fix"
     ]
   },
   "eslintConfig": {
