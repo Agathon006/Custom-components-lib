@@ -16,18 +16,18 @@ const Button: FC<ButtonProps> = ({
   variant = 'contained',
   ...props
 }) => {
-  const rootClasses = ['ccl-button'];
+  const rootClasses = ['button'];
 
   if (size === 'small') {
-    rootClasses.push('ccl-button-small');
+    rootClasses.push('button-small');
   } else if (size === 'big') {
-    rootClasses.push('ccl-button-big');
+    rootClasses.push('button-big');
   }
 
   if (variant === 'text') {
-    rootClasses.push('ccl-button-text');
+    rootClasses.push('button-text');
   } else if (variant === 'outlined') {
-    rootClasses.push('ccl-button-outlined');
+    rootClasses.push('button-outlined');
   }
 
   return (
