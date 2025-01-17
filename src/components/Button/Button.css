@@ -1,6 +1,6 @@
 @import '../../assets/style/vars.css';
 
-.ccl-button {
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@
 }
 
 /* Hover style */
-.ccl-button:hover {
+.button:hover {
   background-color: #1565c0;
   box-shadow:
     0px 2px 4px -1px rgba(var(--color-black), 0.2),
@@ -46,7 +46,7 @@
 }
 
 /* Active style */
-.ccl-button:active {
+.button:active {
   box-shadow:
     0px 5px 5px -3px rgba(var(--color-black), 0.2),
     0px 8px 10px 1px rgba(var(--color-black), 0.14),
@@ -54,42 +54,42 @@
 }
 
 /* Disabled style */
-.ccl-button:disabled {
+.button:disabled {
   pointer-events: none;
   cursor: default;
   opacity: 0.5;
 }
 
 /* Sizes */
-.ccl-button.ccl-button-small {
+.button.button-small {
   font-size: 0.75rem;
   padding: 4px 8px;
 }
 
-.ccl-button.ccl-button-big {
+.button.button-big {
   font-size: 1rem;
   padding: 8px 24px;
 }
 
 /* Variants */
-.ccl-button.ccl-button-text {
+.button.button-text {
   background-color: transparent;
   box-shadow: none;
   color: var(--color-primary);
 }
 
-.ccl-button.ccl-button-text:hover {
+.button.button-text:hover {
   background-color: var(--color-primary-dark);
 }
 
-.ccl-button.ccl-button-outlined {
+.button.button-outlined {
   border: 1px solid rgba(var(--color-black), 0.23);
   background-color: transparent;
   color: var(--color-primary);
   box-shadow: none;
 }
 
-.ccl-button.ccl-button-outlined:hover {
+.button.button-outlined:hover {
   border: 1px solid var(--color-primary);
   background-color: var(--color-primary-dark);
 }
