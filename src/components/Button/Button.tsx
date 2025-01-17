@@ -10,15 +10,17 @@ export type ButtonProps = {
   children?: React.ReactNode;
   size?: ButtonSize;
   variant?: ButtonVariant;
+  className?: string;
 } & React.ComponentPropsWithoutRef<'button'>;
 
 export const Button: FC<ButtonProps> = ({
   children,
   size = 'medium',
   variant = 'contained',
+  className,
   ...props
 }) => {
-  const cssClasses = clsx('button', {
+  const cssClasses = clsx('button', className, {
     'button-small': size === 'small',
     'button-big': size === 'big',
     'button-text': variant === 'text',
