@@ -44,7 +44,8 @@ module.exports = [
       'node_modules/**',    
       'dist/**',               
       '.storybook/**',          
-      'src/stories/**',    
+      'src/stories/**',          
+      'src/test/**',   
       '*.config.js',
       '.*.js',
     ]

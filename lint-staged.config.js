@@ -3,4 +3,5 @@ module.exports = {
         'prettier --write',
     ],
     '*.{js, ts, jsx, tsx}': ['eslint --fix'],
+    '*.test.{js, ts, jsx, tsx}': ['npm run test'],
 };
