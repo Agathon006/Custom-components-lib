@@ -44,10 +44,11 @@ module.exports = [
       'node_modules/**',    
       'dist/**',               
       '.storybook/**',          
-      'src/stories/**',          
-      'src/test/**',   
+      'src/stories/**',     
       '*.config.js',
       '.*.js',
+      'declarations.d.ts',
+      '**/*.test.tsx',
     ]
   },
 ];
