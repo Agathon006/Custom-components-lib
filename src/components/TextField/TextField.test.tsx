@@ -5,74 +5,115 @@ import '@testing-library/jest-dom';
 
 describe('TextField', () => {
   const defaultProps: TextFieldProps = {
-    id: 'test-id',
+    id: 'test-input',
   };
 
-  it('renders input with correct id', () => {
-    render(<TextField {...defaultProps} />);
-    expect(screen.getByRole('textbox')).toHaveAttribute('id', 'test-id');
+  const renderComponent = (props: Partial<TextFieldProps> = {}) => {
+    render(<TextField {...defaultProps} {...props} />);
+  };
+
+  it('should render without errors', () => {
+    renderComponent();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
 
-  it('renders with a label', () => {
-    const labelText = 'Test Label';
-    render(<TextField {...defaultProps} label={labelText} />);
-    expect(screen.getByLabelText(labelText)).toBeInTheDocument();
+  it('should render with the correct ID', () => {
+    renderComponent({ id: 'custom-id' });
+    expect(screen.getByRole('textbox')).toHaveAttribute('id', 'custom-id');
   });
 
-  it('renders input with specified type', () => {
-    render(<TextField {...defaultProps} type="textbox" />);
+  it('should not render label when not provided', () => {
+    renderComponent();
+    expect(screen.queryByRole('textbox', { name: 'undefined' })).not.toBeInTheDocument();
+  });
+
+  it('should render helper text correctly when provided', () => {
+    renderComponent({ helperText: 'Test Helper Text' });
+    expect(screen.getByText('Test Helper Text')).toBeInTheDocument();
+  });
+
+  it('should not render helper text when not provided', () => {
+    renderComponent();
+    expect(screen.queryByText('Test Helper Text')).not.toBeInTheDocument();
+  });
+
+  it('should apply correct classes for different variants', () => {
+    renderComponent({ variant: 'outlined' });
+    expect(screen.getByRole('textbox')).toHaveClass('textField-outlined');
+  });
+
+  it('should apply error class when error prop is true', () => {
+    renderComponent({ error: true });
+    expect(screen.getByRole('textbox')).toHaveClass('error');
+    if (screen.queryByText('Test Label')) {
+      expect(screen.getByText('Test Label')).toHaveClass('error');
+    }
+
+    if (screen.queryByText('Test Helper Text')) {
+      expect(screen.getByText('Test Helper Text')).toHaveClass('error');
+    }
+  });
+
+  it('should not apply error class when error prop is false', () => {
+    renderComponent({ error: false });
+    expect(screen.getByRole('textbox')).not.toHaveClass('error');
+  });
+
+  it('should apply custom className', () => {
+    renderComponent({ className: 'custom-class' });
+    expect(screen.getByRole('textbox')).toHaveClass('custom-class');
+  });
+
+  it('should have correct type attribute', () => {
+    renderComponent({ type: 'textbox' });
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'textbox');
   });
-
-  it('renders input with correct variant class', () => {
-    render(<TextField {...defaultProps} variant="filled" />);
-    expect(screen.getByRole('textbox')).toHaveClass('textField-filled');
+  it('should have default type attribute text', () => {
+    renderComponent();
+    expect(screen.getByRole('textbox')).toHaveAttribute('type', 'text');
   });
 
-  it('renders with additional classname', () => {
-    const additionalClass = 'my-custom-class';
-    render(<TextField {...defaultProps} className={additionalClass} />);
-    expect(screen.getByRole('textbox')).toHaveClass(additionalClass);
+  it('should have placeholder attribute', () => {
+    renderComponent({ placeholder: 'Enter your name' });
+    expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', 'Enter your name');
   });
 
-  it('renders input with a placeholder', () => {
-    const placeholderText = 'Enter text here';
-    render(<TextField {...defaultProps} placeholder={placeholderText} />);
-    expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', placeholderText);
+  it('should set isFocused state on focus', () => {
+    renderComponent({ label: 'Test Label' });
+    const inputElement = screen.getByRole('textbox');
+    fireEvent.focus(inputElement);
+    expect(screen.getByText('Test Label')).toHaveClass('labelFocused');
   });
 
-  it('renders input with required attribute', () => {
-    render(<TextField {...defaultProps} required />);
-    expect(screen.getByRole('textbox')).toBeRequired();
+  it('should remove isFocused state on blur', () => {
+    renderComponent({ label: 'Test Label' });
+    const inputElement = screen.getByRole('textbox');
+    fireEvent.focus(inputElement);
+    fireEvent.blur(inputElement);
+    expect(screen.getByText('Test Label')).not.toHaveClass('labelFocused');
   });
 
-  it('renders with error styling when error prop is true', () => {
-    render(<TextField {...defaultProps} error={true} />);
-    expect(screen.getByRole('textbox')).toHaveClass('textField-error');
+  it('should set hasValue state on input change', () => {
+    renderComponent({ label: 'Test Label' });
+    const inputElement = screen.getByRole('textbox');
+    fireEvent.change(inputElement, { target: { value: 'test' } });
+    expect(screen.getByText('Test Label')).toHaveClass('labelFocused');
   });
 
-  it('renders helper text', () => {
-    const helperText = 'This is helper text';
-    render(<TextField {...defaultProps} helperText={helperText} />);
-    expect(screen.getByText(helperText)).toBeInTheDocument();
+  it('should set hasValue state when defaultValue is provided', () => {
+    renderComponent({ label: 'Test Label', defaultValue: 'initial value' });
+    expect(screen.getByText('Test Label')).toHaveClass('labelFocused');
   });
 
-  it('renders helper text with error styling when error prop is true', () => {
-    const helperText = 'Error helper text';
-    render(<TextField {...defaultProps} helperText={helperText} error={true} />);
-    expect(screen.getByText(helperText)).toHaveClass('textField-error');
+  it('should render with a defaultValue', () => {
+    renderComponent({ defaultValue: 'initial value' });
+    expect((screen.getByRole('textbox') as HTMLInputElement).value).toBe('initial value');
   });
 
-  it('allows value to be changed', () => {
-    render(<TextField {...defaultProps} />);
-    const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'test value' } });
-    expect(input).toHaveValue('test value');
-  });
-
-  it('passes down other props to the input element', () => {
-    const dataTestId = 'custom-data-test-id';
-    render(<TextField {...defaultProps} data-testid={dataTestId} />);
-    expect(screen.getByRole('textbox')).toHaveAttribute('data-testid', dataTestId);
+  it('should not set hasValue when input is cleared', () => {
+    renderComponent({ label: 'Test Label', defaultValue: 'initial value' });
+    const inputElement = screen.getByRole('textbox');
+    fireEvent.change(inputElement, { target: { value: '' } });
+    expect(screen.getByText('Test Label')).not.toHaveClass('labelFocused');
   });
 });

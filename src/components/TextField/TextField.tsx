@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import classes from './TextField.module.scss';
-
 import { clsx } from '../../utils/clsx';
 
 type TextFieldVariant = 'outlined' | 'filled' | 'standard';
@@ -8,53 +7,72 @@ type TextFieldVariant = 'outlined' | 'filled' | 'standard';
 export type TextFieldProps = {
   id: string;
   label?: string;
+  helperText?: string;
   type?: string;
   variant?: TextFieldVariant;
   className?: string;
   placeholder?: string;
   required?: boolean;
   error?: boolean;
-  helperText?: string;
   defaultValue?: string;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export const TextField: FC<TextFieldProps> = ({
   id,
   label,
+  helperText,
   type = 'text',
   variant = 'outlined',
   className,
   placeholder,
   required,
   error,
-  helperText,
+  defaultValue,
   ...props
 }) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [hasValue, setHasValue] = useState(!!defaultValue);
 
   const cssClasses = clsx(
     classes.textField,
     className,
     classes[`textField-${variant}`],
-    error ? classes['textField-error'] : null
+    error ? classes['error'] : null
   );
+
+  const labelClasses = clsx(
+    classes.label,
+    isFocused || hasValue ? classes.labelFocused : null,
+    classes[`label-${variant}`]
+  );
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHasValue(!!event.target.value);
+  };
 
   return (
     <div className={classes.textFieldWrapper}>
-      {label && (
-        <label className={classes.label} htmlFor={id}>
-          {label}
-        </label>
-      )}
-      <input
-        {...props}
-        id={id}
-        type={type}
-        className={cssClasses}
-        placeholder={placeholder}
-        required={required}
-      />
+      <div className={classes.labelAndInputWrapper}>
+        {label && (
+          <label className={clsx(labelClasses, error ? classes['error'] : null)} htmlFor={id}>
+            {label}
+          </label>
+        )}
+        <input
+          {...props}
+          id={id}
+          type={type}
+          className={cssClasses}
+          placeholder={placeholder}
+          required={required}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          onChange={handleInputChange}
+          defaultValue={defaultValue}
+        />
+      </div>
       {helperText && (
-        <span className={clsx(classes.helperText, error ? classes['textField-error'] : null)}>
+        <span className={clsx(classes.helperText, error ? classes['error'] : null)}>
           {helperText}
         </span>
       )}
