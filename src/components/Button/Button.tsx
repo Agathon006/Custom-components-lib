@@ -23,10 +23,8 @@ export const Button: FC<ButtonProps> = ({
   const cssClasses = clsx(
     classes.button,
     className,
-    size === 'small' && classes['button-small'],
-    size === 'big' && classes['button-big'],
-    variant === 'text' && classes['button-text'],
-    variant === 'outlined' && classes['button-outlined']
+    classes[`button-${size}`],
+    classes[`button-${variant}`]
   );
 
   return (
