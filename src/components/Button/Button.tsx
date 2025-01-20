@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './Button.scss';
+import classes from './Button.module.scss';
 
 import { clsx } from '../../utils/clsx';
 
@@ -20,12 +20,12 @@ export const Button: FC<ButtonProps> = ({
   className,
   ...props
 }) => {
-  const cssClasses = clsx('button', className, {
-    'button-small': size === 'small',
-    'button-big': size === 'big',
-    'button-text': variant === 'text',
-    'button-outlined': variant === 'outlined',
-  });
+  const cssClasses = clsx(
+    classes.button,
+    className,
+    classes[`button-${size}`],
+    classes[`button-${variant}`]
+  );
 
   return (
     <button {...props} className={cssClasses}>
