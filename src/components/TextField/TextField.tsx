@@ -7,7 +7,7 @@ type TextFieldVariant = 'outlined' | 'filled' | 'standard';
 export type TextFieldProps = {
   id: string;
   label?: string;
-  helperText?: string;
+  errorText?: string;
   type?: string;
   variant?: TextFieldVariant;
   className?: string;
@@ -21,7 +21,7 @@ export type TextFieldProps = {
 export const TextField: FC<TextFieldProps> = ({
   id,
   label,
-  helperText,
+  errorText,
   type = 'text',
   variant = 'outlined',
   className,
@@ -82,9 +82,9 @@ export const TextField: FC<TextFieldProps> = ({
           onChange={handleInputChange}
         />
       </label>
-      {helperText && (
+      {errorText && (
         <span className={clsx(classes['error-text'], error ? classes['error'] : null)}>
-          {helperText}
+          {errorText}
         </span>
       )}
     </div>

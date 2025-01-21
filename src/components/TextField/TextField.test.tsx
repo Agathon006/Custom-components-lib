@@ -27,14 +27,14 @@ describe('TextField', () => {
     expect(component.queryByRole('textbox', { name: 'undefined' })).not.toBeInTheDocument();
   });
 
-  it('should render helper text correctly when provided', () => {
-    const component = renderComponent({ helperText: 'Test Helper Text' });
-    expect(component.getByText('Test Helper Text')).toBeInTheDocument();
+  it('should render error text correctly when provided', () => {
+    const component = renderComponent({ errorText: 'Test Error Text' });
+    expect(component.getByText('Test Error Text')).toBeInTheDocument();
   });
 
-  it('should not render helper text when not provided', () => {
+  it('should not render error text when not provided', () => {
     const component = renderComponent();
-    expect(component.queryByText('Test Helper Text')).not.toBeInTheDocument();
+    expect(component.queryByText('Test Error Text')).not.toBeInTheDocument();
   });
 
   it('should apply correct classes for different variants', () => {
