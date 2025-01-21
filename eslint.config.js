@@ -1,12 +1,19 @@
-const { FlatCompat } = require('@eslint/eslintrc');
-const js = require('@eslint/js');
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
+import reactPlugin from 'eslint-plugin-react';
+import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import typescriptParser from '@typescript-eslint/parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
 });
 
-module.exports = [
+export default [
   ...compat.extends('plugin:storybook/recommended'),
   ...compat.extends('eslint:recommended'),
   ...compat.extends('plugin:react/recommended'),
@@ -15,7 +22,7 @@ module.exports = [
   {
     files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
     languageOptions: {
-      parser: require('@typescript-eslint/parser'),
+      parser: typescriptParser,
       parserOptions: {
         project: ['./tsconfig.json'],
         ecmaFeatures: {
@@ -24,8 +31,8 @@ module.exports = [
       },
     },
     plugins: {
-      '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
-      react: require('eslint-plugin-react'),
+      '@typescript-eslint': typescriptPlugin,
+      react: reactPlugin,
     },
     rules: {
       'react/prop-types': 'off',
@@ -41,14 +48,14 @@ module.exports = [
   },
   {
     ignores: [
-      'node_modules/**',    
-      'dist/**',               
-      '.storybook/**',          
-      'src/stories/**',     
+      'node_modules/**',
+      'dist/**',
+      '.storybook/**',
+      'src/stories/**',
       '*.config.js',
       '.*.js',
       'declarations.d.ts',
       '**/*.test.tsx',
-    ]
+    ],
   },
 ];

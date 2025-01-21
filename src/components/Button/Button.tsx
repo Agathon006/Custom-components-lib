@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import classes from './Button.module.scss';
-
 import { clsx } from '../../utils/clsx';
 
 type ButtonSize = 'small' | 'medium' | 'big';
