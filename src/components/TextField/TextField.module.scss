@@ -1,143 +1,133 @@
 @use '../../style/vars.scss';
 @use '../../style/mixins.scss';
 
-.text-field-wrapper {
+.label-wrapper {
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
   width: max-content;
+  position: relative;
+  padding: 16px 0px;
+  overflow: hidden;
+  
+  &:focus-within {
+    .label-text {
+      color: var(--color-primary);
+    }
+  }
 
-  .label-and-input-wrapper {
-    position: relative;
-    padding: 16px 0px;
-    overflow: hidden;
-    .label {
-      @include mixins.text-m;
-      margin-bottom: 4px;
-      color: var(--color-grey-light);
-      pointer-events: none;
-      position: absolute;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      transition:
-        transform 0.2s ease-in-out,
-        font-size 0.2s ease-in-out,
-        color 0.2s ease-in-out;
+  .label-text {
+    @include mixins.text-m;
+    color: var(--color-grey-light);
+    pointer-events: none;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition:
+      transform 0.2s ease-in-out,
+      font-size 0.2s ease-in-out,
+      color 0.2s ease-in-out;
 
-      &.label-focused {
-        color: var(--color-primary);
-      }
+    &.error {
+      color: var(--color-red);
+    }
 
-      &.error {
-        color: var(--color-red);
-      }
-
-      &.label-outlined {
-        &.label-focused {
-          + .text-field-outlined {
-            border-top: none;
-          }
-          transform: translate(-10%, -140%) scale(0.8);
+    &-outlined {
+      &.label-text-active {
+        + .text-field-outlined {
+          border-top: 0px solid var(--color-primary);
         }
-      }
-
-      &.label-filled {
-        color: var(--color-grey);
-        &.label-focused {
-          color: var(--color-primary);
-          transform: translate(-10%, -100%) scale(0.8);
-
-          &.error {
-            color: var(--color-red);
-          }
-        }
-      }
-
-      &.label-standard {
-        left: 0px;
-        &.label-focused {
-          transform: translate(-10%, -150%) scale(0.8);
-        }
+        transform: translate(-10%, -140%) scale(0.8);
       }
     }
 
-    .text-field {
-      @include mixins.text-l;
-      padding: 8px 12px;
-      border: 1px solid var(--color-grey-light);
-      border-radius: 4px;
-      outline: none;
-      transition: border-color 0.2s ease-in-out;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 25ch;
-
-      &:focus {
-        border-color: var(--color-primary);
+    &-filled {
+      color: var(--color-grey);
+      &.label-text-active {
+        transform: translate(-10%, -100%) scale(0.8);
       }
+    }
+
+    &-standard {
+      left: 0px;
+      &.label-text-active {
+        transform: translate(-10%, -150%) scale(0.8);
+      }
+    }
+  }
+
+  .text-field {
+    @include mixins.text-l;
+    padding: 8px 12px;
+    border: 1px solid var(--color-grey-light);
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 25ch;
+
+    &::placeholder {
+      color: var(--color-grey-light);
+      transition: opacity 0.2s ease-in-out;
+      opacity: 0;
+    }
+
+    &:focus {
+      border-color: var(--color-primary);
 
       &::placeholder {
-        color: var(--color-grey-light);
-        transition: opacity 0.2s ease-in-out;
-        opacity: 0;
-      }
-
-      &:focus::placeholder {
         opacity: 1;
       }
+    }
 
-      &:not(:placeholder-shown)::placeholder {
-        opacity: 0;
+    &-outlined {
+      &:focus {
+        border: 1px solid var(--color-primary);
       }
 
-      &.text-field-outlined {
-        &:focus {
-          border: 1px solid var(--color-primary);
-        }
+      &.error {
+        border: 1px solid var(--color-red);
+      }
+    }
 
-        &.error {
-          border: 1px solid var(--color-red);
-        }
+    &-filled {
+      padding: 12px 12px 4px;
+      background-color: var(--color-grey-dark);
+      border: none;
+      border-bottom: 1px solid var(--color-white);
+      border-radius: 4px 4px 0px 0px;
+
+      &::placeholder {
+        color: var(--color-grey);
       }
 
-      &.text-field-filled {
-        padding: 12px 12px 4px;
-        background-color: var(--color-grey-light);
-        border: none;
-        border-bottom: 1px solid var(--color-white);
-        border-radius: 4px 4px 0px 0px;
-
-        &::placeholder {
-          color: var(--color-grey);
-        }
-
-        &:focus {
-          border-bottom: 1px solid var(--color-primary);
-        }
-
-        &.error {
-          border: 1px solid var(--color-red);
-        }
+      &:focus {
+        border-bottom: 1px solid var(--color-primary);
       }
 
-      &.text-field-standard {
-        padding: 2px 0px;
-        border: none;
-        background-color: transparent;
-        border-bottom: 1px solid var(--color-grey-light);
-        border-radius: 0;
+      &.error {
+        border: 1px solid var(--color-red);
+      }
+    }
 
-        &:focus {
-          border-bottom-color: var(--color-primary);
-        }
+    &-standard {
+      padding: 2px 0px;
+      border: none;
+      background-color: transparent;
+      border-bottom: 1px solid var(--color-grey-light);
+      border-radius: 0;
 
-        &.error {
-          border-bottom: 1px solid var(--color-red);
-        }
+      &:focus {
+        border-bottom-color: var(--color-primary);
+      }
+
+      &.error {
+        border-bottom: 1px solid var(--color-red);
       }
     }
   }
@@ -145,7 +135,11 @@
   .error-text {
     @include mixins.text-s;
     color: var(--color-primary-light);
-    transform: translateY(-50%);
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    left: 2px;
+    top: 75%;
 
     &.error {
       color: var(--color-red);

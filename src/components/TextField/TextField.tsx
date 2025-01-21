@@ -47,9 +47,9 @@ export const TextField: FC<TextFieldProps> = ({
   );
 
   const labelTextClasses = clsx(
-    classes['label'],
-    (isFocused || isInputFilled) && classes['label-focused'],
-    classes[`label-${variant}`]
+    classes['label-text'],
+    (isFocused || isInputFilled) && classes['label-text-active'],
+    classes[`label-text-${variant}`]
   );
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,35 +58,31 @@ export const TextField: FC<TextFieldProps> = ({
     }
   };
 
-  const truncatedLabel = label && label.length > 25 ? `${label.slice(0, 25)}...` : label;
-
   return (
-    <div className={classes['text-field-wrapper']}>
-      <label className={classes['label-and-input-wrapper']} htmlFor={id}>
-        {label && (
-          <span className={clsx(labelTextClasses, error ? classes['error'] : null)}>
-            {truncatedLabel}
-          </span>
-        )}
-        <input
-          {...props}
-          ref={inputRef}
-          id={id}
-          type={type}
-          className={cssClasses}
-          placeholder={placeholder}
-          required={required}
-          value={value}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          onChange={handleInputChange}
-        />
-      </label>
+    <label className={classes['label-wrapper']}>
+      {label && (
+        <span className={clsx(labelTextClasses, error ? classes['error'] : null)}>
+          {label}
+        </span>
+      )}
+      <input
+        {...props}
+        ref={inputRef}
+        id={id}
+        type={type}
+        className={cssClasses}
+        placeholder={placeholder}
+        required={required}
+        value={value}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        onChange={handleInputChange}
+      />
       {errorText && (
         <span className={clsx(classes['error-text'], error ? classes['error'] : null)}>
           {errorText}
         </span>
       )}
-    </div>
+    </label>
   );
 };

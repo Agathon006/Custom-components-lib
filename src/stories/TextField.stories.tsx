@@ -25,7 +25,7 @@ export const OutlinedError: Story = {
     placeholder: 'Enter text',
     variant: 'outlined',
     error: true,
-    helperText: 'This is an error message',
+    errorText: 'This is an error message',
   },
 };
 
@@ -55,7 +55,7 @@ export const FilledError: Story = {
     placeholder: 'Enter text',
     variant: 'filled',
     error: true,
-    helperText: 'This is an error message',
+    errorText: 'This is an error message',
   },
 };
 
@@ -85,7 +85,7 @@ export const StandardError: Story = {
     placeholder: 'Enter text',
     variant: 'standard',
     error: true,
-    helperText: 'This is an error message',
+    errorText: 'This is an error message',
   },
 };
 
@@ -99,12 +99,12 @@ export const StandardErrorNoText: Story = {
   },
 };
 
-export const WithHelperText: Story = {
+export const WitherrorText: Story = {
   args: {
     id: 'helper-textfield',
     label: 'Helper Text Label',
     placeholder: 'Enter text',
-    helperText: 'This is helper text',
+    errorText: 'This is helper text',
   },
 };
 
