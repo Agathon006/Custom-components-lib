@@ -4,7 +4,7 @@ import { Button, ButtonProps } from './Button';
 import '@testing-library/jest-dom';
 
 describe('Button', () => {
-  const renderComponent = (props: React.PropsWithChildren<Partial<ButtonProps>>) => {
+  const renderComponent = (props: Partial<ButtonProps>) => {
     return render(<Button {...props} />);
   };
 
