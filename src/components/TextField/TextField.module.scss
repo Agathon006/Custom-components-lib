@@ -9,7 +9,7 @@
   position: relative;
   padding: 16px 0px;
   overflow: hidden;
-  
+
   &:focus-within {
     .label-text {
       color: var(--color-primary);
@@ -21,11 +21,13 @@
     color: var(--color-grey-light);
     pointer-events: none;
     position: absolute;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
+    width: calc(100% - 12px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     transition:
       transform 0.2s ease-in-out,
       font-size 0.2s ease-in-out,
