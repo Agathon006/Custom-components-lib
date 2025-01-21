@@ -46,7 +46,7 @@ export const TextField: FC<TextFieldProps> = ({
     error ? classes['error'] : null
   );
 
-  const labelClasses = clsx(
+  const labelTextClasses = clsx(
     classes['label'],
     (isFocused || isInputFilled) && classes['label-focused'],
     classes[`label-${variant}`]
@@ -62,11 +62,11 @@ export const TextField: FC<TextFieldProps> = ({
 
   return (
     <div className={classes['text-field-wrapper']}>
-      <div className={classes['label-and-input-wrapper']}>
+      <label className={classes['label-and-input-wrapper']} htmlFor={id}>
         {label && (
-          <label className={clsx(labelClasses, error ? classes['error'] : null)} htmlFor={id}>
+          <span className={clsx(labelTextClasses, error ? classes['error'] : null)}>
             {truncatedLabel}
-          </label>
+          </span>
         )}
         <input
           {...props}
@@ -81,7 +81,7 @@ export const TextField: FC<TextFieldProps> = ({
           onBlur={() => setIsFocused(false)}
           onChange={handleInputChange}
         />
-      </div>
+      </label>
       {helperText && (
         <span className={clsx(classes['helper-text'], error ? classes['error'] : null)}>
           {helperText}
