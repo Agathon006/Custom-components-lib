@@ -39,26 +39,14 @@
     }
 
     &-outlined {
-      &.label-text-active {
-        + .text-field-outlined {
-          border-top: 0px solid var(--color-primary);
-        }
-        transform: translate(-10%, -140%) scale(0.8);
-      }
     }
 
     &-filled {
       color: var(--color-grey);
-      &.label-text-active {
-        transform: translate(-10%, -100%) scale(0.8);
-      }
     }
 
     &-standard {
       left: 0px;
-      &.label-text-active {
-        transform: translate(-10%, -150%) scale(0.8);
-      }
     }
   }
 
@@ -91,6 +79,15 @@
     &-outlined {
       &:focus {
         border: 1px solid var(--color-primary);
+        border-top: 0px solid var(--color-primary);
+        // хочу чтобы в  .label-text-outlined было
+        // transform: translate(-10%, -140%) scale(0.8);
+      }
+
+      &:not(:placeholder-shown) {
+        border-top: 0px solid var(--color-primary);
+        // хочу чтобы в  .label-text-outlined было
+        //   transform: translate(-10%, -140%) scale(0.8);
       }
 
       &.error {
@@ -111,6 +108,13 @@
 
       &:focus {
         border-bottom: 1px solid var(--color-primary);
+        // хочу чтобы в  .label-text-filled было
+        // transform: translate(-10%, -100%) scale(0.8);
+      }
+
+      &:not(:placeholder-shown) {
+        // хочу чтобы в  .label-text-filled было
+        //   transform: translate(-10%, -100%) scale(0.8);
       }
 
       &.error {
@@ -127,6 +131,13 @@
 
       &:focus {
         border-bottom-color: var(--color-primary);
+        // хочу чтобы в  .label-text-filled было
+        // transform: translate(-10%, -150%) scale(0.8);
+      }
+
+      &:not(:placeholder-shown) {
+        // хочу чтобы в  .label-text-filled было
+        //   transform: translate(-10%, -150%) scale(0.8);
       }
 
       &.error {
