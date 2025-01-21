@@ -50,12 +50,14 @@ export const TextField: FC<TextFieldProps> = ({
     setHasValue(!!event.target.value);
   };
 
+  const truncatedLabel = label && label.length > 25 ? `${label.slice(0, 25)}...` : label;
+
   return (
     <div className={classes.textFieldWrapper}>
       <div className={classes.labelAndInputWrapper}>
         {label && (
           <label className={clsx(labelClasses, error ? classes['error'] : null)} htmlFor={id}>
-            {label}
+            {truncatedLabel}
           </label>
         )}
         <input
