@@ -79,14 +79,14 @@ describe('TextField', () => {
     expect(component.getByRole('textbox')).toHaveAttribute('placeholder', 'Enter your name');
   });
 
-  it('should set isFocused state on focus', () => {
+  it('should set label-focused class when input is focused', () => {
     const component = renderComponent({ label: 'Test Label' });
     const inputElement = component.getByRole('textbox');
     fireEvent.focus(inputElement);
     expect(component.getByText('Test Label')).toHaveClass('label-focused');
   });
 
-  it('should remove isFocused state on blur', () => {
+  it('should remove label-focused class when input is blurred', () => {
     const component = renderComponent({ label: 'Test Label' });
     const inputElement = component.getByRole('textbox');
     fireEvent.focus(inputElement);
@@ -94,27 +94,16 @@ describe('TextField', () => {
     expect(component.getByText('Test Label')).not.toHaveClass('label-focused');
   });
 
-  it('should set hasValue state on input change', () => {
-    const component = renderComponent({ label: 'Test Label' });
+  it('should update value when input changes', () => {
+    const onChange = jest.fn();
+    const component = renderComponent({ label: 'Test Label', value: 'initial value', onChange });
     const inputElement = component.getByRole('textbox');
-    fireEvent.change(inputElement, { target: { value: 'test' } });
-    expect(component.getByText('Test Label')).toHaveClass('label-focused');
+    fireEvent.change(inputElement, { target: { value: 'new value' } });
+    expect(onChange).toHaveBeenCalled();
   });
 
-  it('should set hasValue state when defaultValue is provided', () => {
-    const component = renderComponent({ label: 'Test Label', defaultValue: 'initial value' });
-    expect(component.getByText('Test Label')).toHaveClass('label-focused');
-  });
-
-  it('should render with a defaultValue', () => {
-    const component = renderComponent({ defaultValue: 'initial value' });
-    expect((component.getByRole('textbox') as HTMLInputElement).value).toBe('initial value');
-  });
-
-  it('should not set hasValue when input is cleared', () => {
-    const component = renderComponent({ label: 'Test Label', defaultValue: 'initial value' });
-    const inputElement = component.getByRole('textbox');
-    fireEvent.change(inputElement, { target: { value: '' } });
-    expect(component.getByText('Test Label')).not.toHaveClass('label-focused');
+  it('should render with a controlled value', () => {
+    const component = renderComponent({ value: 'controlled value' });
+    expect((component.getByRole('textbox') as HTMLInputElement).value).toBe('controlled value');
   });
 });

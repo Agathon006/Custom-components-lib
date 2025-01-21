@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { TextField } from '../components/TextField';
 
 const meta = {
@@ -114,7 +113,7 @@ export const WithDefaultValue: Story = {
     id: 'default-textfield',
     label: 'Default Value Label',
     placeholder: 'Enter text',
-    defaultValue: 'Initial Value',
+    value: 'Initial Value',
   },
 };
 

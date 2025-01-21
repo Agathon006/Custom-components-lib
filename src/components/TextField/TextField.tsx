@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef } from 'react';
 import classes from './TextField.module.scss';
 import { clsx } from '../../utils/clsx';
 
@@ -14,7 +14,8 @@ export type TextFieldProps = {
   placeholder?: string;
   required?: boolean;
   error?: boolean;
-  defaultValue?: string;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export const TextField: FC<TextFieldProps> = ({
@@ -27,11 +28,16 @@ export const TextField: FC<TextFieldProps> = ({
   placeholder,
   required,
   error,
-  defaultValue,
+  value,
+  onChange,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [hasValue, setHasValue] = useState(!!defaultValue);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const isInputFilled = inputRef.current
+    ? inputRef.current.value !== ''
+    : value !== '' && value !== undefined;
 
   const cssClasses = clsx(
     classes['text-field'],
@@ -42,12 +48,14 @@ export const TextField: FC<TextFieldProps> = ({
 
   const labelClasses = clsx(
     classes['label'],
-    isFocused || hasValue ? classes['label-focused'] : null,
+    isFocused || isInputFilled ? classes['label-focused'] : null,
     classes[`label-${variant}`]
   );
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setHasValue(!!event.target.value);
+    if (onChange) {
+      onChange(event);
+    }
   };
 
   const truncatedLabel = label && label.length > 25 ? `${label.slice(0, 25)}...` : label;
@@ -62,15 +70,16 @@ export const TextField: FC<TextFieldProps> = ({
         )}
         <input
           {...props}
+          ref={inputRef}
           id={id}
           type={type}
           className={cssClasses}
           placeholder={placeholder}
           required={required}
+          value={value}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           onChange={handleInputChange}
-          defaultValue={defaultValue}
         />
       </div>
       {helperText && (

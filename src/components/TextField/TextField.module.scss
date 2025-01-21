@@ -49,6 +49,10 @@
         &.label-focused {
           color: var(--color-primary);
           transform: translate(-10%, -100%) scale(0.8);
+
+          &.error {
+            color: var(--color-red);
+          }
         }
       }
 
