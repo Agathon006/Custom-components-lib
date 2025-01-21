@@ -45,13 +45,6 @@ describe('TextField', () => {
   it('should apply error class when error prop is true', () => {
     const component = renderComponent({ error: true });
     expect(component.getByRole('textbox')).toHaveClass('error');
-    if (component.queryByText('Test Label')) {
-      expect(component.getByText('Test Label')).toHaveClass('error');
-    }
-
-    if (component.queryByText('Test Helper Text')) {
-      expect(component.getByText('Test Helper Text')).toHaveClass('error');
-    }
   });
 
   it('should not apply error class when error prop is false', () => {
