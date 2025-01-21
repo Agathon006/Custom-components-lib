@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC } from 'react';
 import classes from './TextField.module.scss';
 import { clsx } from '../../utils/clsx';
 
@@ -25,20 +25,13 @@ export const TextField: FC<TextFieldProps> = ({
   type = 'text',
   variant = 'outlined',
   className,
-  placeholder,
+  placeholder='',
   required,
   error,
   value,
   onChange,
   ...props
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const isInputFilled = inputRef.current
-    ? inputRef.current.value !== ''
-    : value !== '' && value !== undefined;
-
   const cssClasses = clsx(
     classes['text-field'],
     className,
@@ -46,11 +39,7 @@ export const TextField: FC<TextFieldProps> = ({
     error ? classes['error'] : null
   );
 
-  const labelTextClasses = clsx(
-    classes['label-text'],
-    (isFocused || isInputFilled) && classes['label-text-active'],
-    classes[`label-text-${variant}`]
-  );
+  const labelTextClasses = clsx(classes['label-text'], classes[`label-text-${variant}`]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
@@ -60,24 +49,19 @@ export const TextField: FC<TextFieldProps> = ({
 
   return (
     <label className={classes['label-wrapper']}>
-      {label && (
-        <span className={clsx(labelTextClasses, error ? classes['error'] : null)}>
-          {label}
-        </span>
-      )}
       <input
         {...props}
-        ref={inputRef}
         id={id}
         type={type}
         className={cssClasses}
         placeholder={placeholder}
         required={required}
         value={value}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
         onChange={handleInputChange}
       />
+      {label && (
+        <span className={clsx(labelTextClasses, error ? classes['error'] : null)}>{label}</span>
+      )}
       {errorText && (
         <span className={clsx(classes['error-text'], error ? classes['error'] : null)}>
           {errorText}
