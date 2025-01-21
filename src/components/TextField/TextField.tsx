@@ -48,7 +48,7 @@ export const TextField: FC<TextFieldProps> = ({
 
   const labelClasses = clsx(
     classes['label'],
-    isFocused || isInputFilled ? classes['label-focused'] : null,
+    (isFocused || isInputFilled) && classes['label-focused'],
     classes[`label-${variant}`]
   );
 
