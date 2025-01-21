@@ -142,7 +142,7 @@
     }
   }
 
-  .helper-text {
+  .error-text {
     @include mixins.text-s;
     color: var(--color-primary-light);
     transform: translateY(-50%);

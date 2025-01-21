@@ -83,7 +83,7 @@ export const TextField: FC<TextFieldProps> = ({
         />
       </label>
       {helperText && (
-        <span className={clsx(classes['helper-text'], error ? classes['error'] : null)}>
+        <span className={clsx(classes['error-text'], error ? classes['error'] : null)}>
           {helperText}
         </span>
       )}
