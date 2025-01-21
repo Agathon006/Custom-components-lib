@@ -1,61 +1,65 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { Button, ButtonProps } from './Button';
 import '@testing-library/jest-dom';
 
 describe('Button', () => {
+  const renderComponent = (props: React.PropsWithChildren<Partial<ButtonProps>>) => {
+    return render(<Button {...props} />);
+  };
+
   it('renders a button with text content', () => {
-    render(<Button>Click me</Button>);
-    expect(screen.getByRole('button')).toHaveTextContent('Click me');
+    const component = renderComponent({ children: 'Click me' });
+    expect(component.getByRole('button')).toHaveTextContent('Click me');
   });
 
   it('renders with custom className', () => {
-    render(<Button className="my-custom-class">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('my-custom-class');
+    const component = renderComponent({ className: 'my-custom-class', children: 'Click me' });
+    expect(component.getByRole('button')).toHaveClass('my-custom-class');
   });
 
   it('renders with default size medium', () => {
-    render(<Button>Click me</Button>);
-    expect(screen.getByRole('button')).not.toHaveClass('button-small');
-    expect(screen.getByRole('button')).not.toHaveClass('button-big');
+    const component = renderComponent({ children: 'Click me' });
+    expect(component.getByRole('button')).not.toHaveClass('button-small');
+    expect(component.getByRole('button')).not.toHaveClass('button-big');
   });
 
   it('renders with size small', () => {
-    render(<Button size="small">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('button-small');
+    const component = renderComponent({ size: 'small', children: 'Click me' });
+    expect(component.getByRole('button')).toHaveClass('button-small');
   });
 
   it('renders with size big', () => {
-    render(<Button size="big">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('button-big');
+    const component = renderComponent({ size: 'big', children: 'Click me' });
+    expect(component.getByRole('button')).toHaveClass('button-big');
   });
 
   it('renders with default variant contained', () => {
-    render(<Button>Click me</Button>);
-    expect(screen.getByRole('button')).not.toHaveClass('button-text');
-    expect(screen.getByRole('button')).not.toHaveClass('button-outlined');
+    const component = renderComponent({ children: 'Click me' });
+    expect(component.getByRole('button')).not.toHaveClass('button-text');
+    expect(component.getByRole('button')).not.toHaveClass('button-outlined');
   });
 
   it('renders with variant text', () => {
-    render(<Button variant="text">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('button-text');
+    const component = renderComponent({ variant: 'text', children: 'Click me' });
+    expect(component.getByRole('button')).toHaveClass('button-text');
   });
 
   it('renders with variant outlined', () => {
-    render(<Button variant="outlined">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('button-outlined');
+    const component = renderComponent({ variant: 'outlined', children: 'Click me' });
+    expect(component.getByRole('button')).toHaveClass('button-outlined');
   });
 
   it('handles onClick event', () => {
     const onClick = jest.fn();
-    render(<Button onClick={onClick}>Click me</Button>);
-    fireEvent.click(screen.getByRole('button'));
+    const component = renderComponent({ onClick, children: 'Click me' });
+    fireEvent.click(component.getByRole('button'));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('renders with disabled state', () => {
-    render(<Button disabled>Click me</Button>);
-    expect(screen.getByRole('button')).toBeDisabled();
+    const component = renderComponent({ disabled: true, children: 'Click me' });
+    expect(component.getByRole('button')).toBeDisabled();
   });
 
   it('renders with all props', () => {
@@ -67,8 +71,8 @@ describe('Button', () => {
       onClick: onClick,
       disabled: true,
     };
-    render(<Button {...buttonProps}>Test</Button>);
-    const button = screen.getByRole('button');
+    const component = renderComponent({ ...buttonProps, children: 'Test' });
+    const button = component.getByRole('button');
 
     expect(button).toHaveTextContent('Test');
     expect(button).toHaveClass('button-big');
@@ -81,12 +85,12 @@ describe('Button', () => {
   });
 
   it('renders with HTML attributes', () => {
-    render(
-      <Button aria-label="test-button" type="submit">
-        Click me
-      </Button>
-    );
-    const button = screen.getByRole('button');
+    const component = renderComponent({
+      'aria-label': 'test-button',
+      type: 'submit',
+      children: 'Click me',
+    });
+    const button = component.getByRole('button');
     expect(button).toHaveAttribute('aria-label', 'test-button');
     expect(button).toHaveAttribute('type', 'submit');
   });
