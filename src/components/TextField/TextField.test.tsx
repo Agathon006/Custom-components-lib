@@ -39,7 +39,7 @@ describe('TextField', () => {
 
   it('should apply correct classes for different variants', () => {
     renderComponent({ variant: 'outlined' });
-    expect(screen.getByRole('textbox')).toHaveClass('textField-outlined');
+    expect(screen.getByRole('textbox')).toHaveClass('text-field-outlined');
   });
 
   it('should apply error class when error prop is true', () => {
@@ -82,7 +82,7 @@ describe('TextField', () => {
     renderComponent({ label: 'Test Label' });
     const inputElement = screen.getByRole('textbox');
     fireEvent.focus(inputElement);
-    expect(screen.getByText('Test Label')).toHaveClass('labelFocused');
+    expect(screen.getByText('Test Label')).toHaveClass('label-focused');
   });
 
   it('should remove isFocused state on blur', () => {
@@ -90,19 +90,19 @@ describe('TextField', () => {
     const inputElement = screen.getByRole('textbox');
     fireEvent.focus(inputElement);
     fireEvent.blur(inputElement);
-    expect(screen.getByText('Test Label')).not.toHaveClass('labelFocused');
+    expect(screen.getByText('Test Label')).not.toHaveClass('label-focused');
   });
 
   it('should set hasValue state on input change', () => {
     renderComponent({ label: 'Test Label' });
     const inputElement = screen.getByRole('textbox');
     fireEvent.change(inputElement, { target: { value: 'test' } });
-    expect(screen.getByText('Test Label')).toHaveClass('labelFocused');
+    expect(screen.getByText('Test Label')).toHaveClass('label-focused');
   });
 
   it('should set hasValue state when defaultValue is provided', () => {
     renderComponent({ label: 'Test Label', defaultValue: 'initial value' });
-    expect(screen.getByText('Test Label')).toHaveClass('labelFocused');
+    expect(screen.getByText('Test Label')).toHaveClass('label-focused');
   });
 
   it('should render with a defaultValue', () => {
@@ -114,6 +114,6 @@ describe('TextField', () => {
     renderComponent({ label: 'Test Label', defaultValue: 'initial value' });
     const inputElement = screen.getByRole('textbox');
     fireEvent.change(inputElement, { target: { value: '' } });
-    expect(screen.getByText('Test Label')).not.toHaveClass('labelFocused');
+    expect(screen.getByText('Test Label')).not.toHaveClass('label-focused');
   });
 });

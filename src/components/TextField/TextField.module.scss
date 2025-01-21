@@ -1,13 +1,13 @@
 @use '../../style/vars.scss';
 @use '../../style/mixins.scss';
 
-.textFieldWrapper {
+.text-field-wrapper {
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
   width: max-content;
 
-  .labelAndInputWrapper {
+  .label-and-input-wrapper {
     position: relative;
     padding: 16px 0px;
     overflow: hidden;
@@ -27,7 +27,7 @@
         font-size 0.2s ease-in-out,
         color 0.2s ease-in-out;
 
-      &.labelFocused {
+      &.label-focused {
         color: var(--color-primary);
       }
 
@@ -36,8 +36,8 @@
       }
 
       &.label-outlined {
-        &.labelFocused {
-          + .textField-outlined {
+        &.label-focused {
+          + .text-field-outlined {
             border-top: none;
           }
           transform: translate(-10%, -140%) scale(0.8);
@@ -45,20 +45,22 @@
       }
 
       &.label-filled {
-        &.labelFocused {
+        color: var(--color-grey);
+        &.label-focused {
+          color: var(--color-primary);
           transform: translate(-10%, -100%) scale(0.8);
         }
       }
 
       &.label-standard {
         left: 0px;
-        &.labelFocused {
+        &.label-focused {
           transform: translate(-10%, -150%) scale(0.8);
         }
       }
     }
 
-    .textField {
+    .text-field {
       @include mixins.text-l;
       padding: 8px 12px;
       border: 1px solid var(--color-grey-light);
@@ -88,7 +90,7 @@
         opacity: 0;
       }
 
-      &.textField-outlined {
+      &.text-field-outlined {
         &:focus {
           border: 1px solid var(--color-primary);
         }
@@ -98,12 +100,16 @@
         }
       }
 
-      &.textField-filled {
+      &.text-field-filled {
         padding: 12px 12px 4px;
         background-color: var(--color-grey-light);
         border: none;
         border-bottom: 1px solid var(--color-white);
         border-radius: 4px 4px 0px 0px;
+
+        &::placeholder {
+          color: var(--color-grey);
+        }
 
         &:focus {
           border-bottom: 1px solid var(--color-primary);
@@ -114,7 +120,7 @@
         }
       }
 
-      &.textField-standard {
+      &.text-field-standard {
         padding: 2px 0px;
         border: none;
         background-color: transparent;
@@ -132,7 +138,7 @@
     }
   }
 
-  .helperText {
+  .helper-text {
     @include mixins.text-s;
     color: var(--color-primary-light);
     transform: translateY(-50%);

@@ -34,15 +34,15 @@ export const TextField: FC<TextFieldProps> = ({
   const [hasValue, setHasValue] = useState(!!defaultValue);
 
   const cssClasses = clsx(
-    classes.textField,
+    classes['text-field'],
     className,
-    classes[`textField-${variant}`],
+    classes[`text-field-${variant}`],
     error ? classes['error'] : null
   );
 
   const labelClasses = clsx(
-    classes.label,
-    isFocused || hasValue ? classes.labelFocused : null,
+    classes['label'],
+    isFocused || hasValue ? classes['label-focused'] : null,
     classes[`label-${variant}`]
   );
 
@@ -53,8 +53,8 @@ export const TextField: FC<TextFieldProps> = ({
   const truncatedLabel = label && label.length > 25 ? `${label.slice(0, 25)}...` : label;
 
   return (
-    <div className={classes.textFieldWrapper}>
-      <div className={classes.labelAndInputWrapper}>
+    <div className={classes['text-field-wrapper']}>
+      <div className={classes['label-and-input-wrapper']}>
         {label && (
           <label className={clsx(labelClasses, error ? classes['error'] : null)} htmlFor={id}>
             {truncatedLabel}
@@ -74,7 +74,7 @@ export const TextField: FC<TextFieldProps> = ({
         />
       </div>
       {helperText && (
-        <span className={clsx(classes.helperText, error ? classes['error'] : null)}>
+        <span className={clsx(classes['helper-text'], error ? classes['error'] : null)}>
           {helperText}
         </span>
       )}
