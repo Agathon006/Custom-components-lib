@@ -1,5 +1,5 @@
-@use '../../style/vars.scss' as *;
-@use '../../style/mixins.scss' as mixins;
+@use '../../style/vars.scss';
+@use '../../style/mixins.scss';
 
 .textFieldWrapper {
   display: flex;
@@ -9,7 +9,7 @@
 
   .labelAndInputWrapper {
     position: relative;
-    padding: 5px 0px;
+    padding: 16px 0px;
     overflow: hidden;
     .label {
       @include mixins.text-m;
@@ -135,7 +135,7 @@
   .helperText {
     @include mixins.text-s;
     color: var(--color-primary-light);
-    margin-top: 4px;
+    transform: translateY(-50%);
 
     &.error {
       color: var(--color-red);
