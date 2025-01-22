@@ -92,7 +92,9 @@ describe('TextField', () => {
     await user.type(input, 'New value');
 
     expect(onChange).toHaveBeenCalledTimes(9);
+
     const event = onChange.mock.calls[7][0];
+    
     expect(event.target.value).toBe('New value');
   });
 
