@@ -1,0 +1,185 @@
+@use '../../style/vars.scss';
+@use '../../style/mixins.scss';
+
+.label_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  position: relative;
+  padding: 18px 0px;
+  overflow: hidden;
+
+  &:focus-within {
+    .label_text {
+      color: var(--color-primary);
+    }
+  }
+
+  .label_text {
+    @include mixins.text-m;
+    color: var(--color-grey-light);
+    pointer-events: none;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(100% - 12px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: start;
+    transition:
+      transform 0.2s ease-in-out,
+      font-size 0.2s ease-in-out,
+      color 0.2s ease-in-out;
+
+    &_outlined {
+      color: var(--color-grey-light);
+
+      &.error {
+        color: var(--color-red);
+      }
+    }
+
+    &_filled {
+      color: var(--color-grey);
+
+      &.error {
+        color: var(--color-red);
+      }
+    }
+
+    &_standard {
+      left: 0px;
+
+      &.error {
+        color: var(--color-red);
+      }
+    }
+  }
+
+  .text_field {
+    @include mixins.text-l;
+    padding: 8px 12px;
+    border: 1px solid var(--color-grey-light);
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 25ch;
+
+    &::placeholder {
+      color: var(--color-grey-light);
+      transition: opacity 0.2s ease-in-out;
+      opacity: 0;
+    }
+
+    &:focus {
+      border-color: var(--color-primary);
+
+      &::placeholder {
+        opacity: 1;
+      }
+    }
+
+    &_outlined {
+      &:focus {
+        border: 1px solid var(--color-primary);
+        border-top: 0px solid var(--color-primary);
+
+        + .label_text_outlined {
+          transform: translate(-10%, -140%) scale(0.8);
+        }
+
+        &.error {
+          border: 1px solid var(--color-red);
+          border-top: 0px solid var(--color-red);
+        }
+      }
+
+      &:not(:placeholder-shown) {
+        border-top: 0px solid var(--color-primary);
+
+        + .label_text_outlined {
+          transform: translate(-10%, -140%) scale(0.8);
+        }
+      }
+
+      &.error {
+        border: 1px solid var(--color-red);
+      }
+    }
+
+    &_filled {
+      padding: 12px 12px 4px;
+      background-color: var(--color-grey-dark);
+      border: none;
+      border-bottom: 1px solid var(--color-white);
+      border-radius: 4px 4px 0px 0px;
+
+      &::placeholder {
+        color: var(--color-grey);
+      }
+
+      &:focus {
+        border-bottom: 1px solid var(--color-primary);
+
+        + .label_text_filled {
+          transform: translate(-10%, -100%) scale(0.8);
+        }
+      }
+
+      &:not(:placeholder-shown) {
+        + .label_text_filled {
+          transform: translate(-10%, -100%) scale(0.8);
+        }
+      }
+
+      &.error {
+        border-bottom: 1px solid var(--color-red);
+      }
+    }
+
+    &_standard {
+      padding: 2px 0px;
+      border: none;
+      background-color: transparent;
+      border-bottom: 1px solid var(--color-grey-light);
+      border-radius: 0;
+
+      &:focus {
+        border-bottom-color: var(--color-primary);
+
+        + .label_text_standard {
+          transform: translate(-10%, -150%) scale(0.8);
+        }
+      }
+
+      &:not(:placeholder-shown) {
+        + .label_text_standard {
+          transform: translate(-10%, -150%) scale(0.8);
+        }
+      }
+
+      &.error {
+        border-bottom: 1px solid var(--color-red);
+      }
+    }
+  }
+
+  .error_text {
+    @include mixins.text-s;
+    color: var(--color-primary-light);
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    left: 2px;
+    top: 75%;
+
+    &.error {
+      color: var(--color-red);
+    }
+  }
+}

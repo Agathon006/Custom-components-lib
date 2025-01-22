@@ -15,7 +15,7 @@
   "keywords": [],
   "author": "dzmitry zhukouski",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "description": "",
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.3",
@@ -31,8 +31,10 @@
     "@storybook/test": "^8.5.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
-    "@types/react": "^19.0.7",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@typescript-eslint/parser": "^8.20.0",
     "css-loader": "^6.0.0",
@@ -46,11 +48,12 @@
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.4.1",
     "prettier": "^3.4.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
     "storybook": "^8.5.0",
+    "style-loader": "^4.0.0",
     "ts-jest": "^29.2.5",
     "ts-loader": "^9.5.2",
     "typescript": "^5.7.3",
@@ -58,13 +61,10 @@
     "webpack-cli": "^6.0.1"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "files": [
     "dist"
-  ],
-  "dependencies": {
-    "style-loader": "^4.0.0"
-  }
+  ]
 }

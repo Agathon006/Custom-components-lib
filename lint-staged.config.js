@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     '*.{json, js, ts, jsx, tsx, html, css, scss, sass}': [
         'prettier --write',
     ],

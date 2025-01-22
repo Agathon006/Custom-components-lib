@@ -1,64 +1,94 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Button, ButtonProps } from '.';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Button, ButtonProps } from './Button';
 import '@testing-library/jest-dom';
 
+const CLASS_NAMES = {
+  buttonMedium: 'button_medium',
+  buttonContained: 'button_contained',
+  buttonSmall: 'button_small',
+  buttonBig: 'button_big',
+  buttonText: 'button_text',
+  buttonOutlined: 'button_outlined',
+};
+
+const BUTTON_TEXT = 'Click me';
+const BUTTON_TEST_TEXT = 'Test';
+const ARIA_LABEL = 'test-button';
+const BUTTON_TYPE = 'submit';
+
 describe('Button', () => {
+  const renderComponent = (props: Partial<ButtonProps>) => {
+    return render(<Button {...props} />);
+  };
+
   it('renders a button with text content', () => {
-    render(<Button>Click me</Button>);
-    expect(screen.getByRole('button')).toHaveTextContent('Click me');
+    const component = renderComponent({ children: BUTTON_TEXT });
+
+    expect(component.getByRole('button')).toHaveTextContent(BUTTON_TEXT);
   });
 
   it('renders with custom className', () => {
-    render(<Button className="my-custom-class">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('my-custom-class');
+    const component = renderComponent({ className: 'my-custom-class', children: BUTTON_TEXT });
+
+    expect(component.getByRole('button')).toHaveClass('my-custom-class');
   });
 
-  it('renders with default size medium', () => {
-    render(<Button>Click me</Button>);
-    expect(screen.getByRole('button')).not.toHaveClass('button-small');
-    expect(screen.getByRole('button')).not.toHaveClass('button-big');
+  it('renders a default medium contained button with no provided prop variant', () => {
+    const component = renderComponent({ children: BUTTON_TEXT });
+
+    expect(component.getByRole('button')).toHaveClass(CLASS_NAMES.buttonMedium);
+    expect(component.getByRole('button')).toHaveClass(CLASS_NAMES.buttonContained);
   });
 
   it('renders with size small', () => {
-    render(<Button size="small">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('button-small');
+    const component = renderComponent({ size: 'small', children: BUTTON_TEXT });
+
+    expect(component.getByRole('button')).toHaveClass(CLASS_NAMES.buttonSmall);
   });
 
   it('renders with size big', () => {
-    render(<Button size="big">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('button-big');
+    const component = renderComponent({ size: 'big', children: BUTTON_TEXT });
+
+    expect(component.getByRole('button')).toHaveClass(CLASS_NAMES.buttonBig);
   });
 
   it('renders with default variant contained', () => {
-    render(<Button>Click me</Button>);
-    expect(screen.getByRole('button')).not.toHaveClass('button-text');
-    expect(screen.getByRole('button')).not.toHaveClass('button-outlined');
+    const component = renderComponent({ children: BUTTON_TEXT });
+
+    expect(component.getByRole('button')).not.toHaveClass(CLASS_NAMES.buttonText);
+    expect(component.getByRole('button')).not.toHaveClass(CLASS_NAMES.buttonOutlined);
   });
 
   it('renders with variant text', () => {
-    render(<Button variant="text">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('button-text');
+    const component = renderComponent({ variant: 'text', children: BUTTON_TEXT });
+
+    expect(component.getByRole('button')).toHaveClass(CLASS_NAMES.buttonText);
   });
 
   it('renders with variant outlined', () => {
-    render(<Button variant="outlined">Click me</Button>);
-    expect(screen.getByRole('button')).toHaveClass('button-outlined');
+    const component = renderComponent({ variant: 'outlined', children: BUTTON_TEXT });
+
+    expect(component.getByRole('button')).toHaveClass(CLASS_NAMES.buttonOutlined);
   });
 
-  it('handles onClick event', () => {
+  it('handles onClick event', async () => {
     const onClick = jest.fn();
-    render(<Button onClick={onClick}>Click me</Button>);
-    fireEvent.click(screen.getByRole('button'));
+    const component = renderComponent({ onClick, children: BUTTON_TEXT });
+
+    await userEvent.click(component.getByRole('button'));
+
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('renders with disabled state', () => {
-    render(<Button disabled>Click me</Button>);
-    expect(screen.getByRole('button')).toBeDisabled();
+    const component = renderComponent({ disabled: true, children: BUTTON_TEXT });
+
+    expect(component.getByRole('button')).toBeDisabled();
   });
 
-  it('renders with all props', () => {
+  it('renders with all props', async () => {
     const onClick = jest.fn();
     const buttonProps: ButtonProps = {
       size: 'big',
@@ -67,27 +97,29 @@ describe('Button', () => {
       onClick: onClick,
       disabled: true,
     };
-    render(<Button {...buttonProps}>Test</Button>);
-    const button = screen.getByRole('button');
+    const component = renderComponent({ ...buttonProps, children: BUTTON_TEST_TEXT });
+    const button = component.getByRole('button');
 
-    expect(button).toHaveTextContent('Test');
-    expect(button).toHaveClass('button-big');
-    expect(button).toHaveClass('button-outlined');
+    expect(button).toHaveTextContent(BUTTON_TEST_TEXT);
+    expect(button).toHaveClass(CLASS_NAMES.buttonBig);
+    expect(button).toHaveClass(CLASS_NAMES.buttonOutlined);
     expect(button).toHaveClass('test-class');
     expect(button).toBeDisabled();
 
-    fireEvent.click(button);
+    await userEvent.click(button);
+
     expect(onClick).not.toHaveBeenCalled();
   });
 
   it('renders with HTML attributes', () => {
-    render(
-      <Button aria-label="test-button" type="submit">
-        Click me
-      </Button>
-    );
-    const button = screen.getByRole('button');
-    expect(button).toHaveAttribute('aria-label', 'test-button');
-    expect(button).toHaveAttribute('type', 'submit');
+    const component = renderComponent({
+      'aria-label': ARIA_LABEL,
+      type: BUTTON_TYPE,
+      children: BUTTON_TEXT,
+    });
+    const button = component.getByRole('button');
+
+    expect(button).toHaveAttribute('aria-label', ARIA_LABEL);
+    expect(button).toHaveAttribute('type', BUTTON_TYPE);
   });
 });

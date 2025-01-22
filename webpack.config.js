@@ -1,20 +1,29 @@
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   mode: 'production',
   entry: './src/index.tsx',
+  experiments: {
+    outputModule: true
+  },
   output: {
+    libraryTarget: 'module',
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
-    libraryTarget: 'umd',
+    umdNamedDefine: true,
+    globalObject: 'this',
     clean: true,
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
   externals: {
-    react: 'react',
-    'react-dom': 'react-dom',
+    'react': 'react',
+    'react-dom': 'reactDOM'
   },
   module: {
     rules: [
@@ -25,7 +34,7 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              esModule: true,
+              esModule: false,
               modules: {
                 localIdentName: '[sha1:hash:hex:4]'
               }
