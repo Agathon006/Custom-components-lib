@@ -4,6 +4,20 @@ import userEvent from '@testing-library/user-event';
 import { TextField, TextFieldProps } from './TextField';
 import '@testing-library/jest-dom';
 
+const CLASS_NAMES = {
+  textField: 'text_field',
+  textFieldOutlined: 'text_field_outlined',
+  textFieldFilled: 'text_field_filled',
+  textFieldStandard: 'text_field_standard',
+  labelText: 'label_text',
+  error: 'error',
+  errorText: 'error_text',
+};
+
+const PLACEHOLDER_TEXT = 'Enter text';
+const ERROR_TEXT = 'Error occurred';
+const LABEL_TEXT = 'Test Label';
+
 describe('TextField', () => {
   const defaultProps: TextFieldProps = {
     id: 'test-input',
@@ -18,22 +32,22 @@ describe('TextField', () => {
     const component = renderComponent({ id: 'test-id' });
     const input = component.getByRole('textbox');
 
-    expect(input).toHaveClass('text_field');
-    expect(input).toHaveClass('text_field_outlined');
+    expect(input).toHaveClass(CLASS_NAMES.textField);
+    expect(input).toHaveClass(CLASS_NAMES.textFieldOutlined);
   });
 
   it('renders with variant filled', () => {
     const component = renderComponent({ id: 'test-id', variant: 'filled' });
     const input = component.getByRole('textbox');
 
-    expect(input).toHaveClass('text_field_filled');
+    expect(input).toHaveClass(CLASS_NAMES.textFieldFilled);
   });
 
   it('renders with variant standard', () => {
     const component = renderComponent({ id: 'test-id', variant: 'standard' });
     const input = component.getByRole('textbox');
 
-    expect(input).toHaveClass('text_field_standard');
+    expect(input).toHaveClass(CLASS_NAMES.textFieldStandard);
   });
 
   it('renders with custom className', () => {
@@ -44,29 +58,29 @@ describe('TextField', () => {
   });
 
   it('renders with label', () => {
-    const component = renderComponent({ id: 'test-id', label: 'Test Label' });
+    const component = renderComponent({ id: 'test-id', label: LABEL_TEXT });
 
-    expect(component.getByText('Test Label')).toHaveClass('label_text');
+    expect(component.getByText(LABEL_TEXT)).toHaveClass(CLASS_NAMES.labelText);
   });
 
   it('renders with error state', () => {
     const component = renderComponent({ id: 'test-id', error: true });
     const input = component.getByRole('textbox');
 
-    expect(input).toHaveClass('error');
+    expect(input).toHaveClass(CLASS_NAMES.error);
   });
 
   it('renders with errorText', () => {
-    const component = renderComponent({ id: 'test-id', errorText: 'Error occurred' });
+    const component = renderComponent({ id: 'test-id', errorText: ERROR_TEXT });
 
-    expect(component.getByText('Error occurred')).toHaveClass('error_text');
+    expect(component.getByText(ERROR_TEXT)).toHaveClass(CLASS_NAMES.errorText);
   });
 
   it('renders with placeholder', () => {
-    const component = renderComponent({ id: 'test-id', placeholder: 'Enter text' });
+    const component = renderComponent({ id: 'test-id', placeholder: PLACEHOLDER_TEXT });
     const input = component.getByRole('textbox');
 
-    expect(input).toHaveAttribute('placeholder', 'Enter text');
+    expect(input).toHaveAttribute('placeholder', PLACEHOLDER_TEXT);
   });
 
   it('handles onChange event', async () => {
@@ -115,14 +129,14 @@ describe('TextField', () => {
     const component = renderComponent(textFieldProps);
     const input = component.getByRole('textbox');
 
-    expect(input).toHaveClass('text_field');
-    expect(input).toHaveClass('text_field_filled');
+    expect(input).toHaveClass(CLASS_NAMES.textField);
+    expect(input).toHaveClass(CLASS_NAMES.textFieldFilled);
     expect(input).toHaveClass('custom-class');
     expect(input).toHaveAttribute('placeholder', 'Placeholder');
     expect(input).toBeRequired();
     expect(input).toHaveValue('Value');
-    expect(component.getByText('Label')).toHaveClass('label_text');
-    expect(component.getByText('Error')).toHaveClass('error_text');
+    expect(component.getByText('Label')).toHaveClass(CLASS_NAMES.labelText);
+    expect(component.getByText('Error')).toHaveClass(CLASS_NAMES.errorText);
 
     await user.type(input, 'New value');
 
