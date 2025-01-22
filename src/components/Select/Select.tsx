@@ -9,7 +9,12 @@ export type SelectProps = {
   options?: { [key: string]: string };
 } & React.ComponentPropsWithoutRef<'div'>;
 
-export const Select: FC<SelectProps> = ({ id, label = 'Select...', options = {}, ...props }) => {
+export const Select: FC<SelectProps> = ({
+  id,
+  label = 'Select...',
+  options = { None: '' },
+  ...props
+}) => {
   const [selected, setSelected] = useState<{ optionText: string; optionValue: string }>({
     optionText: '',
     optionValue: '',
@@ -35,9 +40,12 @@ export const Select: FC<SelectProps> = ({ id, label = 'Select...', options = {},
   }, []);
 
   const onOptionClick = (optionText: string, optionValue: string) => {
+    if (optionValue === '') return;
     setSelected({ optionText, optionValue });
     setIsOpen(prevState => !prevState);
   };
+
+  const optionsWithEmptyCase = Object.keys(options).length === 0 ? { None: '' } : options;
 
   return (
     <label className={classes.select_wrapper} data-select>
@@ -50,10 +58,10 @@ export const Select: FC<SelectProps> = ({ id, label = 'Select...', options = {},
       <span className={classes.label_span}>{label}</span>
       {isOpen && (
         <div className={clsx(classes.options, isOpen && classes.options_active)}>
-          {Object.entries(options).map(([optionText, optionValue]) => (
+          {Object.entries(optionsWithEmptyCase).map(([optionText, optionValue]) => (
             <div
               key={optionValue}
-              className={classes.option}
+              className={clsx(classes.option, optionValue === '' && classes.option_disabled)}
               onClick={() => onOptionClick(optionText, optionValue)}
               data-select-option
             >

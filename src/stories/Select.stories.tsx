@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 import { Select, SelectProps } from '../components/Select';
 
@@ -40,5 +42,21 @@ export const EmptyOptions: Story = {
     id: 'empty-options-select',
     label: 'No options available',
     options: {},
+  },
+};
+
+export const ManySelectors: Story = {
+  render: args => (
+    <div style={{ display: 'flex', gap: '100px' }}>
+      <Select {...args} id="first-select" label="First Selector" />
+      <Select {...args} id="second-select" label="Second Selector" />
+    </div>
+  ),
+  args: {
+    options: {
+      Option1: 'value1',
+      Option2: 'value2',
+      Option3: 'value3',
+    },
   },
 };
