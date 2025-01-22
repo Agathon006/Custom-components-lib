@@ -30,7 +30,6 @@ $transition:
 }
 
 .button {
-  @include mixins.text-m;
   letter-spacing: 0.02857em;
   display: inline-flex;
   align-items: center;
@@ -39,8 +38,8 @@ $transition:
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   outline: 0;
-  border: 0;
   margin: 0;
+  border: 0;
   cursor: pointer;
   user-select: none;
   vertical-align: middle;
@@ -48,9 +47,6 @@ $transition:
   text-transform: uppercase;
   border-radius: 4px;
   transition: $transition;
-  padding: 6px 16px;
-  color: var(--color-white);
-  background-color: var(--color-primary);
 
   @include shadow-default();
 
@@ -70,12 +66,17 @@ $transition:
   }
 
   &_small {
-    font-size: 0.75rem;
+    @include mixins.text-s;
     padding: 4px 8px;
   }
 
+  &_medium {
+    @include mixins.text-m;
+    padding: 6px 16px;
+  }
+
   &_big {
-    font-size: 1rem;
+    @include mixins.text-l;
     padding: 8px 24px;
   }
   &_text {
@@ -86,6 +87,10 @@ $transition:
     &:hover {
       background-color: var(--color-primary-dark);
     }
+  }
+  &_contained {
+    background-color: var(--color-primary);
+    color: var(--color-white);
   }
   &_outlined {
     border: 1px solid var(--color-primary);
