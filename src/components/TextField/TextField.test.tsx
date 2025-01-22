@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { TextField, TextFieldProps } from './TextField';
 import '@testing-library/jest-dom';
 
@@ -68,16 +69,16 @@ describe('TextField', () => {
     expect(input).toHaveAttribute('placeholder', 'Enter text');
   });
 
-  it('handles onChange event', () => {
+  it('handles onChange event', async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn();
     const component = renderComponent({ id: 'test-id', onChange });
     const input = component.getByRole('textbox');
-  
-    fireEvent.change(input, { target: { value: 'New value' } });
-  
-    expect(onChange).toHaveBeenCalledTimes(1);
-  
-    const event = onChange.mock.calls[0][0];
+
+    await user.type(input, 'New value');
+
+    expect(onChange).toHaveBeenCalledTimes(9);
+    const event = onChange.mock.calls[7][0];
     expect(event.target.value).toBe('New value');
   });
 
@@ -95,7 +96,8 @@ describe('TextField', () => {
     expect(input).toHaveValue('Initial value');
   });
 
-  it('renders with all props', () => {
+  it('renders with all props', async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn();
     const textFieldProps: TextFieldProps = {
       id: 'test-id',
@@ -122,8 +124,8 @@ describe('TextField', () => {
     expect(component.getByText('Label')).toHaveClass('label_text');
     expect(component.getByText('Error')).toHaveClass('error_text');
 
-    fireEvent.change(input, { target: { value: 'New value' } });
+    await user.type(input, 'New value');
 
-    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(9);
   });
 });

@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Button, ButtonProps } from './Button';
 import '@testing-library/jest-dom';
 
@@ -58,11 +59,11 @@ describe('Button', () => {
     expect(component.getByRole('button')).toHaveClass('button_outlined');
   });
 
-  it('handles onClick event', () => {
+  it('handles onClick event', async () => {
     const onClick = jest.fn();
     const component = renderComponent({ onClick, children: 'Click me' });
 
-    fireEvent.click(component.getByRole('button'));
+    await userEvent.click(component.getByRole('button'));
 
     expect(onClick).toHaveBeenCalledTimes(1);
   });
@@ -73,7 +74,7 @@ describe('Button', () => {
     expect(component.getByRole('button')).toBeDisabled();
   });
 
-  it('renders with all props', () => {
+  it('renders with all props', async () => {
     const onClick = jest.fn();
     const buttonProps: ButtonProps = {
       size: 'big',
@@ -91,7 +92,7 @@ describe('Button', () => {
     expect(button).toHaveClass('test-class');
     expect(button).toBeDisabled();
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     expect(onClick).not.toHaveBeenCalled();
   });
