@@ -22,8 +22,8 @@ export const Button: FC<ButtonProps> = ({
   const cssClasses = clsx(
     classes.button,
     className,
-    classes[`button-${size}`],
-    classes[`button-${variant}`]
+    classes[`button_${size}`],
+    classes[`button_${variant}`]
   );
 
   return (
