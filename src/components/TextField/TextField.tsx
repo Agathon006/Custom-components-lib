@@ -41,12 +41,6 @@ export const TextField: FC<TextFieldProps> = ({
 
   const labelTextClasses = clsx(classes['label-text'], classes[`label-text-${variant}`]);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange) {
-      onChange(event);
-    }
-  };
-
   return (
     <label className={classes['label-wrapper']}>
       <input
@@ -57,7 +51,7 @@ export const TextField: FC<TextFieldProps> = ({
         placeholder={placeholder}
         required={required}
         value={value}
-        onChange={handleInputChange}
+        onChange={onChange}
       />
       {label && (
         <span className={clsx(labelTextClasses, error ? classes['error'] : null)}>{label}</span>
