@@ -1,135 +1,82 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { TextField } from '../components/TextField';
+import { Meta, StoryObj } from '@storybook/react';
+import { TextField, TextFieldProps } from '../components/TextField';
 
-const meta = {
-  title: 'Example/TextField',
+const meta: Meta<TextFieldProps> = {
+  title: 'Components/TextField',
   component: TextField,
-} satisfies Meta<typeof TextField>;
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['outlined', 'filled', 'standard'],
+    },
+    error: {
+      control: 'boolean',
+    },
+  },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<TextFieldProps>;
 
-export const Outlined: Story = {
+export const OutlinedWithLabelWithErrorText: Story = {
   args: {
-    id: 'outlined-textfield',
+    id: 'outlined-with-label-with-error-text',
     label: 'Outlined Label',
-    placeholder: 'Enter text',
     variant: 'outlined',
+    errorText: 'This is an error message',
+    placeholder: 'Enter text',
   },
 };
 
-export const OutlinedError: Story = {
+export const FilledWithLabelWithErrorText: Story = {
   args: {
-    id: 'outlined-textfield-error',
+    id: 'filled-with-label-with-error-text',
+    label: 'Filled Label',
+    variant: 'filled',
+    errorText: 'This is an error message',
+    placeholder: 'Enter text',
+  },
+};
+
+export const StandardWithLabelWithErrorText: Story = {
+  args: {
+    id: 'standard-with-label-with-error-text',
+    label: 'Standard Label',
+    variant: 'standard',
+    errorText: 'This is an error message',
+    placeholder: 'Enter text',
+  },
+};
+
+export const OutlinedWithLabelWithErrorTextWithError: Story = {
+  args: {
+    id: 'outlined-with-label-with-error-text-with-error',
     label: 'Outlined Label',
-    placeholder: 'Enter text',
     variant: 'outlined',
-    error: true,
     errorText: 'This is an error message',
-  },
-};
-
-export const OutlinedErrorNoText: Story = {
-  args: {
-    id: 'outlined-textfield-error-no-text',
-    label: 'Outlined Label',
     placeholder: 'Enter text',
-    variant: 'outlined',
     error: true,
   },
 };
 
-export const Filled: Story = {
+export const FilledWithLabelWithErrorTextWithError: Story = {
   args: {
-    id: 'filled-textfield',
+    id: 'filled-with-label-with-error-text-with-error',
     label: 'Filled Label',
-    placeholder: 'Enter text',
     variant: 'filled',
-  },
-};
-
-export const FilledError: Story = {
-  args: {
-    id: 'filled-textfield-error',
-    label: 'Filled Label',
-    placeholder: 'Enter text',
-    variant: 'filled',
-    error: true,
     errorText: 'This is an error message',
-  },
-};
-
-export const FilledErrorNoText: Story = {
-  args: {
-    id: 'filled-textfield-error-no-text',
-    label: 'Filled Label',
     placeholder: 'Enter text',
-    variant: 'filled',
     error: true,
   },
 };
 
-export const Standard: Story = {
+export const StandardWithLabelWithErrorTextWithError: Story = {
   args: {
-    id: 'standard-textfield',
+    id: 'standard-with-label-with-error-text-with-error',
     label: 'Standard Label',
-    placeholder: 'Enter text',
     variant: 'standard',
-  },
-};
-
-export const StandardError: Story = {
-  args: {
-    id: 'standard-textfield-error',
-    label: 'Standard Label',
-    placeholder: 'Enter text',
-    variant: 'standard',
-    error: true,
     errorText: 'This is an error message',
-  },
-};
-
-export const StandardErrorNoText: Story = {
-  args: {
-    id: 'standard-textfield-error-no-text',
-    label: 'Standard Label',
     placeholder: 'Enter text',
-    variant: 'standard',
     error: true,
-  },
-};
-
-export const WitherrorText: Story = {
-  args: {
-    id: 'helper-textfield',
-    label: 'Helper Text Label',
-    placeholder: 'Enter text',
-    errorText: 'This is helper text',
-  },
-};
-
-export const WithDefaultValue: Story = {
-  args: {
-    id: 'default-textfield',
-    label: 'Default Value Label',
-    placeholder: 'Enter text',
-    value: 'Initial Value',
-  },
-};
-
-export const DifferentType: Story = {
-  args: {
-    id: 'password-textfield',
-    label: 'Password',
-    type: 'password',
-  },
-};
-
-export const RequiredField: Story = {
-  args: {
-    id: 'required-textfield',
-    label: 'Required Field Label',
-    placeholder: 'Enter text',
-    required: true,
   },
 };

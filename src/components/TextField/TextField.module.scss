@@ -1,22 +1,21 @@
 @use '../../style/vars.scss';
 @use '../../style/mixins.scss';
 
-.label-wrapper {
+.label_wrapper {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
   width: max-content;
   position: relative;
-  padding: 16px 0px;
+  padding: 18px 0px;
   overflow: hidden;
 
   &:focus-within {
-    .label-text {
+    .label_text {
       color: var(--color-primary);
     }
   }
 
-  .label-text {
+  .label_text {
     @include mixins.text-m;
     color: var(--color-grey-light);
     pointer-events: none;
@@ -34,20 +33,32 @@
       font-size 0.2s ease-in-out,
       color 0.2s ease-in-out;
 
-    &.error {
-      color: var(--color-red);
+    &_outlined {
+      color: var(--color-grey-light);
+
+      &.error {
+        color: var(--color-red);
+      }
     }
 
-    &-filled {
+    &_filled {
       color: var(--color-grey);
+
+      &.error {
+        color: var(--color-red);
+      }
     }
 
-    &-standard {
+    &_standard {
       left: 0px;
+
+      &.error {
+        color: var(--color-red);
+      }
     }
   }
 
-  .text-field {
+  .text_field {
     @include mixins.text-l;
     padding: 8px 12px;
     border: 1px solid var(--color-grey-light);
@@ -73,20 +84,25 @@
       }
     }
 
-    &-outlined {
+    &_outlined {
       &:focus {
         border: 1px solid var(--color-primary);
         border-top: 0px solid var(--color-primary);
 
-        + .label-text-outlined {
+        + .label_text_outlined {
           transform: translate(-10%, -140%) scale(0.8);
+        }
+
+        &.error {
+          border: 1px solid var(--color-red);
+          border-top: 0px solid var(--color-red);
         }
       }
 
       &:not(:placeholder-shown) {
         border-top: 0px solid var(--color-primary);
 
-        + .label-text-outlined {
+        + .label_text_outlined {
           transform: translate(-10%, -140%) scale(0.8);
         }
       }
@@ -96,7 +112,7 @@
       }
     }
 
-    &-filled {
+    &_filled {
       padding: 12px 12px 4px;
       background-color: var(--color-grey-dark);
       border: none;
@@ -110,23 +126,23 @@
       &:focus {
         border-bottom: 1px solid var(--color-primary);
 
-        + .label-text-filled {
+        + .label_text_filled {
           transform: translate(-10%, -100%) scale(0.8);
         }
       }
 
       &:not(:placeholder-shown) {
-        + .label-text-filled {
+        + .label_text_filled {
           transform: translate(-10%, -100%) scale(0.8);
         }
       }
 
       &.error {
-        border: 1px solid var(--color-red);
+        border-bottom: 1px solid var(--color-red);
       }
     }
 
-    &-standard {
+    &_standard {
       padding: 2px 0px;
       border: none;
       background-color: transparent;
@@ -136,13 +152,13 @@
       &:focus {
         border-bottom-color: var(--color-primary);
 
-        + .label-text-standard {
+        + .label_text_standard {
           transform: translate(-10%, -150%) scale(0.8);
         }
       }
 
       &:not(:placeholder-shown) {
-        + .label-text-standard {
+        + .label_text_standard {
           transform: translate(-10%, -150%) scale(0.8);
         }
       }
@@ -153,7 +169,7 @@
     }
   }
 
-  .error-text {
+  .error_text {
     @include mixins.text-s;
     color: var(--color-primary-light);
     position: absolute;

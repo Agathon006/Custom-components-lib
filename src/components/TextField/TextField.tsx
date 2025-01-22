@@ -25,7 +25,7 @@ export const TextField: FC<TextFieldProps> = ({
   type = 'text',
   variant = 'outlined',
   className,
-  placeholder='',
+  placeholder = '',
   required,
   error,
   value,
@@ -33,16 +33,22 @@ export const TextField: FC<TextFieldProps> = ({
   ...props
 }) => {
   const cssClasses = clsx(
-    classes['text-field'],
+    classes.text_field,
     className,
-    classes[`text-field-${variant}`],
-    error && classes['error']
+    classes[`text_field_${variant}`],
+    error && classes.error
   );
 
-  const labelTextClasses = clsx(classes['label-text'], classes[`label-text-${variant}`]);
+  const labelTextClasses = clsx(
+    classes.label_text,
+    classes[`label_text_${variant}`],
+    error && classes.error
+  );
+
+  const errorTextClasses = clsx(classes.error_text, error && classes.error);
 
   return (
-    <label className={classes['label-wrapper']}>
+    <label className={classes.label_wrapper}>
       <input
         {...props}
         id={id}
@@ -53,14 +59,8 @@ export const TextField: FC<TextFieldProps> = ({
         value={value}
         onChange={onChange}
       />
-      {label && (
-        <span className={clsx(labelTextClasses, error ? classes['error'] : null)}>{label}</span>
-      )}
-      {errorText && (
-        <span className={clsx(classes['error-text'], error ? classes['error'] : null)}>
-          {errorText}
-        </span>
-      )}
+      {label && <span className={labelTextClasses}>{label}</span>}
+      {errorText && <span className={errorTextClasses}>{errorText}</span>}
     </label>
   );
 };
