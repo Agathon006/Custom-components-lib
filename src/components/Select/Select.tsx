@@ -23,8 +23,12 @@ export const Select: FC<SelectProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (!(event.target as HTMLElement).closest('[data-select-option]')) {
-        if (!(event.target as HTMLElement).closest('[data-select]')) {
+      const target = event.target as HTMLElement;
+      const isSelectClick = !!target.closest(`[data-select]`);
+      const isOptionClick = !!target.closest(`[data-select-option]`);
+
+      if (!isOptionClick) {
+        if (!isSelectClick) {
           setIsOpen(false);
         } else {
           setIsOpen(prevState => !prevState);
