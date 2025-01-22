@@ -20,42 +20,42 @@ describe('Button', () => {
     expect(component.getByRole('button')).toHaveClass('my-custom-class');
   });
 
-  it('renders with default size medium', () => {
+  it('renders a default medium contained button with no provided prop variant', () => {
     const component = renderComponent({ children: 'Click me' });
 
-    expect(component.getByRole('button')).not.toHaveClass('button-small');
-    expect(component.getByRole('button')).not.toHaveClass('button-big');
+    expect(component.getByRole('button')).toHaveClass('button_medium');
+    expect(component.getByRole('button')).toHaveClass('button_contained');
   });
 
   it('renders with size small', () => {
     const component = renderComponent({ size: 'small', children: 'Click me' });
 
-    expect(component.getByRole('button')).toHaveClass('button-small');
+    expect(component.getByRole('button')).toHaveClass('button_small');
   });
 
   it('renders with size big', () => {
     const component = renderComponent({ size: 'big', children: 'Click me' });
 
-    expect(component.getByRole('button')).toHaveClass('button-big');
+    expect(component.getByRole('button')).toHaveClass('button_big');
   });
 
   it('renders with default variant contained', () => {
     const component = renderComponent({ children: 'Click me' });
 
-    expect(component.getByRole('button')).not.toHaveClass('button-text');
-    expect(component.getByRole('button')).not.toHaveClass('button-outlined');
+    expect(component.getByRole('button')).not.toHaveClass('button_text');
+    expect(component.getByRole('button')).not.toHaveClass('button_outlined');
   });
 
   it('renders with variant text', () => {
     const component = renderComponent({ variant: 'text', children: 'Click me' });
 
-    expect(component.getByRole('button')).toHaveClass('button-text');
+    expect(component.getByRole('button')).toHaveClass('button_text');
   });
 
   it('renders with variant outlined', () => {
     const component = renderComponent({ variant: 'outlined', children: 'Click me' });
 
-    expect(component.getByRole('button')).toHaveClass('button-outlined');
+    expect(component.getByRole('button')).toHaveClass('button_outlined');
   });
 
   it('handles onClick event', () => {
@@ -86,8 +86,8 @@ describe('Button', () => {
     const button = component.getByRole('button');
 
     expect(button).toHaveTextContent('Test');
-    expect(button).toHaveClass('button-big');
-    expect(button).toHaveClass('button-outlined');
+    expect(button).toHaveClass('button_big');
+    expect(button).toHaveClass('button_outlined');
     expect(button).toHaveClass('test-class');
     expect(button).toBeDisabled();
 
@@ -103,7 +103,7 @@ describe('Button', () => {
       children: 'Click me',
     });
     const button = component.getByRole('button');
-    
+
     expect(button).toHaveAttribute('aria-label', 'test-button');
     expect(button).toHaveAttribute('type', 'submit');
   });
