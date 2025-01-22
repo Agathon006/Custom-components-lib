@@ -36,7 +36,7 @@ export const TextField: FC<TextFieldProps> = ({
     classes['text-field'],
     className,
     classes[`text-field-${variant}`],
-    error ? classes['error'] : null
+    error && classes['error']
   );
 
   const labelTextClasses = clsx(classes['label-text'], classes[`label-text-${variant}`]);
