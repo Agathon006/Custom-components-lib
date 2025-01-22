@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import classes from './Select.module.scss';
 import { clsx } from '../../utils/clsx';
-import ArrowDownSvg from '../../assets/icons/arrow-down.svg';
+import { GoTriangleDown as ArrowDown } from 'react-icons/go';
 
 export type SelectProps = {
   id: string;
@@ -44,7 +44,7 @@ export const Select: FC<SelectProps> = ({ id, label = 'Select...', options = {},
       <div {...props} id={id} className={classes.select} tabIndex={0}>
         <span className={classes.selected_value}>{selected.optionText}</span>
         <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
-          <ArrowDownSvg />
+          <ArrowDown />
         </div>
       </div>
       <span className={classes.label_span}>{label}</span>
