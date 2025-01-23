@@ -7,12 +7,16 @@ export type SelectProps = {
   id: string;
   label?: string;
   options?: { [key: string]: string };
+  className?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & React.ComponentPropsWithoutRef<'div'>;
 
 export const Select: FC<SelectProps> = ({
   id,
   label = 'Select...',
   options = { None: '' },
+  className,
+  onChange,
   ...props
 }) => {
   const [selected, setSelected] = useState<{ optionText: string; optionValue: string }>({
@@ -43,14 +47,25 @@ export const Select: FC<SelectProps> = ({
 
   const onOptionClick = (optionText: string, optionValue: string) => {
     if (optionValue === '') return;
+
     setSelected({ optionText, optionValue });
-    setIsOpen(prevState => !prevState);
+    setIsOpen(false);
+
+    if (onChange) {
+      const event = {
+        target: {
+          id,
+          value: optionValue,
+        },
+      } as React.ChangeEvent<HTMLInputElement>;
+      onChange(event);
+    }
   };
 
   const optionsWithEmptyCase = Object.keys(options).length === 0 ? { None: '' } : options;
 
   return (
-    <label className={classes.select_wrapper}>
+    <label className={clsx(classes.select_wrapper, className)}>
       <div
         {...props}
         id={id}
