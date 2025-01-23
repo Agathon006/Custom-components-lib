@@ -27,13 +27,7 @@ export const Select: FC<SelectProps> = ({
       const isSelectClick = !!target.closest(`[data-select]`);
       const isOptionClick = !!target.closest(`[data-select-option]`);
 
-      if (!isOptionClick) {
-        if (!isSelectClick) {
-          setIsOpen(false);
-        } else {
-          setIsOpen(prevState => !prevState);
-        }
-      }
+      if (!isOptionClick && !isSelectClick) setIsOpen(false);
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -42,6 +36,10 @@ export const Select: FC<SelectProps> = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const onSelectClick = () => {
+    setIsOpen(prevState => !prevState);
+  };
 
   const onOptionClick = (optionText: string, optionValue: string) => {
     if (optionValue === '') return;
@@ -53,7 +51,14 @@ export const Select: FC<SelectProps> = ({
 
   return (
     <label className={classes.select_wrapper}>
-      <div {...props} id={id} className={classes.select} tabIndex={0} data-select>
+      <div
+        {...props}
+        id={id}
+        className={classes.select}
+        tabIndex={0}
+        onClick={() => onSelectClick()}
+        data-select
+      >
         <span className={classes.selected_value}>{selected.optionText}</span>
         <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
           <ArrowDown />
