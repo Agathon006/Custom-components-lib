@@ -5,7 +5,6 @@ import { clsx } from '../../utils/clsx';
 type TextFieldVariant = 'outlined' | 'filled' | 'standard';
 
 export type TextFieldProps = {
-  id: string;
   label?: string;
   errorText?: string;
   type?: string;
@@ -19,7 +18,6 @@ export type TextFieldProps = {
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export const TextField: FC<TextFieldProps> = ({
-  id,
   label,
   errorText,
   type = 'text',
@@ -51,7 +49,6 @@ export const TextField: FC<TextFieldProps> = ({
     <label className={classes.label_wrapper}>
       <input
         {...props}
-        id={id}
         type={type}
         className={cssClasses}
         placeholder={placeholder}

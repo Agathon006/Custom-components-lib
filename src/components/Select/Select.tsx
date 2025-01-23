@@ -4,7 +4,6 @@ import { clsx } from '../../utils/clsx';
 import ArrowDownIcon from '../../assets/icons/triangleDown.svg';
 
 export type SelectProps = {
-  id: string;
   label?: string;
   options?: { id: string; label: string }[];
   value?: string;
@@ -13,7 +12,6 @@ export type SelectProps = {
 } & React.ComponentPropsWithoutRef<'div'>;
 
 export const Select: FC<SelectProps> = ({
-  id,
   label = 'Select...',
   options = [{ id: '', label: 'None' }],
   value,
@@ -54,7 +52,6 @@ export const Select: FC<SelectProps> = ({
     <label className={clsx(classes.select_wrapper, className)} role="select_wrapper">
       <div
         {...props}
-        id={id}
         className={classes.select}
         tabIndex={0}
         onClick={() => onSelectClick()}
