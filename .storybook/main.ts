@@ -15,6 +15,39 @@ const config: StorybookConfig = {
   },
   webpackFinal: async config => {
     if (config && config.module && config.module.rules) {
+      config.module.rules = config.module.rules.map(rule => {
+        if (
+          rule &&
+          typeof rule === 'object' &&
+          rule.test instanceof RegExp &&
+          rule.test.test('.svg')
+        ) {
+          return {
+            test: /\.svg$/,
+            use: [
+              {
+                loader: '@svgr/webpack',
+                options: {
+                  svgoConfig: {
+                    plugins: [
+                      {
+                        name: 'preset-default',
+                        params: {
+                          overrides: {
+                            removeViewBox: false,
+                          },
+                        },
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+          };
+        }
+        return rule;
+      });
+
       config.module.rules.push({
         test: /\.scss$/,
         use: [
