@@ -2,6 +2,7 @@
 @use '../../style/mixins.scss';
 
 .select_wrapper {
+  height: fit-content;
   display: flex;
   flex-direction: column;
   width: max-content;
@@ -21,7 +22,7 @@
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    width: calc(100% - 12px);
+    width: 80%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -33,7 +34,6 @@
   }
 
   .select {
-    width: 100%;
     min-height: 21px;
     padding: 10px;
     font-size: 14px;
@@ -88,11 +88,11 @@
       position: absolute;
       right: 0px;
       top: 50%;
-      transform: translate(100%, -50%);
+      transform: translate(-50%, -50%);
       pointer-events: none;
 
       &_open {
-        transform: rotate(180deg) translate(-100%, 50%);
+        transform: rotate(180deg) translate(50%, 50%);
       }
     }
   }

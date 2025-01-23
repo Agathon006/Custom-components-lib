@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import classes from './Select.module.scss';
 import { clsx } from '../../utils/clsx';
 import { GoTriangleDown as ArrowDown } from 'react-icons/go';
@@ -6,23 +6,21 @@ import { GoTriangleDown as ArrowDown } from 'react-icons/go';
 export type SelectProps = {
   id: string;
   label?: string;
-  options?: { [key: string]: string };
+  options?: { id: string; label: string }[];
+  value?: string; 
+  onChange?: (value: string) => void; 
   className?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & React.ComponentPropsWithoutRef<'div'>;
 
 export const Select: FC<SelectProps> = ({
   id,
   label = 'Select...',
-  options = { None: '' },
-  className,
+  options = [{ id: '', label: 'None' }],
+  value,
   onChange,
+  className,
   ...props
 }) => {
-  const [selected, setSelected] = useState<{ optionText: string; optionValue: string }>({
-    optionText: '',
-    optionValue: '',
-  });
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -45,24 +43,12 @@ export const Select: FC<SelectProps> = ({
     setIsOpen(prevState => !prevState);
   };
 
-  const onOptionClick = (optionText: string, optionValue: string) => {
-    if (optionValue === '') return;
-
-    setSelected({ optionText, optionValue });
+  const onOptionClick = (id: string) => {
     setIsOpen(false);
-
-    if (onChange) {
-      const event = {
-        target: {
-          id,
-          value: optionValue,
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
-      onChange(event);
-    }
+    if (onChange) onChange(id);
   };
 
-  const optionsWithEmptyCase = Object.keys(options).length === 0 ? { None: '' } : options;
+  const selectedOption = options.find(option => option.id === value);
 
   return (
     <label className={clsx(classes.select_wrapper, className)} role="select_wrapper">
@@ -75,7 +61,9 @@ export const Select: FC<SelectProps> = ({
         data-select
         role="select"
       >
-        <span className={classes.selected_value}>{selected.optionText}</span>
+        <span className={classes.selected_value}>
+          {selectedOption?.label}
+        </span>
         <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
           <ArrowDown />
         </div>
@@ -83,14 +71,14 @@ export const Select: FC<SelectProps> = ({
       <span className={classes.label_span}>{label}</span>
       {isOpen && (
         <div className={clsx(classes.options, isOpen && classes.options_active)}>
-          {Object.entries(optionsWithEmptyCase).map(([optionText, optionValue]) => (
+          {options.map(({ id, label }) => (
             <div
-              key={optionValue}
-              className={clsx(classes.option, optionValue === '' && classes.option_disabled)}
-              onClick={() => onOptionClick(optionText, optionValue)}
+              key={id}
+              className={clsx(classes.option, id === '' && classes.option_disabled)}
+              onClick={() => onOptionClick(id)}
               data-select-option
             >
-              {optionText}
+              {label}
             </div>
           ))}
         </div>

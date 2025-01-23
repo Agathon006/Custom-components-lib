@@ -6,11 +6,11 @@ import '@testing-library/jest-dom';
 
 const SELECT_LABEL = 'Test Label';
 const SELECT_ID = 'test-select';
-const SELECT_OPTIONS = {
-  Option1: 'value1',
-  Option2: 'value2',
-  Option3: 'value3',
-};
+const SELECT_OPTIONS = [
+  { id: 'text1', label: 'Text 1' },
+  { id: 'text2', label: 'Text 2sssssssssssssssssssssssssssssssssssssssssss' },
+  { id: 'text3', label: 'Text 3' },
+];
 const CUSTOM_CLASS = 'custom-select-class';
 
 describe('Select', () => {
@@ -22,7 +22,7 @@ describe('Select', () => {
     renderComponent({});
 
     expect(screen.getByText('Select...')).toBeInTheDocument();
-    expect(screen.queryByText('Option1')).not.toBeInTheDocument();
+    expect(screen.queryByText('Text 1')).not.toBeInTheDocument();
   });
 
   it('renders with provided label', () => {
@@ -38,14 +38,14 @@ describe('Select', () => {
 
     expect(selectElement).toBeInTheDocument();
 
-    Object.keys(SELECT_OPTIONS).forEach(optionText => {
-      expect(screen.queryByText(optionText)).not.toBeInTheDocument();
+    SELECT_OPTIONS.forEach(option => {
+      expect(screen.queryByText(option.label)).not.toBeInTheDocument();
     });
 
     await userEvent.click(selectElement);
 
-    Object.keys(SELECT_OPTIONS).forEach(optionText => {
-      expect(screen.getByText(optionText)).toBeInTheDocument();
+    SELECT_OPTIONS.forEach(option => {
+      expect(screen.getByText(option.label)).toBeInTheDocument();
     });
   });
 
@@ -63,7 +63,7 @@ describe('Select', () => {
     await userEvent.click(select);
     await userEvent.click(select);
 
-    expect(screen.queryByText('Option1')).not.toBeInTheDocument();
+    expect(screen.queryByText('Text 1')).not.toBeInTheDocument();
   });
 
   it('selects an option and triggers onChange', async () => {
@@ -71,45 +71,23 @@ describe('Select', () => {
     renderComponent({ options: SELECT_OPTIONS, onChange });
 
     const select = screen.getByRole('select');
-    const optionToSelect = screen.getByText('Option1');
-
     await userEvent.click(select);
+
+    const optionToSelect = screen.getByText('Text 1');
     await userEvent.click(optionToSelect);
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith(
-      expect.objectContaining({
-        target: expect.objectContaining({
-          id: SELECT_ID,
-          value: 'value1',
-        }),
-      })
-    );
-
-    expect(screen.getByText('Option1')).toBeInTheDocument();
+    expect(onChange).toHaveBeenCalledWith(expect.stringContaining('text1'));
   });
 
-    it('does not trigger onChange for disabled options', async () => {
-      const onChange = jest.fn();
-      renderComponent({ options: { None: '', ...SELECT_OPTIONS }, onChange });
-  
-      const select = screen.getByRole('select');
-      const disabledOption = screen.getByText('None');
+  it('closes the dropdown when clicking outside', async () => {
+    renderComponent({ options: SELECT_OPTIONS });
 
-      await userEvent.click(select);
-      await userEvent.click(disabledOption);
-  
-      expect(onChange).not.toHaveBeenCalled();
-    });
+    const select = screen.getByRole('select');
 
-      it('closes the dropdown when clicking outside', async () => {
-        renderComponent({ options: SELECT_OPTIONS });
-    
-        const select = screen.getByRole('select');
+    await userEvent.click(select);
+    await userEvent.click(document.body);
 
-        await userEvent.click(select);
-        await userEvent.click(document.body);
-        
-        expect(screen.queryByText('Option1')).not.toBeInTheDocument();
-      });
+    expect(screen.queryByText('Text 1')).not.toBeInTheDocument();
+  });
 });

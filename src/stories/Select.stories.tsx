@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { Select, SelectProps } from '../components/Select';
 
@@ -17,7 +16,15 @@ const meta: Meta<SelectProps> = {
     },
     options: {
       control: 'object',
-      description: 'An object containing options for the Select component.',
+      description: 'An array of options for the Select component.',
+    },
+    value: {
+      control: 'text',
+      description: 'The current value of the Select component.',
+    },
+    onChange: {
+      action: 'changed',
+      description: 'Callback triggered when the value changes.',
     },
   },
 };
@@ -26,37 +33,82 @@ export default meta;
 type Story = StoryObj<SelectProps>;
 
 export const Default: Story = {
-  args: {
-    id: 'default-select',
-    label: 'Choose an option',
-    options: {
-      Option1: 'value1',
-      Option2: 'value2',
-      Option3: 'value3',
-    },
+  render: args => {
+    const [selectedValue, setSelectedValue] = useState('');
+
+    const options = [
+      { id: 'text1', label: 'Text 1' },
+      { id: 'text2', label: 'Text 2sssssssssssssssssssssssssssssssssssssssssss' },
+      { id: 'text3', label: 'Text 3' },
+    ];
+
+    return (
+      <Select
+        id="default-select"
+        label="choose an option"
+        options={options}
+        value={selectedValue}
+        onChange={value => {
+          setSelectedValue(value);
+        }}
+      />
+    );
   },
 };
 
 export const EmptyOptions: Story = {
-  args: {
-    id: 'empty-options-select',
-    label: 'No options available',
-    options: {},
+  render: args => {
+    const [selectedValue, setSelectedValue] = useState('');
+
+    return (
+      <Select
+        id="empty-options-select"
+        label="No options available"
+        value={selectedValue}
+        onChange={value => {
+          setSelectedValue(value);
+          args.onChange?.(value);
+        }}
+      />
+    );
   },
 };
 
 export const ManySelectors: Story = {
-  render: args => (
-    <div style={{ display: 'flex', gap: '100px' }}>
-      <Select {...args} id="first-select" label="First Selector" />
-      <Select {...args} id="second-select" label="Second Selector" />
-    </div>
-  ),
-  args: {
-    options: {
-      Option1: 'value1',
-      Option2: 'value2',
-      Option3: 'value3',
-    },
+  render: args => {
+    const [firstValue, setFirstValue] = useState('');
+    const [secondValue, setSecondValue] = useState('');
+
+    const options = [
+      { id: 'text1', label: 'Text 1' },
+      { id: 'text2', label: 'Text 2sssssssssssssssssssssssssssssssssssssssssss' },
+      { id: 'text3', label: 'Text 3' },
+    ];
+
+    return (
+      <div style={{ display: 'flex', gap: '100px' }}>
+        <Select
+          {...args}
+          id="first-select"
+          label="First Selector"
+          value={firstValue}
+          options={options}
+          onChange={value => {
+            setFirstValue(value);
+            args.onChange?.(value);
+          }}
+        />
+        <Select
+          {...args}
+          id="second-select"
+          label="Second Selector"
+          value={secondValue}
+          onChange={value => {
+            setSecondValue(value);
+            args.onChange?.(value);
+          }}
+        />
+      </div>
+    );
   },
 };
