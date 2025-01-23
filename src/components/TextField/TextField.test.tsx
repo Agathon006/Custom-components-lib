@@ -52,9 +52,9 @@ describe('TextField', () => {
 
   it('renders with custom className', () => {
     const component = renderComponent({ id: 'test-id', className: 'custom-class' });
-    const input = component.getByRole('textbox');
+    const inputWrapper = component.getByRole('text_field_combobox');
 
-    expect(input).toHaveClass('custom-class');
+    expect(inputWrapper).toHaveClass('custom-class');
   });
 
   it('renders with label', () => {
@@ -130,10 +130,11 @@ describe('TextField', () => {
     };
     const component = renderComponent(textFieldProps);
     const input = component.getByRole('textbox');
+    const inputWrapper = component.getByRole('text_field_combobox');
 
     expect(input).toHaveClass(CLASS_NAMES.textField);
     expect(input).toHaveClass(CLASS_NAMES.textFieldFilled);
-    expect(input).toHaveClass('custom-class');
+    expect(inputWrapper).toHaveClass('custom-class');
     expect(input).toHaveAttribute('placeholder', 'Placeholder');
     expect(input).toBeRequired();
     expect(input).toHaveValue('Value');

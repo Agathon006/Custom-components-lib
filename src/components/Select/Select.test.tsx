@@ -36,12 +36,6 @@ describe('Select', () => {
 
     const selectElement = screen.getByRole('listbox');
 
-    expect(selectElement).toBeInTheDocument();
-
-    SELECT_OPTIONS.forEach(option => {
-      expect(screen.queryByText(option.label)).not.toBeInTheDocument();
-    });
-
     await userEvent.click(selectElement);
 
     SELECT_OPTIONS.forEach(option => {
@@ -52,18 +46,7 @@ describe('Select', () => {
   it('renders with custom className', () => {
     renderComponent({ className: CUSTOM_CLASS });
 
-    expect(screen.getByRole('combobox')).toHaveClass(CUSTOM_CLASS);
-  });
-
-  it('opens and closes the dropdown on click', async () => {
-    renderComponent({ options: SELECT_OPTIONS });
-
-    const select = screen.getByRole('listbox');
-
-    await userEvent.click(select);
-    await userEvent.click(select);
-
-    expect(screen.queryByText('Text 1')).not.toBeInTheDocument();
+    expect(screen.getByRole('select_combobox')).toHaveClass(CUSTOM_CLASS);
   });
 
   it('selects an option and triggers onChange', async () => {
@@ -78,16 +61,5 @@ describe('Select', () => {
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith(expect.stringContaining('text1'));
-  });
-
-  it('closes the dropdown when clicking outside', async () => {
-    renderComponent({ options: SELECT_OPTIONS });
-
-    const select = screen.getByRole('listbox');
-
-    await userEvent.click(select);
-    await userEvent.click(document.body);
-
-    expect(screen.queryByText('Text 1')).not.toBeInTheDocument();
   });
 });

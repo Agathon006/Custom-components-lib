@@ -1,8 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
-import classes from './Select.module.scss';
-import { clsx } from '../../utils/clsx';
+
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import ArrowDownIcon from '../../assets/icons/triangleDown.svg';
+import { clsx } from '../../utils/clsx';
+import { TextField } from '../TextField';
+import classes from './Select.module.scss';
 
 export type SelectProps = {
   label?: string;
@@ -24,7 +26,7 @@ export const Select: FC<SelectProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      useOnClickOutside(event, ['select', 'select-option'], () => setIsOpen(false));
+      useOnClickOutside(event, 'select', () => setIsOpen(false));
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -34,47 +36,38 @@ export const Select: FC<SelectProps> = ({
     };
   }, []);
 
-  const onSelectClick = () => {
-    setIsOpen(prevState => !prevState);
-  };
-
-  const onOptionClick = (id: string) => {
-    setIsOpen(false);
-    if (onChange) onChange(id);
-  };
-
   const selectedOption = options.find(option => option.id === value);
 
   return (
-    <label className={clsx(classes.select_wrapper, className)} role="combobox">
-      <div
-        {...props}
+    <div
+      className={clsx(classes.select_wrapper, className)}
+      onClick={() => setIsOpen(prevState => !prevState)}
+      data-select
+      role="select_combobox"
+    >
+      <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
+        <ArrowDownIcon />
+      </div>
+      <TextField
+        readOnly
         className={classes.select}
         tabIndex={0}
-        onClick={() => onSelectClick()}
-        data-select
         role="listbox"
-      >
-        <span className={classes.selected_value}>{selectedOption?.label}</span>
-        <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
-          <ArrowDownIcon />
-        </div>
+        label={label}
+        value={selectedOption ? selectedOption.label : ''}
+        {...props}
+      />
+      <div className={clsx(classes.options, isOpen && classes.options_active)}>
+        {options.map(({ id, label }) => (
+          <div
+            key={id}
+            className={clsx(classes.option, id === '' && classes.option_disabled)}
+            onClick={() => onChange && onChange(id)}
+          >
+            {label}
+          </div>
+        ))}
       </div>
-      <span className={classes.label_span}>{label}</span>
-      {isOpen && (
-        <div className={clsx(classes.options, isOpen && classes.options_active)}>
-          {options.map(({ id, label }) => (
-            <div
-              key={id}
-              className={clsx(classes.option, id === '' && classes.option_disabled)}
-              onClick={() => onOptionClick(id)}
-              data-select-option
-            >
-              {label}
-            </div>
-          ))}
-        </div>
-      )}
-    </label>
+    </div>
   );
 };

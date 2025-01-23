@@ -32,7 +32,6 @@ export const TextField: FC<TextFieldProps> = ({
 }) => {
   const cssClasses = clsx(
     classes.text_field,
-    className,
     classes[`text_field_${variant}`],
     error && classes.error
   );
@@ -46,7 +45,7 @@ export const TextField: FC<TextFieldProps> = ({
   const errorTextClasses = clsx(classes.error_text, error && classes.error);
 
   return (
-    <label className={classes.label_wrapper}>
+    <label className={clsx(classes.label_wrapper, className)} role="text_field_combobox">
       <input
         {...props}
         type={type}

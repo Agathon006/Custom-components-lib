@@ -1,18 +1,11 @@
 export default function useOnClickOutside(
   event: MouseEvent,
-  dataAttributes: string[],
+  dataAttribute: string,
   handler: () => void
 ) {
+  if (!dataAttribute) return;
   const target = event.target as HTMLElement;
-
-  if (!dataAttributes || dataAttributes.length === 0) {
-    handler();
-    return;
-  }
-
-  const isAnyClosestFound = dataAttributes.some(attribute => {
-    return !!target.closest(`[data-${attribute}]`);
-  });
+  const isAnyClosestFound = !!target.closest(`[data-${dataAttribute}]`);
 
   if (!isAnyClosestFound) {
     handler();
