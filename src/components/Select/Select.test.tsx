@@ -34,7 +34,7 @@ describe('Select', () => {
   it('opens dropdown when clicked', async () => {
     renderComponent({ options: SELECT_OPTIONS });
 
-    const selectElement = screen.getByRole('select');
+    const selectElement = screen.getByRole('listbox');
 
     expect(selectElement).toBeInTheDocument();
 
@@ -52,13 +52,13 @@ describe('Select', () => {
   it('renders with custom className', () => {
     renderComponent({ className: CUSTOM_CLASS });
 
-    expect(screen.getByRole('select_wrapper')).toHaveClass(CUSTOM_CLASS);
+    expect(screen.getByRole('combobox')).toHaveClass(CUSTOM_CLASS);
   });
 
   it('opens and closes the dropdown on click', async () => {
     renderComponent({ options: SELECT_OPTIONS });
 
-    const select = screen.getByRole('select');
+    const select = screen.getByRole('listbox');
 
     await userEvent.click(select);
     await userEvent.click(select);
@@ -70,7 +70,7 @@ describe('Select', () => {
     const onChange = jest.fn();
     renderComponent({ options: SELECT_OPTIONS, onChange });
 
-    const select = screen.getByRole('select');
+    const select = screen.getByRole('listbox');
     await userEvent.click(select);
 
     const optionToSelect = screen.getByText('Text 1');
@@ -83,7 +83,7 @@ describe('Select', () => {
   it('closes the dropdown when clicking outside', async () => {
     renderComponent({ options: SELECT_OPTIONS });
 
-    const select = screen.getByRole('select');
+    const select = screen.getByRole('listbox');
 
     await userEvent.click(select);
     await userEvent.click(document.body);

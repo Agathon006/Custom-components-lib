@@ -46,14 +46,14 @@ export const Select: FC<SelectProps> = ({
   const selectedOption = options.find(option => option.id === value);
 
   return (
-    <label className={clsx(classes.select_wrapper, className)} role="select_wrapper">
+    <label className={clsx(classes.select_wrapper, className)} role="combobox">
       <div
         {...props}
         className={classes.select}
         tabIndex={0}
         onClick={() => onSelectClick()}
         data-select
-        role="select"
+        role="listbox"
       >
         <span className={classes.selected_value}>{selectedOption?.label}</span>
         <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
