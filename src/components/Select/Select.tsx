@@ -65,7 +65,7 @@ export const Select: FC<SelectProps> = ({
   const optionsWithEmptyCase = Object.keys(options).length === 0 ? { None: '' } : options;
 
   return (
-    <label className={clsx(classes.select_wrapper, className)}>
+    <label className={clsx(classes.select_wrapper, className)} role="select_wrapper">
       <div
         {...props}
         id={id}
@@ -73,6 +73,7 @@ export const Select: FC<SelectProps> = ({
         tabIndex={0}
         onClick={() => onSelectClick()}
         data-select
+        role="select"
       >
         <span className={classes.selected_value}>{selected.optionText}</span>
         <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
