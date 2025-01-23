@@ -12,6 +12,10 @@
     .label_span {
       color: var(--color-primary);
     }
+
+    .select .arrow_icon svg {
+      fill: var(--color-primary);
+    }
   }
 
   .label_span {
@@ -83,13 +87,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      max-width: 16px;
-      max-height: 16px;
+      width: 16px;
+      height: 16px;
       position: absolute;
       right: 0px;
       top: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
+
+      svg {
+        fill: var(--color-grey-light);
+      }
 
       &_open {
         transform: rotate(180deg) translate(50%, 50%);

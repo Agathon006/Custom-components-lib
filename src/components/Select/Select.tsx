@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
 import classes from './Select.module.scss';
 import { clsx } from '../../utils/clsx';
-import { GoTriangleDown as ArrowDown } from 'react-icons/go';
+import ArrowDownIcon from '../../assets/icons/triangleDown.svg';
 
 export type SelectProps = {
   id: string;
   label?: string;
   options?: { id: string; label: string }[];
-  value?: string; 
-  onChange?: (value: string) => void; 
+  value?: string;
+  onChange?: (value: string) => void;
   className?: string;
 } & React.ComponentPropsWithoutRef<'div'>;
 
@@ -61,11 +61,9 @@ export const Select: FC<SelectProps> = ({
         data-select
         role="select"
       >
-        <span className={classes.selected_value}>
-          {selectedOption?.label}
-        </span>
+        <span className={classes.selected_value}>{selectedOption?.label}</span>
         <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
-          <ArrowDown />
+          <ArrowDownIcon />
         </div>
       </div>
       <span className={classes.label_span}>{label}</span>
