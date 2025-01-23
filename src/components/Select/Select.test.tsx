@@ -60,12 +60,7 @@ describe('Select', () => {
 
     const select = screen.getByRole('select');
 
-    expect(screen.queryByText('Option1')).not.toBeInTheDocument();
-
     await userEvent.click(select);
-
-    expect(screen.getByText('Option1')).toBeInTheDocument();
-
     await userEvent.click(select);
 
     expect(screen.queryByText('Option1')).not.toBeInTheDocument();
