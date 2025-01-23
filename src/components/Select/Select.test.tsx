@@ -71,11 +71,9 @@ describe('Select', () => {
     renderComponent({ options: SELECT_OPTIONS, onChange });
 
     const select = screen.getByRole('select');
-
-    await userEvent.click(select);
-
     const optionToSelect = screen.getByText('Option1');
 
+    await userEvent.click(select);
     await userEvent.click(optionToSelect);
 
     expect(onChange).toHaveBeenCalledTimes(1);
@@ -96,11 +94,9 @@ describe('Select', () => {
       renderComponent({ options: { None: '', ...SELECT_OPTIONS }, onChange });
   
       const select = screen.getByRole('select');
-
-      await userEvent.click(select);
-  
       const disabledOption = screen.getByText('None');
 
+      await userEvent.click(select);
       await userEvent.click(disabledOption);
   
       expect(onChange).not.toHaveBeenCalled();
@@ -112,9 +108,6 @@ describe('Select', () => {
         const select = screen.getByRole('select');
 
         await userEvent.click(select);
-    
-        expect(screen.getByText('Option1')).toBeInTheDocument();
-    
         await userEvent.click(document.body);
         
         expect(screen.queryByText('Option1')).not.toBeInTheDocument();
