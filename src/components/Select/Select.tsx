@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import classes from './Select.module.scss';
 import { clsx } from '../../utils/clsx';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import ArrowDownIcon from '../../assets/icons/triangleDown.svg';
 
 export type SelectProps = {
@@ -23,11 +24,7 @@ export const Select: FC<SelectProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      const isSelectClick = !!target.closest(`[data-select]`);
-      const isOptionClick = !!target.closest(`[data-select-option]`);
-
-      if (!isOptionClick && !isSelectClick) setIsOpen(false);
+      useOnClickOutside(event, ['select', 'select-option'], () => setIsOpen(false));
     };
 
     document.addEventListener('mousedown', handleClickOutside);
