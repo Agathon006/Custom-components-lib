@@ -34,7 +34,7 @@ describe('Select', () => {
   it('opens dropdown when clicked', async () => {
     renderComponent({ options: SELECT_OPTIONS });
 
-    const selectElement = screen.getByRole('listbox');
+    const selectElement = screen.getByRole('combobox');
 
     await userEvent.click(selectElement);
 
@@ -46,14 +46,14 @@ describe('Select', () => {
   it('renders with custom className', () => {
     renderComponent({ className: CUSTOM_CLASS });
 
-    expect(screen.getByRole('combobox')).toHaveClass(CUSTOM_CLASS);
+    expect(screen.getByTestId('select-wrapper')).toHaveClass(CUSTOM_CLASS);
   });
 
   it('selects an option and triggers onChange', async () => {
     const onChange = jest.fn();
     renderComponent({ options: SELECT_OPTIONS, onChange });
 
-    const select = screen.getByRole('listbox');
+    const select = screen.getByRole('combobox');
     await userEvent.click(select);
 
     const optionToSelect = screen.getByText('Text 1');

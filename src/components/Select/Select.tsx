@@ -32,8 +32,8 @@ export const Select: FC<SelectProps> = ({
     <div
       className={clsx(classes.select_wrapper, className)}
       onClick={() => setIsOpen(prevState => !prevState)}
-      role="combobox"
       ref={comboboxRef}
+      data-testid="select-wrapper"
     >
       <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
         <ArrowDownIcon />
@@ -42,12 +42,12 @@ export const Select: FC<SelectProps> = ({
         readOnly
         className={classes.select}
         tabIndex={0}
-        role="listbox"
+        role="combobox"
         label={label}
         value={selectedOption ? selectedOption.label : ''}
         {...props}
       />
-      <div className={clsx(classes.options, isOpen && classes.options_active)}>
+      <div className={clsx(classes.options, isOpen && classes.options_active)} role="listbox">
         {options.map(({ id, label }) => (
           <div
             key={id}
