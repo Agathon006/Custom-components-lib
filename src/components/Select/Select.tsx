@@ -47,16 +47,15 @@ export const Select: FC<SelectProps> = ({
         {...props}
       />
       <div className={clsx(classes.options, isOpen && classes.options_active)} role="listbox">
-        {options?.map(({ id, label }) => (
-          <div
-            key={id}
-            className={clsx(classes.option, id === '' && classes.option_disabled)}
-            onClick={() => onChange?.(id)}
-            role="listitem"
-          >
-            {label}
-          </div>
-        ))}
+        {options ? (
+          options.map(({ id, label }) => (
+            <div key={id} className={classes.option} onClick={() => onChange?.(id)} role="listitem">
+              {label}
+            </div>
+          ))
+        ) : (
+          <div className={classes.option_disabled}>No options</div>
+        )}
       </div>
     </div>
   );

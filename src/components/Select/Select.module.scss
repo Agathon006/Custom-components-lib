@@ -57,12 +57,19 @@
       &:hover {
         background-color: var(--color-grey-light);
       }
+    }
 
-      &_disabled {
-        color: var(--color-grey);
-        pointer-events: none;
-        cursor: not-allowed;
-      }
+    .option_disabled {
+      padding: 10px;
+      font-size: 14px;
+      transition: background-color 0.2s ease;
+      text-align: start;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--color-grey);
+      pointer-events: none;
+      cursor: not-allowed;
     }
   }
 }
