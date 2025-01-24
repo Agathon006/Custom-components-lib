@@ -47,7 +47,8 @@ export const Select: FC<SelectProps> = ({
   useEffect(() => {
     if (isOpen && optionsListRef.current && optionsListRef.current.children.length > 0) {
       if (focusedIndex === -1) {
-        selectWrapperRef.current?.focus();
+        const selectedInput = selectWrapperRef.current?.children[0].children[0] as HTMLElement;
+        selectedInput.focus();
       } else {
         const selectedOption = optionsListRef.current.children[focusedIndex] as HTMLElement;
         selectedOption?.focus();

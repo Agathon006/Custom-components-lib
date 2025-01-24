@@ -70,8 +70,6 @@ export const TextField: FC<TextFieldProps> = ({
 
   return (
     <label className={clsx(className, classes.label_wrapper)} data-testid="text-field-wrapper">
-      {leftIcon && <div className={classes.left_icon}>{leftIcon}</div>}
-      {rightIcon && <div className={classes.right_icon}>{rightIcon}</div>}
       <input
         {...props}
         type={type}
@@ -84,6 +82,8 @@ export const TextField: FC<TextFieldProps> = ({
       />
       {label && <span className={labelTextClasses}>{label}</span>}
       {errorText && <span className={errorTextClasses}>{errorText}</span>}
+      {leftIcon && <div className={classes.left_icon}>{leftIcon}</div>}
+      {rightIcon && <div className={classes.right_icon}>{rightIcon}</div>}
     </label>
   );
 };

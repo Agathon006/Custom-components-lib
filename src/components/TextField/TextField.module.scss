@@ -21,42 +21,6 @@
     }
   }
 
-  .left_icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    z-index: 2;
-    left: 0px;
-    top: 50%;
-    transform: translate(50%, -50%);
-    pointer-events: none;
-
-    svg {
-      fill: var(--color-grey-light);
-    }
-  }
-
-  .right_icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    z-index: 2;
-    right: 0px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-
-    svg {
-      fill: var(--color-grey-light);
-    }
-  }
-
   .label_text {
     padding: 0px 2px;
     @include mixins.text-m;
@@ -293,6 +257,42 @@
 
     &.error {
       color: var(--color-red);
+    }
+  }
+
+  .left_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    z-index: 2;
+    left: 0px;
+    top: 50%;
+    transform: translate(50%, -50%);
+    pointer-events: none;
+
+    svg {
+      fill: var(--color-grey-light);
+    }
+  }
+
+  .right_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    svg {
+      fill: var(--color-grey-light);
     }
   }
 }
