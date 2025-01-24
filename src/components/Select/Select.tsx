@@ -15,8 +15,8 @@ export type SelectProps = {
 } & React.ComponentPropsWithoutRef<'div'>;
 
 export const Select: FC<SelectProps> = ({
-  label = 'Select...',
-  options = [{ id: '', label: 'None' }],
+  label,
+  options,
   value,
   onChange,
   className,
@@ -26,7 +26,7 @@ export const Select: FC<SelectProps> = ({
 
   const comboboxRef = useOnClickOutside<HTMLDivElement>(() => setIsOpen(false));
 
-  const selectedOption = options.find(option => option.id === value);
+  const selectedOption = options?.find(option => option.id === value);
 
   return (
     <div
@@ -48,7 +48,7 @@ export const Select: FC<SelectProps> = ({
         {...props}
       />
       <div className={clsx(classes.options, isOpen && classes.options_active)} role="listbox">
-        {options.map(({ id, label }) => (
+        {options?.map(({ id, label }) => (
           <div
             key={id}
             className={clsx(classes.option, id === '' && classes.option_disabled)}
