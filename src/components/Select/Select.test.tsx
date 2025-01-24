@@ -46,7 +46,7 @@ describe('Select', () => {
   it('renders with custom className', () => {
     renderComponent({ className: CUSTOM_CLASS });
 
-    expect(screen.getByRole('select_combobox')).toHaveClass(CUSTOM_CLASS);
+    expect(screen.getByRole('combobox')).toHaveClass(CUSTOM_CLASS);
   });
 
   it('selects an option and triggers onChange', async () => {

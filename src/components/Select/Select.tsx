@@ -43,7 +43,7 @@ export const Select: FC<SelectProps> = ({
       className={clsx(classes.select_wrapper, className)}
       onClick={() => setIsOpen(prevState => !prevState)}
       data-select
-      role="select_combobox"
+      role="combobox"
     >
       <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
         <ArrowDownIcon />

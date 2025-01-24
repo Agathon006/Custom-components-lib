@@ -45,7 +45,7 @@ export const TextField: FC<TextFieldProps> = ({
   const errorTextClasses = clsx(classes.error_text, error && classes.error);
 
   return (
-    <label className={clsx(classes.label_wrapper, className)} role="text_field_combobox">
+    <label className={clsx(classes.label_wrapper, className)} data-testid="text-field-wrapper">
       <input
         {...props}
         type={type}
