@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 
-import useOnClickOutside from '../../hooks/useOnClickOutside';
+import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import ArrowDownIcon from '../../assets/icons/triangleDown.svg';
 import { clsx } from '../../utils/clsx';
 import { TextField } from '../TextField';
@@ -24,17 +24,7 @@ export const Select: FC<SelectProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      useOnClickOutside(event, 'select', () => setIsOpen(false));
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  const comboboxRef = useOnClickOutside<HTMLDivElement>(() => setIsOpen(false));
 
   const selectedOption = options.find(option => option.id === value);
 
@@ -42,8 +32,8 @@ export const Select: FC<SelectProps> = ({
     <div
       className={clsx(classes.select_wrapper, className)}
       onClick={() => setIsOpen(prevState => !prevState)}
-      data-select
       role="combobox"
+      ref={comboboxRef}
     >
       <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
         <ArrowDownIcon />
