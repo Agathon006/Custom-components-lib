@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
@@ -25,16 +25,52 @@ export const Select: FC<SelectProps> = ({
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const comboboxRef = useOnClickOutside<HTMLDivElement>(() => setIsOpen(false));
+  const [focusedIndex, setFocusedIndex] = useState(-1);
+  const selectWrapperRef = useOnClickOutside<HTMLDivElement>(() => setIsOpen(false));
 
   const selectedOption = options?.find(option => option.id === value);
+  const optionsListRef = useRef<HTMLDivElement | null>(null);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      setIsOpen(prevState => !prevState);
+      if (!isOpen && options && options.length > 0) {
+        setFocusedIndex(-1);
+      }
+    } else if (e.key === 'ArrowDown' && isOpen && options && options.length > 0) {
+      setFocusedIndex(prevIndex => Math.min(prevIndex + 1, options.length - 1));
+    } else if (e.key === 'ArrowUp' && isOpen && options && options.length > 0) {
+      setFocusedIndex(prevIndex => Math.max(prevIndex - 1, -1));
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen && optionsListRef.current && optionsListRef.current.children.length > 0) {
+      if (focusedIndex === -1) {
+        selectWrapperRef.current?.focus();
+      } else {
+        const selectedOption = optionsListRef.current.children[focusedIndex] as HTMLElement;
+        selectedOption?.focus();
+      }
+    }
+  }, [isOpen, focusedIndex, options]);
 
   const optionsList = isOpen && (
-    <div className={clsx(classes.options, isOpen && classes.options_active)} role="listbox">
+    <div
+      className={clsx(classes.options, isOpen && classes.options_active)}
+      role="listbox"
+      ref={optionsListRef}
+    >
       {options ? (
         options.map(({ id, label }) => (
-          <div key={id} className={classes.option} onClick={() => onChange?.(id)} role="listitem">
+          <div
+            key={id}
+            className={classes.option}
+            onClick={() => onChange?.(id)}
+            onKeyDown={e => e.key === 'Enter' && onChange?.(id)}
+            role="listitem"
+            tabIndex={-1}
+          >
             {label}
           </div>
         ))
@@ -47,8 +83,10 @@ export const Select: FC<SelectProps> = ({
   return (
     <div
       className={clsx(classes.select_wrapper, className)}
+      tabIndex={0}
       onClick={() => setIsOpen(prevState => !prevState)}
-      ref={comboboxRef}
+      onKeyDown={handleKeyDown}
+      ref={selectWrapperRef}
       data-testid="select-wrapper"
     >
       <TextField
@@ -61,7 +99,7 @@ export const Select: FC<SelectProps> = ({
         rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
         {...props}
       />
-      {optionsList && createPortal(optionsList, comboboxRef.current as HTMLElement)}
+      {optionsList && createPortal(optionsList, selectWrapperRef.current as HTMLElement)}
     </div>
   );
 };
