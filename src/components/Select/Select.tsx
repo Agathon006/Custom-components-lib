@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import ArrowDownIcon from '../../assets/icons/triangleDown.svg';
@@ -29,6 +30,20 @@ export const Select: FC<SelectProps> = ({
 
   const selectedOption = options?.find(option => option.id === value);
 
+  const optionsList = isOpen && (
+    <div className={clsx(classes.options, isOpen && classes.options_active)} role="listbox">
+      {options ? (
+        options.map(({ id, label }) => (
+          <div key={id} className={classes.option} onClick={() => onChange?.(id)} role="listitem">
+            {label}
+          </div>
+        ))
+      ) : (
+        <div className={classes.option_disabled}>No options</div>
+      )}
+    </div>
+  );
+
   return (
     <div
       className={clsx(classes.select_wrapper, className)}
@@ -46,17 +61,7 @@ export const Select: FC<SelectProps> = ({
         rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
         {...props}
       />
-      <div className={clsx(classes.options, isOpen && classes.options_active)} role="listbox">
-        {options ? (
-          options.map(({ id, label }) => (
-            <div key={id} className={classes.option} onClick={() => onChange?.(id)} role="listitem">
-              {label}
-            </div>
-          ))
-        ) : (
-          <div className={classes.option_disabled}>No options</div>
-        )}
-      </div>
+      {optionsList && createPortal(optionsList, comboboxRef.current as HTMLElement)}
     </div>
   );
 };

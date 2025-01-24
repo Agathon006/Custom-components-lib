@@ -199,12 +199,12 @@
     }
 
     &_filled {
-      padding-top: 12px;
-      padding-bottom: 4px;
+      padding: 12px 12px 4px;
       background-color: var(--color-grey-light);
       border: none;
       border-bottom: 1px solid var(--color-white);
       border-radius: 4px 4px 0px 0px;
+      line-height: 1.4;
 
       &.text_field_with_left_icon {
         padding: 12px 12px 4px 30px;
@@ -242,8 +242,7 @@
     }
 
     &_standard {
-      padding-top: 2px;
-      padding-bottom: 2px;
+      padding: 2px 0px;
       border: none;
       border-bottom: 1px solid var(--color-grey-light);
       border-radius: 0;
