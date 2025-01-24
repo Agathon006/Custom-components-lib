@@ -13,30 +13,7 @@
     fill: var(--color-primary);
   }
 
-  .arrow_icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    z-index: 2;
-    right: 0px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-
-    svg {
-      fill: var(--color-grey-light);
-    }
-
-    &_open {
-      transform: rotate(180deg) translate(50%, 50%);
-    }
-  }
-
   .select input {
-    padding: 8px 30px 8px 12px;
     border: 1px solid var(--color-grey-light);
     background-color: var(--color-white);
     color: var(--color-grey-dark);

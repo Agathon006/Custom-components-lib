@@ -7,8 +7,54 @@
   width: max-content;
   position: relative;
 
-  &:focus-within .label_text {
-    color: var(--color-primary);
+  &:focus-within {
+    .label_text {
+      color: var(--color-primary);
+    }
+
+    .left_icon svg {
+      fill: var(--color-primary);
+    }
+
+    .right_icon svg {
+      fill: var(--color-primary);
+    }
+  }
+
+  .left_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    z-index: 2;
+    left: 0px;
+    top: 50%;
+    transform: translate(50%, -50%);
+    pointer-events: none;
+
+    svg {
+      fill: var(--color-grey-light);
+    }
+  }
+
+  .right_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    svg {
+      fill: var(--color-grey-light);
+    }
   }
 
   .label_text {
@@ -29,6 +75,18 @@
       transform 0.2s ease-in-out,
       font-size 0.2s ease-in-out,
       color 0.2s ease-in-out;
+
+    &_with_left_icon {
+      left: 28px;
+      max-width: calc(90% - 16px);
+    }
+    &_with_right_icon {
+      max-width: calc(90% - 16px);
+    }
+    &_with_both_icons {
+      left: 28px;
+      max-width: calc(90% - 32px);
+    }
 
     &_outlined {
       background-color: var(--color-white);
@@ -51,6 +109,20 @@
     &_standard {
       left: 0px;
 
+      &.label_text_with_left_icon {
+        left: 30px;
+        max-width: calc(90% - 30px);
+      }
+
+      &.label_text_with_right_icon {
+        max-width: calc(90% - 30px);
+      }
+
+      &.label_text_with_both_icons {
+        left: 30px;
+        max-width: calc(90% - 30px);
+      }
+
       &.error {
         color: var(--color-red);
       }
@@ -59,7 +131,7 @@
 
   .text_field {
     @include mixins.text-l;
-    padding: 8px 12px;
+    padding: 8px 12px 8px 12px;
     border: 1px solid var(--color-grey-light);
     color: var(--color-black);
     border-radius: 4px;
@@ -86,6 +158,19 @@
 
     &_outlined {
       background-color: var(--color-white);
+
+      &.text_field_with_left_icon {
+        padding: 8px 12px 8px 30px;
+      }
+
+      &.text_field_with_right_icon {
+        padding: 8px 30px 8px 12px;
+      }
+
+      &.text_field_with_both_icons {
+        padding: 8px 30px 8px 30px;
+      }
+
       &:focus {
         border: 1px solid var(--color-primary);
 
@@ -99,7 +184,6 @@
       }
 
       &:not(:placeholder-shown) {
-
         + .label_text_outlined {
           transform: translate(-10%, -160%) scale(0.8);
         }
@@ -115,12 +199,24 @@
     }
 
     &_filled {
-      padding: 12px 12px 4px;
-      background-color: var(--color-white);
-      opacity: 0.09;
+      padding-top: 12px;
+      padding-bottom: 4px;
+      background-color: var(--color-grey-light);
       border: none;
       border-bottom: 1px solid var(--color-white);
       border-radius: 4px 4px 0px 0px;
+
+      &.text_field_with_left_icon {
+        padding: 12px 12px 4px 30px;
+      }
+
+      &.text_field_with_right_icon {
+        padding: 12px 30px 4px 12px;
+      }
+
+      &.text_field_with_both_icons {
+        padding: 12px 30px 4px 30px;
+      }
 
       &::placeholder {
         color: var(--color-grey);
@@ -146,10 +242,23 @@
     }
 
     &_standard {
-      padding: 2px 0px;
+      padding-top: 2px;
+      padding-bottom: 2px;
       border: none;
       border-bottom: 1px solid var(--color-grey-light);
       border-radius: 0;
+
+      &.text_field_with_left_icon {
+        padding: 2px 0px 2px 30px;
+      }
+
+      &.text_field_with_right_icon {
+        padding: 2px 30px 2px 0px;
+      }
+
+      &.text_field_with_both_icons {
+        padding: 2px 30px 2px 30px;
+      }
 
       &:focus {
         border-bottom-color: var(--color-primary);

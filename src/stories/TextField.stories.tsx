@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { TextField, TextFieldProps } from '../components/TextField';
+import React from 'react';
 
 const meta: Meta<TextFieldProps> = {
   title: 'Components/TextField',
@@ -17,6 +18,7 @@ const meta: Meta<TextFieldProps> = {
 
 export default meta;
 type Story = StoryObj<TextFieldProps>;
+
 
 export const OutlinedWithLabelWithErrorText: Story = {
   args: {
@@ -78,5 +80,169 @@ export const StandardWithLabelWithErrorTextWithError: Story = {
     errorText: 'This is an error message',
     placeholder: 'Enter text',
     error: true,
+  },
+};
+
+export const NoIcons: Story = {
+  args: {
+    id: 'no-icons',
+    label: 'No Icons',
+    placeholder: 'Enter text',
+  },
+};
+
+export const LeftIconOnly: Story = {
+  args: {
+    id: 'left-icon-only',
+    label: 'Left Icon Only',
+    placeholder: 'Enter text',
+    leftIcon: (
+      <span role="img" aria-label="left-icon">
+        🔍
+      </span>
+    ),
+  },
+};
+
+export const RightIconOnly: Story = {
+  args: {
+    id: 'right-icon-only',
+    label: 'Right Icon Only',
+    placeholder: 'Enter text',
+    rightIcon: (
+      <span role="img" aria-label="right-icon">
+        ⚙️
+      </span>
+    ),
+  },
+};
+
+export const BothIcons: Story = {
+  args: {
+    id: 'both-icons',
+    label: 'Both Icons',
+    placeholder: 'Enter text',
+    leftIcon: (
+      <span role="img" aria-label="left-icon">
+        🔍
+      </span>
+    ),
+    rightIcon: (
+      <span role="img" aria-label="right-icon">
+        ⚙️
+      </span>
+    ),
+  },
+};
+
+export const FilledNoIcons: Story = {
+  args: {
+    id: 'filled-no-icons',
+    label: 'No Icons (Filled)',
+    placeholder: 'Enter text',
+    variant: 'filled',
+  },
+};
+
+export const FilledLeftIconOnly: Story = {
+  args: {
+    id: 'filled-left-icon-only',
+    label: 'Left Icon Only (Filled)',
+    placeholder: 'Enter text',
+    variant: 'filled',
+    leftIcon: (
+      <span role="img" aria-label="left-icon">
+        🔍
+      </span>
+    ),
+  },
+};
+
+export const FilledRightIconOnly: Story = {
+  args: {
+    id: 'filled-right-icon-only',
+    label: 'Right Icon Only (Filled)',
+    placeholder: 'Enter text',
+    variant: 'filled',
+    rightIcon: (
+      <span role="img" aria-label="right-icon">
+        ⚙️
+      </span>
+    ),
+  },
+};
+
+export const FilledBothIcons: Story = {
+  args: {
+    id: 'filled-both-icons',
+    label: 'Both Icons (Filled)',
+    placeholder: 'Enter text',
+    variant: 'filled',
+    leftIcon: (
+      <span role="img" aria-label="left-icon">
+        🔍
+      </span>
+    ),
+    rightIcon: (
+      <span role="img" aria-label="right-icon">
+        ⚙️
+      </span>
+    ),
+  },
+};
+
+export const StandardNoIcons: Story = {
+  args: {
+    id: 'standard-no-icons',
+    label: 'No Icons (Standard)',
+    placeholder: 'Enter text',
+    variant: 'standard',
+  },
+};
+
+export const StandardLeftIconOnly: Story = {
+  args: {
+    id: 'standard-left-icon-only',
+    label: 'Left Icon Only (Standard)',
+    placeholder: 'Enter text',
+    variant: 'standard',
+    leftIcon: (
+      <span role="img" aria-label="left-icon">
+        🔍
+      </span>
+    ),
+  },
+};
+
+export const StandardRightIconOnly: Story = {
+  args: {
+    id: 'standard-right-icon-only',
+    label: 'Right Icon Only (Standard)',
+    placeholder: 'Enter text',
+    variant: 'standard',
+    rightIcon: (
+      <span role="img" aria-label="right-icon">
+        ⚙️
+      </span>
+    ),
+  },
+};
+
+export const StandardBothIcons: Story = {
+  args: {
+    id: 'standard-both-icons',
+    label: 'Both Icons (Standard)',
+    placeholder: 'Enter text',
+    variant: 'standard',
+    leftIcon: (
+      <span role="img" aria-label="left-icon">
+        🔍
+      </span>
+    ),
+    rightIcon: (
+      <span role="img" aria-label="right-icon">
+        ⚙️
+      </span>
+    ),
   },
 };

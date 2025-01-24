@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import ArrowDownIcon from '../../assets/icons/triangleDown.svg';
+import ArrowUpIcon from '../../assets/icons/triangleUp.svg';
 import { clsx } from '../../utils/clsx';
 import { TextField } from '../TextField';
 import classes from './Select.module.scss';
@@ -35,9 +36,6 @@ export const Select: FC<SelectProps> = ({
       ref={comboboxRef}
       data-testid="select-wrapper"
     >
-      <div className={clsx(classes.arrow_icon, isOpen && classes.arrow_icon_open)}>
-        <ArrowDownIcon />
-      </div>
       <TextField
         readOnly
         className={classes.select}
@@ -45,6 +43,7 @@ export const Select: FC<SelectProps> = ({
         role="combobox"
         label={label}
         value={selectedOption ? selectedOption.label : ''}
+        rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
         {...props}
       />
       <div className={clsx(classes.options, isOpen && classes.options_active)} role="listbox">
