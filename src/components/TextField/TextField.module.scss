@@ -12,6 +12,7 @@
   }
 
   .label_text {
+    padding: 0px 2px;
     @include mixins.text-m;
     color: var(--color-grey-light);
     pointer-events: none;
@@ -19,7 +20,7 @@
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    width: calc(100% - 12px);
+    max-width: 90%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -30,6 +31,8 @@
       color 0.2s ease-in-out;
 
     &_outlined {
+      background-color: var(--color-white);
+      line-height: 1.5;
       color: var(--color-grey-light);
 
       &.error {
@@ -58,6 +61,7 @@
     @include mixins.text-l;
     padding: 8px 12px;
     border: 1px solid var(--color-grey-light);
+    color: var(--color-black);
     border-radius: 4px;
     outline: none;
     transition: border-color 0.2s ease-in-out;
@@ -81,19 +85,12 @@
     }
 
     &_outlined {
+      background-color: var(--color-white);
       &:focus {
         border: 1px solid var(--color-primary);
 
-        &:has(+ .label_text_outlined) {
-          border-top: 0px solid var(--color-primary);
-
-          &.error {
-            border-top: 0px solid var(--color-red);
-          }
-        }
-
         + .label_text_outlined {
-          transform: translate(-10%, -140%) scale(0.8);
+          transform: translate(-10%, -160%) scale(0.8);
         }
 
         &.error {
@@ -102,20 +99,13 @@
       }
 
       &:not(:placeholder-shown) {
-        &:has(+ .label_text_outlined) {
-          border-top: 0px solid var(--color-primary);
-        }
 
         + .label_text_outlined {
-          transform: translate(-10%, -140%) scale(0.8);
+          transform: translate(-10%, -160%) scale(0.8);
         }
 
         &.error {
           border: 1px solid var(--color-red);
-
-          &:has(+ .label_text_outlined) {
-            border-top: 0px solid var(--color-red);
-          }
         }
       }
 
@@ -126,7 +116,8 @@
 
     &_filled {
       padding: 12px 12px 4px;
-      background-color: var(--color-grey-dark);
+      background-color: var(--color-white);
+      opacity: 0.09;
       border: none;
       border-bottom: 1px solid var(--color-white);
       border-radius: 4px 4px 0px 0px;
@@ -157,7 +148,6 @@
     &_standard {
       padding: 2px 0px;
       border: none;
-      background-color: transparent;
       border-bottom: 1px solid var(--color-grey-light);
       border-radius: 0;
 
@@ -191,6 +181,7 @@
     left: 2px;
     top: 100%;
     width: 100%;
+    text-align: start;
 
     &.error {
       color: var(--color-red);
