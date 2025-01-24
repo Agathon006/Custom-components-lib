@@ -52,7 +52,8 @@ export const Select: FC<SelectProps> = ({
           <div
             key={id}
             className={clsx(classes.option, id === '' && classes.option_disabled)}
-            onClick={() => onChange && onChange(id)}
+            onClick={() => onChange?.(id)}
+            role="listitem"
           >
             {label}
           </div>
