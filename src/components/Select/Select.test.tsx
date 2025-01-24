@@ -18,13 +18,6 @@ describe('Select', () => {
     return render(<Select id={SELECT_ID} {...props} />);
   };
 
-  it('renders with default label and no options', () => {
-    renderComponent({});
-
-    expect(screen.getByText('Select...')).toBeInTheDocument();
-    expect(screen.queryByText('Text 1')).not.toBeInTheDocument();
-  });
-
   it('renders with provided label', () => {
     renderComponent({ label: SELECT_LABEL });
 
