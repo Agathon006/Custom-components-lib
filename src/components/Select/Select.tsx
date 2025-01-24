@@ -84,7 +84,6 @@ export const Select: FC<SelectProps> = ({
   return (
     <div
       className={clsx(classes.select_wrapper, className)}
-      tabIndex={0}
       onClick={() => setIsOpen(prevState => !prevState)}
       onKeyDown={handleKeyDown}
       ref={selectWrapperRef}
