@@ -23,13 +23,6 @@ export const WithCustomClassName: Story = {
   },
 };
 
-export const Radio: Story = {
-  args: {
-    label: 'Select Option',
-    type: 'radio',
-  },
-};
-
 export const Disabled: Story = {
   args: {
     label: 'I am disabled',

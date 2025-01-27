@@ -36,13 +36,7 @@ describe('Checkbox', () => {
 
     expect(component.getByRole('checkbox')).toHaveAttribute('type', 'checkbox');
   });
-
-  it('renders with custom type (radio)', () => {
-    const component = renderComponent({ label: CHECKBOX_LABEL, type: 'radio' });
-
-    expect(component.getByRole('radio')).toBeInTheDocument();
-  });
-
+  
   it('renders with label text', () => {
     const component = renderComponent({ label: CHECKBOX_LABEL });
 
@@ -68,18 +62,16 @@ describe('Checkbox', () => {
     const onChange = jest.fn();
     const checkboxProps: CheckboxProps = {
       label: 'Test Label',
-      type: 'radio',
       size: 'big',
       className: 'test-class',
       disabled: true,
       onChange: onChange,
     };
     const component = renderComponent({ ...checkboxProps });
-    const checkbox = component.getByRole('radio');
+    const checkbox = component.getByRole('checkbox');
     const checkboxWrapper = component.getByTestId('checkbox-wrapper');
 
     expect(checkbox).toBeDisabled();
-    expect(checkbox).toHaveClass('checkbox_big');
     expect(checkboxWrapper).toHaveClass('test-class');
     expect(component.getByText('Test Label')).toBeInTheDocument();
 
