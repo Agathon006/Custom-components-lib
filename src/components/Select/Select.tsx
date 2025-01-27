@@ -7,11 +7,16 @@ import { clsx } from '../../utils/clsx';
 import { TextField } from '../TextField';
 import classes from './Select.module.scss';
 
+export type SelectOption = {
+  id: string;
+  label: string;
+};
+
 export type SelectProps = {
   label?: string;
-  options?: { id: string; label: string }[];
-  value?: string;
-  onChange?: (value: string) => void;
+  options?: SelectOption[];
+  value?: SelectOption['id'];
+  onChange?: (value: SelectOption['id']) => void;
   className?: string;
 } & React.ComponentPropsWithoutRef<'div'>;
 
