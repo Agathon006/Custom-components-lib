@@ -60,31 +60,6 @@ export const Select: FC<SelectProps> = ({
     }
   }, [isOpen, focusedIndex, options]);
 
-  const optionsList = isOpen && (
-    <div
-      className={clsx(classes.options, isOpen && classes.options_active)}
-      role="listbox"
-      ref={optionsListRef}
-    >
-      {options ? (
-        options.map(({ id, label }) => (
-          <div
-            key={id}
-            className={classes.option}
-            onClick={() => onChange?.(id)}
-            onKeyDown={e => e.key === 'Enter' && onChange?.(id)}
-            role="listitem"
-            tabIndex={-1}
-          >
-            {label}
-          </div>
-        ))
-      ) : (
-        <div className={classes.option_disabled}>No options</div>
-      )}
-    </div>
-  );
-
   return (
     <div
       className={clsx(classes.select_wrapper, className)}
@@ -104,7 +79,32 @@ export const Select: FC<SelectProps> = ({
         rightIconClassName={isOpen && classes.upside_down}
         {...props}
       />
-      {optionsList && createPortal(optionsList, selectWrapperRef.current as HTMLElement)}
+      {isOpen &&
+        createPortal(
+          <div
+            className={clsx(classes.options, isOpen && classes.options_active)}
+            role="listbox"
+            ref={optionsListRef}
+          >
+            {options ? (
+              options.map(({ id, label }) => (
+                <div
+                  key={id}
+                  className={classes.option}
+                  onClick={() => onChange?.(id)}
+                  onKeyDown={e => e.key === 'Enter' && onChange?.(id)}
+                  role="listitem"
+                  tabIndex={-1}
+                >
+                  {label}
+                </div>
+              ))
+            ) : (
+              <div className={classes.option_disabled}>No options</div>
+            )}
+          </div>,
+          selectWrapperRef.current as HTMLElement
+        )}
     </div>
   );
 };
