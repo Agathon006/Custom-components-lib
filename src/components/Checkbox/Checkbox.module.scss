@@ -10,11 +10,29 @@
     height: 16px;
     width: 16px;
     cursor: pointer;
+
+    &_small {
+      height: 12px;
+      width: 12px;
+    }
+
+    &_big {
+      height: 20px;
+      width: 20px;
+    }
   }
 
   .label_text {
     padding-left: 10px;
     @include mixins.text-m;
     cursor: pointer;
+
+    &_small {
+      @include mixins.text-s;
+    }
+
+    &_big {
+      @include mixins.text-l;
+    }
   }
 }

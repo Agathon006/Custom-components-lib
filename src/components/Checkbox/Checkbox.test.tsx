@@ -67,17 +67,19 @@ describe('Checkbox', () => {
   it('renders with all props', async () => {
     const onChange = jest.fn();
     const checkboxProps: CheckboxProps = {
+      label: 'Test Label',
       type: 'radio',
+      size: 'big',
       className: 'test-class',
       disabled: true,
       onChange: onChange,
-      label: 'Test Label',
     };
     const component = renderComponent({ ...checkboxProps });
     const checkbox = component.getByRole('radio');
     const checkboxWrapper = component.getByTestId('checkbox-wrapper');
 
     expect(checkbox).toBeDisabled();
+    expect(checkbox).toHaveClass('checkbox_big');
     expect(checkboxWrapper).toHaveClass('test-class');
     expect(component.getByText('Test Label')).toBeInTheDocument();
 
