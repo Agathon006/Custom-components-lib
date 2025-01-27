@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import ArrowDownIcon from '../../assets/icons/triangleDown.svg';
-import ArrowUpIcon from '../../assets/icons/triangleUp.svg';
 import { clsx } from '../../utils/clsx';
 import { TextField } from '../TextField';
 import classes from './Select.module.scss';
@@ -96,7 +95,8 @@ export const Select: FC<SelectProps> = ({
         role="combobox"
         label={label}
         value={selectedOption ? selectedOption.label : ''}
-        rightIcon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        rightIcon={<ArrowDownIcon />}
+        rightIconClassName={isOpen && classes.upside_down}
         {...props}
       />
       {optionsList && createPortal(optionsList, selectWrapperRef.current as HTMLElement)}
