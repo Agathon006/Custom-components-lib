@@ -1,20 +1,32 @@
 @use '../../style/mixins.scss';
+@use '../../style/vars.scss';
 
 .label_wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  --checkbox-color: #90caf9;
-  --checkbox-fill-color: black;
+  --checkbox-fill-color: var(--color-primary);
+  --checkbox-fill-text-color: var(--color-black);
 
   .checkbox {
     display: none;
+
+    &:checked ~ .checkbox_icon:not(.checkbox_icon_custom) {
+      fill: var(--checkbox-fill-color);
+
+      path:nth-child(2) {
+        fill: var(--checkbox-fill-text-color);
+      }
+    }
+
+    &:checked ~ .checkbox_icon_custom {
+      stroke: var(--checkbox-fill-color);
+      fill: var(--checkbox-fill-color);
+    }
   }
 
   .checkbox_icon {
-    border: 2px solid var(--checkbox-color);
-    border-radius: 3px;
     margin: 0;
     width: 16px;
     height: 16px;
@@ -36,15 +48,20 @@
 
     path {
       transition: fill 0.1s ease;
-      transform: translate(1px, 1px);
     }
-  }
 
-  .checkbox:checked ~ .checkbox_icon {
-    fill: var(--checkbox-color);
+    &:not(.checkbox_icon_custom) path:nth-child(1) {
+      stroke: var(--checkbox-fill-color);
+    }
 
-    path {
-      fill: var(--checkbox-fill-color);
+    &_custom {
+      display: block;
+      border: 0;
+      stroke: var(--checkbox-fill-color);
+
+      & ~ .checkbox_icon {
+        display: none;
+      }
     }
   }
 

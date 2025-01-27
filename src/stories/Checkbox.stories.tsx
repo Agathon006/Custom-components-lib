@@ -1,6 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
+/// <reference path="../../declarations.d.ts" />
 
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Checkbox } from '../components/Checkbox';
+
+import AppleSvgIcon from '../assets/icons/apple.svg';
+import AirplaySvgIcon from '../assets/icons/airplay.svg';
 
 const meta = {
   title: 'Components/Checkbox',
@@ -30,9 +35,10 @@ export const Disabled: Story = {
   },
 };
 
-export const CustomLabelText: Story = {
+export const CustomColor: Story = {
   args: {
-    label: 'Custom Label Text',
+    label: 'White on dark',
+    color: '#6f6f6f',
   },
 };
 
@@ -54,5 +60,23 @@ export const WithAriaLabel: Story = {
   args: {
     label: 'Accessible Checkbox',
     'aria-label': 'checkbox-aria-label',
+  },
+};
+
+export const WithCustomIcon: Story = {
+  args: {
+    label: 'Checkbox with custom icon',
+    color: '#ff0000',
+    size: 'big',
+    customIcon: <AppleSvgIcon />,
+  },
+};
+
+export const WithCustomIcon2: Story = {
+  args: {
+    label: 'Checkbox with custom icon',
+    color: '#ff0000',
+    size: 'big',
+    customIcon: <AirplaySvgIcon />,
   },
 };
