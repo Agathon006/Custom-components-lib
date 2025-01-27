@@ -38,34 +38,15 @@ export const TextField: FC<TextFieldProps> = ({
   rightIconClassName,
   ...props
 }) => {
-  const hasLeftIcon = !!leftIcon;
-  const hasRightIcon = !!rightIcon;
-  const hasIcons = hasLeftIcon && hasRightIcon;
-
-  let inputIconClass = null;
-  let labelIconClass = null;
-  if (hasIcons) {
-    inputIconClass = classes.text_field_with_both_icons;
-    labelIconClass = classes.label_text_with_both_icons;
-  } else if (hasLeftIcon) {
-    inputIconClass = classes.text_field_with_left_icon;
-    labelIconClass = classes.label_text_with_left_icon;
-  } else if (hasRightIcon) {
-    inputIconClass = classes.text_field_with_right_icon;
-    labelIconClass = classes.label_text_with_right_icon;
-  }
-
   const cssClasses = clsx(
     classes.text_field,
     classes[`text_field_${variant}`],
-    inputIconClass,
     error && classes.error
   );
 
   const labelTextClasses = clsx(
     classes.label_text,
     classes[`label_text_${variant}`],
-    labelIconClass,
     error && classes.error
   );
 

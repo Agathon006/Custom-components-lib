@@ -40,16 +40,20 @@
       font-size 0.2s ease-in-out,
       color 0.2s ease-in-out;
 
-    &_with_left_icon {
+    &:has(~ .left_icon) {
       left: 28px;
       max-width: calc(90% - 16px);
     }
-    &_with_right_icon {
+
+    &:has(~ .right_icon) {
       max-width: calc(90% - 16px);
     }
-    &_with_both_icons {
-      left: 28px;
-      max-width: calc(90% - 32px);
+
+    &:has(~ .left_icon) {
+      &:has(~ .right_icon) {
+        left: 28px;
+        max-width: calc(90% - 32px);
+      }
     }
 
     &_outlined {
@@ -73,18 +77,20 @@
     &_standard {
       left: 0px;
 
-      &.label_text_with_left_icon {
+      &:has(~ .left_icon) {
         left: 30px;
         max-width: calc(90% - 30px);
       }
 
-      &.label_text_with_right_icon {
+      &:has(~ .right_icon) {
         max-width: calc(90% - 30px);
       }
 
-      &.label_text_with_both_icons {
-        left: 30px;
-        max-width: calc(90% - 30px);
+      &:has(~ .left_icon) {
+        &:has(~ .right_icon) {
+          left: 30px;
+          max-width: calc(90% - 30px);
+        }
       }
 
       &.error {
@@ -123,16 +129,18 @@
     &_outlined {
       background-color: var(--color-white);
 
-      &.text_field_with_left_icon {
+      &:has(~ .left_icon) {
         padding: 8px 12px 8px 30px;
       }
 
-      &.text_field_with_right_icon {
+      &:has(~ .right_icon) {
         padding: 8px 30px 8px 12px;
       }
 
-      &.text_field_with_both_icons {
-        padding: 8px 30px 8px 30px;
+      &:has(~ .left_icon) {
+        &:has(~ .right_icon) {
+          padding: 8px 30px 8px 30px;
+        }
       }
 
       &:focus {
@@ -170,16 +178,18 @@
       border-radius: 4px 4px 0px 0px;
       line-height: 1.4;
 
-      &.text_field_with_left_icon {
+      &:has(~ .left_icon) {
         padding: 12px 12px 4px 30px;
       }
 
-      &.text_field_with_right_icon {
+      &:has(~ .right_icon) {
         padding: 12px 30px 4px 12px;
       }
 
-      &.text_field_with_both_icons {
-        padding: 12px 30px 4px 30px;
+      &:has(~ .left_icon) {
+        &:has(~ .right_icon) {
+          padding: 12px 30px 4px 30px;
+        }
       }
 
       &::placeholder {
@@ -211,16 +221,18 @@
       border-bottom: 1px solid var(--color-grey-light);
       border-radius: 0;
 
-      &.text_field_with_left_icon {
+      &:has(~ .left_icon) {
         padding: 2px 0px 2px 30px;
       }
 
-      &.text_field_with_right_icon {
+      &:has(~ .right_icon) {
         padding: 2px 30px 2px 0px;
       }
 
-      &.text_field_with_both_icons {
-        padding: 2px 30px 2px 30px;
+      &:has(~ .left_icon) {
+        &:has(~ .right_icon) {
+          padding: 2px 30px 2px 30px;
+        }
       }
 
       &:focus {
