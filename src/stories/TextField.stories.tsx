@@ -1,6 +1,10 @@
+/// <reference path="../../declarations.d.ts" />
+
 import { Meta, StoryObj } from '@storybook/react';
 import { TextField, TextFieldProps } from '../components/TextField';
 import React from 'react';
+
+import SvgIcon from '../assets/icons/triangleDown.svg';
 
 const meta: Meta<TextFieldProps> = {
   title: 'Components/TextField',
@@ -18,7 +22,6 @@ const meta: Meta<TextFieldProps> = {
 
 export default meta;
 type Story = StoryObj<TextFieldProps>;
-
 
 export const OutlinedWithLabelWithErrorText: Story = {
   args: {
@@ -96,11 +99,7 @@ export const LeftIconOnly: Story = {
     id: 'left-icon-only',
     label: 'Left Icon Only',
     placeholder: 'Enter text',
-    leftIcon: (
-      <span role="img" aria-label="left-icon">
-        🔍
-      </span>
-    ),
+    leftIcon: <SvgIcon />,
   },
 };
 
@@ -109,11 +108,7 @@ export const RightIconOnly: Story = {
     id: 'right-icon-only',
     label: 'Right Icon Only',
     placeholder: 'Enter text',
-    rightIcon: (
-      <span role="img" aria-label="right-icon">
-        ⚙️
-      </span>
-    ),
+    rightIcon: <SvgIcon />,
   },
 };
 
@@ -122,16 +117,8 @@ export const BothIcons: Story = {
     id: 'both-icons',
     label: 'Both Icons',
     placeholder: 'Enter text',
-    leftIcon: (
-      <span role="img" aria-label="left-icon">
-        🔍
-      </span>
-    ),
-    rightIcon: (
-      <span role="img" aria-label="right-icon">
-        ⚙️
-      </span>
-    ),
+    leftIcon: <SvgIcon />,
+    rightIcon: <SvgIcon />,
   },
 };
 
@@ -150,11 +137,7 @@ export const FilledLeftIconOnly: Story = {
     label: 'Left Icon Only (Filled)',
     placeholder: 'Enter text',
     variant: 'filled',
-    leftIcon: (
-      <span role="img" aria-label="left-icon">
-        🔍
-      </span>
-    ),
+    leftIcon: <SvgIcon />,
   },
 };
 
@@ -164,11 +147,7 @@ export const FilledRightIconOnly: Story = {
     label: 'Right Icon Only (Filled)',
     placeholder: 'Enter text',
     variant: 'filled',
-    rightIcon: (
-      <span role="img" aria-label="right-icon">
-        ⚙️
-      </span>
-    ),
+    rightIcon: <SvgIcon />,
   },
 };
 
@@ -178,16 +157,8 @@ export const FilledBothIcons: Story = {
     label: 'Both Icons (Filled)',
     placeholder: 'Enter text',
     variant: 'filled',
-    leftIcon: (
-      <span role="img" aria-label="left-icon">
-        🔍
-      </span>
-    ),
-    rightIcon: (
-      <span role="img" aria-label="right-icon">
-        ⚙️
-      </span>
-    ),
+    leftIcon: <SvgIcon />,
+    rightIcon: <SvgIcon />,
   },
 };
 
@@ -206,11 +177,7 @@ export const StandardLeftIconOnly: Story = {
     label: 'Left Icon Only (Standard)',
     placeholder: 'Enter text',
     variant: 'standard',
-    leftIcon: (
-      <span role="img" aria-label="left-icon">
-        🔍
-      </span>
-    ),
+    leftIcon: <SvgIcon />,
   },
 };
 
@@ -220,11 +187,7 @@ export const StandardRightIconOnly: Story = {
     label: 'Right Icon Only (Standard)',
     placeholder: 'Enter text',
     variant: 'standard',
-    rightIcon: (
-      <span role="img" aria-label="right-icon">
-        ⚙️
-      </span>
-    ),
+    rightIcon: <SvgIcon />,
   },
 };
 
@@ -234,15 +197,7 @@ export const StandardBothIcons: Story = {
     label: 'Both Icons (Standard)',
     placeholder: 'Enter text',
     variant: 'standard',
-    leftIcon: (
-      <span role="img" aria-label="left-icon">
-        🔍
-      </span>
-    ),
-    rightIcon: (
-      <span role="img" aria-label="right-icon">
-        ⚙️
-      </span>
-    ),
+    leftIcon: <SvgIcon />,
+    rightIcon: <SvgIcon />,
   },
 };
