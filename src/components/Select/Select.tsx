@@ -80,6 +80,7 @@ export const Select: FC<SelectProps> = ({
         {...props}
       />
       {isOpen &&
+        selectWrapperRef.current &&
         createPortal(
           <div
             className={clsx(classes.options, isOpen && classes.options_active)}
@@ -103,7 +104,7 @@ export const Select: FC<SelectProps> = ({
               <div className={classes.option_disabled}>No options</div>
             )}
           </div>,
-          selectWrapperRef.current as HTMLElement
+          selectWrapperRef.current
         )}
     </div>
   );
