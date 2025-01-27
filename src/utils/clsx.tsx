@@ -1,4 +1,4 @@
-export function clsx(...args: (string | string[] | null | undefined | false)[]): string {
+export const clsx = (...args: (string | string[] | null | undefined | false)[]): string => {
   const classes: string[] = [];
 
   for (const arg of args) {
@@ -14,4 +14,4 @@ export function clsx(...args: (string | string[] | null | undefined | false)[]):
   }
 
   return classes.join(' ');
-}
+};

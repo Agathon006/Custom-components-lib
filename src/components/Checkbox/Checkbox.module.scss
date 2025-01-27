@@ -6,6 +6,7 @@
   align-items: center;
 
   --checkbox-color: #90caf9;
+  --checkbox-fill-color: black;
 
   .checkbox {
     display: none;
@@ -43,7 +44,7 @@
     fill: var(--checkbox-color);
 
     path {
-      fill: currentColor;
+      fill: var(--checkbox-fill-color);
     }
   }
 

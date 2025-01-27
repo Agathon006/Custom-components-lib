@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import classes from './TextField.module.scss';
-import { clsx } from '../../utils/clsx';
+import { clsx } from '../../utils';
 
 type TextFieldVariant = 'outlined' | 'filled' | 'standard';
 

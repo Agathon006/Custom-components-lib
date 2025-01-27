@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import classes from './Checkbox.module.scss';
-import { clsx } from '../../utils/clsx';
+import { clsx, getLuminance } from '../../utils';
 
 type CheckboxSize = 'small' | 'medium' | 'big';
 
@@ -12,6 +12,8 @@ export type CheckboxProps = {
   className?: string;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
+
+
 export const Checkbox: FC<CheckboxProps> = ({
   label,
   type = 'checkbox',
@@ -22,6 +24,7 @@ export const Checkbox: FC<CheckboxProps> = ({
 }) => {
   const style = {
     '--checkbox-color': color,
+    '--checkbox-fill-color': getLuminance(color) < 0.5 ? 'white' : 'black',
   } as React.CSSProperties;
 
   return (
