@@ -1,0 +1,83 @@
+@use '../../style/vars.scss';
+@use '../../style/mixins.scss';
+
+.select_wrapper {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  position: relative;
+  z-index: 1;
+
+  &:focus-within .arrow_icon svg {
+    fill: var(--color-primary);
+  }
+
+  .select input {
+    border: 1px solid var(--color-grey-light);
+    background-color: var(--color-white);
+    color: var(--color-grey-dark);
+    cursor: pointer;
+  }
+
+  .options {
+    color: var(--color-grey-dark);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    visibility: hidden;
+    opacity: 0;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-grey-light);
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(var(--color-black), 0.15);
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+
+    &_active {
+      transform: scaleY(1);
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .option {
+      padding: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      text-align: start;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: var(--color-grey-light);
+      }
+
+      &:focus {
+        background-color: var(--color-grey-light);
+      }
+    }
+
+    .option_disabled {
+      padding: 10px;
+      font-size: 14px;
+      transition: background-color 0.2s ease;
+      text-align: start;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--color-grey);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.upside_down {
+  transform: rotate(180deg);
+}

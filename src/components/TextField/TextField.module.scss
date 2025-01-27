@@ -6,16 +6,23 @@
   flex-direction: column;
   width: max-content;
   position: relative;
-  padding: 18px 0px;
-  overflow: hidden;
 
   &:focus-within {
     .label_text {
       color: var(--color-primary);
     }
+
+    .icon_left svg {
+      fill: var(--color-primary);
+    }
+
+    .icon_right svg {
+      fill: var(--color-primary);
+    }
   }
 
   .label_text {
+    padding: 0px 2px;
     @include mixins.text-m;
     color: var(--color-grey-light);
     pointer-events: none;
@@ -23,7 +30,7 @@
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    width: calc(100% - 12px);
+    max-width: 90%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -33,7 +40,25 @@
       font-size 0.2s ease-in-out,
       color 0.2s ease-in-out;
 
+    &:has(~ .icon_left) {
+      left: 28px;
+      max-width: calc(90% - 16px);
+    }
+
+    &:has(~ .icon_right) {
+      max-width: calc(90% - 16px);
+    }
+
+    &:has(~ .icon_left) {
+      &:has(~ .icon_right) {
+        left: 28px;
+        max-width: calc(90% - 32px);
+      }
+    }
+
     &_outlined {
+      background-color: var(--color-white);
+      line-height: 1.5;
       color: var(--color-grey-light);
 
       &.error {
@@ -52,6 +77,22 @@
     &_standard {
       left: 0px;
 
+      &:has(~ .icon_left) {
+        left: 30px;
+        max-width: calc(90% - 30px);
+      }
+
+      &:has(~ .icon_right) {
+        max-width: calc(90% - 30px);
+      }
+
+      &:has(~ .icon_left) {
+        &:has(~ .icon_right) {
+          left: 30px;
+          max-width: calc(90% - 30px);
+        }
+      }
+
       &.error {
         color: var(--color-red);
       }
@@ -60,8 +101,9 @@
 
   .text_field {
     @include mixins.text-l;
-    padding: 8px 12px;
+    padding: 8px 12px 8px 12px;
     border: 1px solid var(--color-grey-light);
+    color: var(--color-black);
     border-radius: 4px;
     outline: none;
     transition: border-color 0.2s ease-in-out;
@@ -85,25 +127,41 @@
     }
 
     &_outlined {
+      background-color: var(--color-white);
+
+      &:has(~ .icon_left) {
+        padding: 8px 12px 8px 30px;
+      }
+
+      &:has(~ .icon_right) {
+        padding: 8px 30px 8px 12px;
+      }
+
+      &:has(~ .icon_left) {
+        &:has(~ .icon_right) {
+          padding: 8px 30px 8px 30px;
+        }
+      }
+
       &:focus {
         border: 1px solid var(--color-primary);
-        border-top: 0px solid var(--color-primary);
 
         + .label_text_outlined {
-          transform: translate(-10%, -140%) scale(0.8);
+          transform: translate(-10%, -160%) scale(0.8);
         }
 
         &.error {
           border: 1px solid var(--color-red);
-          border-top: 0px solid var(--color-red);
         }
       }
 
       &:not(:placeholder-shown) {
-        border-top: 0px solid var(--color-primary);
-
         + .label_text_outlined {
-          transform: translate(-10%, -140%) scale(0.8);
+          transform: translate(-10%, -160%) scale(0.8);
+        }
+
+        &.error {
+          border: 1px solid var(--color-red);
         }
       }
 
@@ -114,10 +172,25 @@
 
     &_filled {
       padding: 12px 12px 4px;
-      background-color: var(--color-grey-dark);
+      background-color: var(--color-grey-light);
       border: none;
       border-bottom: 1px solid var(--color-white);
       border-radius: 4px 4px 0px 0px;
+      line-height: 1.4;
+
+      &:has(~ .icon_left) {
+        padding: 12px 12px 4px 30px;
+      }
+
+      &:has(~ .icon_right) {
+        padding: 12px 30px 4px 12px;
+      }
+
+      &:has(~ .icon_left) {
+        &:has(~ .icon_right) {
+          padding: 12px 30px 4px 30px;
+        }
+      }
 
       &::placeholder {
         color: var(--color-grey);
@@ -145,9 +218,22 @@
     &_standard {
       padding: 2px 0px;
       border: none;
-      background-color: transparent;
       border-bottom: 1px solid var(--color-grey-light);
       border-radius: 0;
+
+      &:has(~ .icon_left) {
+        padding: 2px 0px 2px 30px;
+      }
+
+      &:has(~ .icon_right) {
+        padding: 2px 30px 2px 0px;
+      }
+
+      &:has(~ .icon_left) {
+        &:has(~ .icon_right) {
+          padding: 2px 30px 2px 30px;
+        }
+      }
 
       &:focus {
         border-bottom-color: var(--color-primary);
@@ -175,11 +261,38 @@
     position: absolute;
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
     left: 2px;
-    top: 75%;
+    top: 100%;
+    width: 100%;
+    text-align: start;
 
     &.error {
       color: var(--color-red);
+    }
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    z-index: 2;
+    top: calc(50% - 8px);
+    pointer-events: none;
+
+    svg {
+      fill: var(--color-grey-light);
+    }
+
+    &_left {
+      left: 8px;
+    }
+
+    &_right {
+      right: 8px;
     }
   }
 }

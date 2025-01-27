@@ -23,7 +23,7 @@ export default {
   },
   externals: {
     'react': 'react',
-    'react-dom': 'reactDOM'
+    'react-dom': 'react-dom'
   },
   module: {
     rules: [
@@ -42,6 +42,10 @@ export default {
           },
           "sass-loader",
         ]
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
       },
       {
         test: /\.(ts|tsx)?$/,
