@@ -12,11 +12,11 @@
       color: var(--color-primary);
     }
 
-    .left_icon svg {
+    .icon_left svg {
       fill: var(--color-primary);
     }
 
-    .right_icon svg {
+    .icon_right svg {
       fill: var(--color-primary);
     }
   }
@@ -40,17 +40,17 @@
       font-size 0.2s ease-in-out,
       color 0.2s ease-in-out;
 
-    &:has(~ .left_icon) {
+    &:has(~ .icon_left) {
       left: 28px;
       max-width: calc(90% - 16px);
     }
 
-    &:has(~ .right_icon) {
+    &:has(~ .icon_right) {
       max-width: calc(90% - 16px);
     }
 
-    &:has(~ .left_icon) {
-      &:has(~ .right_icon) {
+    &:has(~ .icon_left) {
+      &:has(~ .icon_right) {
         left: 28px;
         max-width: calc(90% - 32px);
       }
@@ -77,17 +77,17 @@
     &_standard {
       left: 0px;
 
-      &:has(~ .left_icon) {
+      &:has(~ .icon_left) {
         left: 30px;
         max-width: calc(90% - 30px);
       }
 
-      &:has(~ .right_icon) {
+      &:has(~ .icon_right) {
         max-width: calc(90% - 30px);
       }
 
-      &:has(~ .left_icon) {
-        &:has(~ .right_icon) {
+      &:has(~ .icon_left) {
+        &:has(~ .icon_right) {
           left: 30px;
           max-width: calc(90% - 30px);
         }
@@ -129,16 +129,16 @@
     &_outlined {
       background-color: var(--color-white);
 
-      &:has(~ .left_icon) {
+      &:has(~ .icon_left) {
         padding: 8px 12px 8px 30px;
       }
 
-      &:has(~ .right_icon) {
+      &:has(~ .icon_right) {
         padding: 8px 30px 8px 12px;
       }
 
-      &:has(~ .left_icon) {
-        &:has(~ .right_icon) {
+      &:has(~ .icon_left) {
+        &:has(~ .icon_right) {
           padding: 8px 30px 8px 30px;
         }
       }
@@ -178,16 +178,16 @@
       border-radius: 4px 4px 0px 0px;
       line-height: 1.4;
 
-      &:has(~ .left_icon) {
+      &:has(~ .icon_left) {
         padding: 12px 12px 4px 30px;
       }
 
-      &:has(~ .right_icon) {
+      &:has(~ .icon_right) {
         padding: 12px 30px 4px 12px;
       }
 
-      &:has(~ .left_icon) {
-        &:has(~ .right_icon) {
+      &:has(~ .icon_left) {
+        &:has(~ .icon_right) {
           padding: 12px 30px 4px 30px;
         }
       }
@@ -221,16 +221,16 @@
       border-bottom: 1px solid var(--color-grey-light);
       border-radius: 0;
 
-      &:has(~ .left_icon) {
+      &:has(~ .icon_left) {
         padding: 2px 0px 2px 30px;
       }
 
-      &:has(~ .right_icon) {
+      &:has(~ .icon_right) {
         padding: 2px 30px 2px 0px;
       }
 
-      &:has(~ .left_icon) {
-        &:has(~ .right_icon) {
+      &:has(~ .icon_left) {
+        &:has(~ .icon_right) {
           padding: 2px 30px 2px 30px;
         }
       }
@@ -272,7 +272,7 @@
     }
   }
 
-  .left_icon {
+  .icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -280,29 +280,19 @@
     height: 16px;
     position: absolute;
     z-index: 2;
-    left: 8px;
     top: calc(50% - 8px);
     pointer-events: none;
 
     svg {
       fill: var(--color-grey-light);
     }
-  }
 
-  .right_icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    z-index: 2;
-    right: 8px;
-    top: calc(50% - 8px);
-    pointer-events: none;
+    &_left {
+      left: 8px;
+    }
 
-    svg {
-      fill: var(--color-grey-light);
+    &_right {
+      right: 8px;
     }
   }
 }

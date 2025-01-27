@@ -66,8 +66,8 @@ export const TextField: FC<TextFieldProps> = ({
       />
       {label && <span className={labelTextClasses}>{label}</span>}
       {errorText && <span className={errorTextClasses}>{errorText}</span>}
-      {leftIcon && <div className={clsx(classes.left_icon, leftIconClassName)}>{leftIcon}</div>}
-      {rightIcon && <div className={clsx(classes.right_icon, rightIconClassName)}>{rightIcon}</div>}
+      {leftIcon && <div className={clsx(classes.icon, classes.icon_left, leftIconClassName)}>{leftIcon}</div>}
+      {rightIcon && <div className={clsx(classes.icon, classes.icon_right, rightIconClassName)}>{rightIcon}</div>}
     </label>
   );
 };
