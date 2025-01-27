@@ -14,7 +14,7 @@ export type TextFieldProps = {
   error?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  // onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export const TextField: FC<TextFieldProps> = ({
@@ -25,7 +25,6 @@ export const TextField: FC<TextFieldProps> = ({
   className,
   placeholder = '',
   error,
-  onChange,
   leftIcon,
   rightIcon,
   ...props
@@ -51,7 +50,6 @@ export const TextField: FC<TextFieldProps> = ({
         type={type}
         className={cssClasses}
         placeholder={placeholder}
-        onChange={onChange}
         autoComplete="off"
       />
       {label && <span className={labelTextClasses}>{label}</span>}
