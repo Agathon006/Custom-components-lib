@@ -11,9 +11,7 @@ export type TextFieldProps = {
   variant?: TextFieldVariant;
   className?: string;
   placeholder?: string;
-  required?: boolean;
   error?: boolean;
-  value?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -26,9 +24,7 @@ export const TextField: FC<TextFieldProps> = ({
   variant = 'outlined',
   className,
   placeholder = '',
-  required,
   error,
-  value,
   onChange,
   leftIcon,
   rightIcon,
@@ -55,8 +51,6 @@ export const TextField: FC<TextFieldProps> = ({
         type={type}
         className={cssClasses}
         placeholder={placeholder}
-        required={required}
-        value={value}
         onChange={onChange}
         autoComplete="off"
       />
