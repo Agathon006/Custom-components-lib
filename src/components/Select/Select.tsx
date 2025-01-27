@@ -75,8 +75,7 @@ export const Select: FC<SelectProps> = ({
         role="combobox"
         label={label}
         value={selectedOption ? selectedOption.label : ''}
-        rightIcon={<ArrowDownIcon />}
-        rightIconClassName={isOpen && classes.upside_down}
+        rightIcon={<ArrowDownIcon className={clsx(isOpen && classes.upside_down)} />}
         {...props}
       />
       {isOpen &&

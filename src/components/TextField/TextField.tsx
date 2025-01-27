@@ -15,9 +15,7 @@ export type TextFieldProps = {
   error?: boolean;
   value?: string;
   leftIcon?: React.ReactNode;
-  leftIconClassName?: string | false;
   rightIcon?: React.ReactNode;
-  rightIconClassName?: string | false;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & React.ComponentPropsWithoutRef<'input'>;
 
@@ -33,9 +31,7 @@ export const TextField: FC<TextFieldProps> = ({
   value,
   onChange,
   leftIcon,
-  leftIconClassName,
   rightIcon,
-  rightIconClassName,
   ...props
 }) => {
   const cssClasses = clsx(
@@ -66,8 +62,8 @@ export const TextField: FC<TextFieldProps> = ({
       />
       {label && <span className={labelTextClasses}>{label}</span>}
       {errorText && <span className={errorTextClasses}>{errorText}</span>}
-      {leftIcon && <div className={clsx(classes.icon, classes.icon_left, leftIconClassName)}>{leftIcon}</div>}
-      {rightIcon && <div className={clsx(classes.icon, classes.icon_right, rightIconClassName)}>{rightIcon}</div>}
+      {leftIcon && <div className={clsx(classes.icon, classes.icon_left)}>{leftIcon}</div>}
+      {rightIcon && <div className={clsx(classes.icon, classes.icon_right)}>{rightIcon}</div>}
     </label>
   );
 };
