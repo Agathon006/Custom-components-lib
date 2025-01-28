@@ -1,0 +1,64 @@
+@use '../../style/mixins.scss';
+@use '../../style/vars.scss';
+
+.switch_wrapper {
+  --wrapper-width: 34px;
+  --wrapper-height: 20px;
+  --slider-height: calc(var(--wrapper-height) * 0.7);
+  --slider-top: calc((var(--wrapper-height) - var(--slider-height)) / 2);
+  --circle-size: var(--wrapper-height);
+  --circle-top: calc(-1 * var(--slider-top));
+  --circle-left-checked: calc(var(--wrapper-width) - var(--circle-size));
+
+  width: var(--wrapper-width);
+  height: var(--wrapper-height);
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  pointer-events: none;
+
+  .switch_checkbox {
+    width: 0;
+    height: 0;
+    opacity: 0;
+
+    &:checked + .switch_slider {
+      background-color: var(--color-primary-light);
+    }
+
+    &:checked + .switch_slider::before {
+      background-color: var(--color-primary);
+      left: var(--circle-left-checked);
+    }
+
+    &:disabled + .switch_slider {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  .switch_slider {
+    width: 100%;
+    height: var(--slider-height);
+    position: absolute;
+    top: var(--slider-top);
+    left: 0;
+    background-color: var(--color-grey-light);
+    transition: 0.4s;
+    border-radius: calc(var(--slider-height) / 2);
+    cursor: pointer;
+    pointer-events: all;
+
+    &::before {
+      width: var(--circle-size);
+      height: var(--circle-size);
+      position: absolute;
+      left: 0;
+      top: var(--circle-top);
+      background-color: var(--color-white-dark);
+      content: '';
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+  }
+}
