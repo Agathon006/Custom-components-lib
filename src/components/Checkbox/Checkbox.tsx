@@ -5,6 +5,11 @@ import DefaultCheckboxSvgIcon from '../../assets/icons/checkbox.svg';
 
 type CheckboxSize = 'small' | 'medium' | 'big';
 
+type CustomCSSProperties = React.CSSProperties & {
+  '--checkbox-fill-color'?: string;
+  '--checkbox-fill-text-color'?: string;
+};
+
 export type CheckboxProps = {
   label?: string;
   type?: 'checkbox';
@@ -23,10 +28,6 @@ export const Checkbox: FC<CheckboxProps> = ({
   className,
   ...props
 }) => {
-  type CustomCSSProperties = React.CSSProperties & {
-    '--checkbox-fill-color'?: string;
-    '--checkbox-fill-text-color'?: string;
-  };
 
   const style: CustomCSSProperties = {
     '--checkbox-fill-color': color,
@@ -40,7 +41,7 @@ export const Checkbox: FC<CheckboxProps> = ({
       data-testid="checkbox-wrapper"
       style={style}
     >
-      <input {...props} type={type} className={classes.checkbox} />
+      <input {...props} type={type} className={classes.checkbox} role='checkbox' />
       {customIcon &&
         React.cloneElement(customIcon, {
           className: clsx(
