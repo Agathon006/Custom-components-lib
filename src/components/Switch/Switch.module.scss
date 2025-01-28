@@ -35,7 +35,7 @@
     }
 
     &:disabled + .switch_slider {
-      opacity: 0.5;
+      opacity: 0.8;
       pointer-events: none;
     }
   }
@@ -47,7 +47,7 @@
     top: var(--slider-top);
     left: 0;
     background-color: var(--color-grey-light);
-    transition: 0.4s;
+    transition: background-color 0.4s, left 0.4s, top 0.4s;
     border-radius: calc(var(--slider-height) / 2);
     pointer-events: all;
 
@@ -59,7 +59,7 @@
       top: var(--circle-top);
       background-color: var(--color-white-dark);
       content: '';
-      transition: 0.4s;
+      transition: background-color 0.4s, left 0.4s, top 0.4s;
       border-radius: 50%;
     }
   }
