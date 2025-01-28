@@ -42,7 +42,7 @@ export const Switch: FC<SwitchProps> = ({
     >
       <input {...props} type={type} className={classes.switch_checkbox} role="checkbox" />
       <div className={classes.switch_slider}></div>
-      {label && <span className={classes.switch_label_text}>{label}</span>}
+      {label && <span className={clsx(classes.switch_label_text, classes[`switch_label_text_${size}`])}>{label}</span>}
     </label>
   );
 };

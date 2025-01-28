@@ -69,7 +69,16 @@
     @include mixins.text-m;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; 
-    max-width: 100%; 
+    text-overflow: ellipsis;
+    max-width: 100%;
+    pointer-events: all;
+
+    &_big {
+      @include mixins.text-l;
+    }
+
+    &_small {
+      @include mixins.text-s;
+    }
   }
 }
