@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import classes from './TextField.module.scss';
-import { clsx } from '../../utils/clsx';
+import { clsx } from '../../utils';
 
 type TextFieldVariant = 'outlined' | 'filled' | 'standard';
 
@@ -14,7 +14,6 @@ export type TextFieldProps = {
   error?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
-  // onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export const TextField: FC<TextFieldProps> = ({

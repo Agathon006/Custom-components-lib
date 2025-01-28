@@ -1,8 +1,8 @@
 /// <reference path="../../declarations.d.ts" />
 
+import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { TextField, TextFieldProps } from '../components/TextField';
-import React from 'react';
 
 import SvgIcon from '../assets/icons/triangleDown.svg';
 

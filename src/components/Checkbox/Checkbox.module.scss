@@ -1,0 +1,81 @@
+@use '../../style/mixins.scss';
+@use '../../style/vars.scss';
+
+.label_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  --checkbox-fill-color: var(--color-primary);
+  --checkbox-fill-text-color: var(--color-black);
+
+  .checkbox {
+    display: none;
+
+    &:checked ~ .checkbox_icon:not(.checkbox_icon_custom) {
+      fill: var(--checkbox-fill-color);
+
+      path:nth-child(2) {
+        fill: var(--checkbox-fill-text-color);
+      }
+    }
+
+    &:checked ~ .checkbox_icon_custom {
+      stroke: var(--checkbox-fill-color);
+      fill: var(--checkbox-fill-color);
+    }
+  }
+
+  .checkbox_icon {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    transition:
+      fill 0.3s ease,
+      stroke 0.3s ease;
+    fill: transparent;
+
+    &_small {
+      width: 12px;
+      height: 12px;
+    }
+
+    &_big {
+      width: 20px;
+      height: 20px;
+    }
+
+    path {
+      transition: fill 0.1s ease;
+    }
+
+    &:not(.checkbox_icon_custom) path:nth-child(1) {
+      stroke: var(--checkbox-fill-color);
+    }
+
+    &_custom {
+      display: block;
+      border: 0;
+      stroke: var(--checkbox-fill-color);
+
+      & ~ .checkbox_icon {
+        display: none;
+      }
+    }
+  }
+
+  .label_text {
+    padding-left: 10px;
+    @include mixins.text-m;
+    cursor: pointer;
+
+    &_small {
+      @include mixins.text-s;
+    }
+
+    &_big {
+      @include mixins.text-l;
+    }
+  }
+}

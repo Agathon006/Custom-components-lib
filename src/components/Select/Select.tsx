@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import ArrowDownIcon from '../../assets/icons/triangleDown.svg';
-import { clsx } from '../../utils/clsx';
+import { clsx } from '../../utils';
 import { TextField } from '../TextField';
 import classes from './Select.module.scss';
 

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import classes from './Button.module.scss';
-import { clsx } from '../../utils/clsx';
+import { clsx } from '../../utils';
 
 type ButtonSize = 'small' | 'medium' | 'big';
 type ButtonVariant = 'text' | 'contained' | 'outlined';
