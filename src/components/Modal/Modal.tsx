@@ -16,7 +16,11 @@ export const Modal: FC<ModalProps> = ({ open, onClose, children, className, ...p
         onClick={() => onClose?.()}
         className={clsx(classes.modal_overlay, open && classes.modal_overlay_open)}
       />
-      <div {...props} className={clsx(classes.modal, open && classes.modal_open, className)}>
+      <div
+        {...props}
+        className={clsx(classes.modal, open && classes.modal_open, className)}
+        role="dialog"
+      >
         {children}
       </div>
     </>
