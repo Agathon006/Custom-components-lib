@@ -2,6 +2,8 @@
 @use '../../style/vars.scss';
 
 .switch_wrapper {
+  --switch-color: var(--color-primary);
+  --switch-color-dark: var(--color-grey);
   --wrapper-width: 34px;
   --wrapper-height: 20px;
   --slider-height: calc(var(--wrapper-height) * 0.7);
@@ -24,11 +26,11 @@
     opacity: 0;
 
     &:checked + .switch_slider {
-      background-color: var(--color-primary-light);
+      background-color: var(--switch-color-dark);
     }
 
     &:checked + .switch_slider::before {
-      background-color: var(--color-primary);
+      background-color: var(--switch-color);
       left: var(--circle-left-checked);
     }
 
