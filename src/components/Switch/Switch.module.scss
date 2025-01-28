@@ -1,0 +1,84 @@
+@use '../../style/mixins.scss';
+@use '../../style/vars.scss';
+
+.switch_wrapper {
+  --switch-color: var(--color-primary);
+  --switch-color-dark: var(--color-grey);
+  --wrapper-width: 34px;
+  --wrapper-height: 20px;
+  --slider-height: calc(var(--wrapper-height) * 0.7);
+  --slider-top: calc((var(--wrapper-height) - var(--slider-height)) / 2);
+  --circle-size: var(--wrapper-height);
+  --circle-top: calc(-1 * var(--slider-top));
+  --circle-left-checked: calc(var(--wrapper-width) - var(--circle-size));
+
+  width: auto;
+  height: var(--wrapper-height);
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  pointer-events: none;
+
+  .switch_checkbox {
+    width: 0;
+    height: 0;
+    opacity: 0;
+
+    &:checked + .switch_slider {
+      background-color: var(--switch-color-dark);
+    }
+
+    &:checked + .switch_slider::before {
+      background-color: var(--switch-color);
+      left: var(--circle-left-checked);
+    }
+
+    &:disabled + .switch_slider {
+      opacity: 0.8;
+      pointer-events: none;
+    }
+  }
+
+  .switch_slider {
+    width: var(--wrapper-width);
+    height: var(--slider-height);
+    position: absolute;
+    top: var(--slider-top);
+    left: 0;
+    background-color: var(--color-grey-light);
+    transition: background-color 0.4s, left 0.4s, top 0.4s;
+    border-radius: calc(var(--slider-height) / 2);
+    pointer-events: all;
+
+    &::before {
+      width: var(--circle-size);
+      height: var(--circle-size);
+      position: absolute;
+      left: 0;
+      top: var(--circle-top);
+      background-color: var(--color-white-dark);
+      content: '';
+      transition: background-color 0.4s, left 0.4s, top 0.4s;
+      border-radius: 50%;
+    }
+  }
+
+  .switch_label_text {
+    margin-left: calc(var(--wrapper-width) * 1.25);
+    @include mixins.text-m;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    pointer-events: all;
+
+    &_big {
+      @include mixins.text-l;
+    }
+
+    &_small {
+      @include mixins.text-s;
+    }
+  }
+}
