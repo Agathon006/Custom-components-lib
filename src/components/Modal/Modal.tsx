@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import classes from './Modal.module.scss';
 import { clsx } from '../../utils';
+import CloseButtonIcon from '../../assets/icons/closeButton.svg';
 
 export type ModalProps = {
   open?: boolean;
@@ -19,6 +20,7 @@ export const Modal: FC<ModalProps> = ({ open, onClose, children, className, ...p
         className={clsx(classes.modal, open && classes.modal_open, className)}
         role="dialog"
       >
+        <CloseButtonIcon onClick={onClose} className={classes.modal_close_button} />
         {children}
       </div>
     </>
