@@ -201,3 +201,15 @@ export const StandardBothIcons: Story = {
     rightIcon: <SvgIcon />,
   },
 };
+
+
+export const DisabledOutlinedWithLabelWithErrorText: Story = {
+  args: {
+    id: 'outlined-with-label-with-error-text',
+    label: 'Outlined Label',
+    variant: 'outlined',
+    errorText: 'This is an error message',
+    placeholder: 'Enter text',
+    disabled: true,
+  },
+};

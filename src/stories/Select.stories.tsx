@@ -50,6 +50,7 @@ export const Default: Story = {
         value={selectedValue}
         onChange={value => {
           setSelectedValue(value);
+          args.onChange?.(value);
         }}
       />
     );

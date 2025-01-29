@@ -51,3 +51,10 @@ export const Small: Story = {
     size: 'small',
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    children: 'Some text',
+    disabled: true,
+  },
+};

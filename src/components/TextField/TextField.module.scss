@@ -127,6 +127,13 @@
       }
     }
 
+    &:disabled ~ .label_text,
+    &:disabled ~ .error_text,
+    &:disabled ~ .icon {
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
     &_outlined {
       background-color: var(--color-white);
 

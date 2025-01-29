@@ -10,20 +10,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    open: true,
-    children: 'This is a modal window',
-  },
-};
-
-export const Closed: Story = {
-  args: {
-    open: false,
-    children: 'This is a modal window that is closed',
-  },
-};
-
 export const WithCloseHandler: Story = {
   args: {
     open: true,

@@ -25,6 +25,12 @@
       stroke: var(--checkbox-fill-color);
       fill: var(--checkbox-fill-color);
     }
+
+    &:disabled ~ .label_text,
+    &:disabled ~ .checkbox_icon {
+      opacity: 0.8;
+      pointer-events: none;
+    }
   }
 
   .checkbox_icon {
