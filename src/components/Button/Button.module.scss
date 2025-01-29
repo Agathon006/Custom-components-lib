@@ -47,6 +47,7 @@ $transition:
   text-transform: uppercase;
   border-radius: 4px;
   transition: $transition;
+  user-select: none;
 
   @include shadow-default();
 

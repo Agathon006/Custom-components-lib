@@ -6,6 +6,7 @@
   flex-direction: column;
   width: max-content;
   position: relative;
+  user-select: none;
 
   &:focus-within {
     .label_text {

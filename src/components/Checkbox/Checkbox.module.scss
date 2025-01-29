@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 
   --checkbox-fill-color: var(--color-primary);
   --checkbox-fill-text-color: var(--color-black);

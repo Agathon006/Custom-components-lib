@@ -37,6 +37,7 @@
   transition:
     opacity 0.3s ease,
     transform 0.3s ease;
+  user-select: none;
 
   &:not(.modal_open) {
     opacity: 0;

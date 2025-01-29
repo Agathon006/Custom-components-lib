@@ -19,6 +19,7 @@
   align-items: center;
   cursor: pointer;
   pointer-events: none;
+  user-select: none;
 
   .switch_checkbox {
     width: 0;
