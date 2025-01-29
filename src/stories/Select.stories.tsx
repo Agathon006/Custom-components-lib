@@ -27,6 +27,7 @@ const meta: Meta<SelectProps> = {
       description: 'Callback triggered when the value changes.',
     },
   },
+  tags: ['autodocs'],
 };
 
 export default meta;

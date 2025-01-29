@@ -18,6 +18,7 @@ const meta: Meta<TextFieldProps> = {
       control: 'boolean',
     },
   },
+  tags: ['autodocs'],
 };
 
 export default meta;

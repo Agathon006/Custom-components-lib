@@ -19,6 +19,7 @@ export type CheckboxProps = {
   className?: string;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
+// A functional component that renders a customizable checkbox with an optional label and icon.
 export const Checkbox: FC<CheckboxProps> = ({
   label,
   type = 'checkbox',
@@ -28,7 +29,6 @@ export const Checkbox: FC<CheckboxProps> = ({
   className,
   ...props
 }) => {
-
   const style: CustomCSSProperties = {
     '--checkbox-fill-color': color,
     '--checkbox-fill-text-color':
@@ -41,7 +41,7 @@ export const Checkbox: FC<CheckboxProps> = ({
       data-testid="checkbox-wrapper"
       style={style}
     >
-      <input {...props} type={type} className={classes.checkbox} role='checkbox' />
+      <input {...props} type={type} className={classes.checkbox} role="checkbox" />
       {customIcon &&
         React.cloneElement(customIcon, {
           className: clsx(

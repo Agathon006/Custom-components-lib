@@ -16,6 +16,7 @@ export type TextFieldProps = {
   rightIcon?: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'input'>;
 
+// A functional component that renders a text field with customizable options.
 export const TextField: FC<TextFieldProps> = ({
   label,
   errorText,

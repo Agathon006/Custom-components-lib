@@ -20,6 +20,7 @@ export type SelectProps = {
   className?: string;
 } & React.ComponentPropsWithoutRef<'div'>;
 
+// A select component with options that can be toggled open and closed with a click.
 export const Select: FC<SelectProps> = ({
   label,
   options = [],

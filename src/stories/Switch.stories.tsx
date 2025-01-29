@@ -26,6 +26,7 @@ const meta = {
       description: 'Disable the switch',
     },
   },
+  tags: ['autodocs'],
 } satisfies Meta<typeof Switch>;
 
 export default meta;

@@ -12,6 +12,7 @@ export type ButtonProps = {
   className?: string;
 } & React.ComponentPropsWithoutRef<'button'>;
 
+//  A customizable button component that supports various sizes and variants.
 export const Button: FC<ButtonProps> = ({
   children,
   size = 'medium',

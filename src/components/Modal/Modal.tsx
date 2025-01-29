@@ -9,6 +9,7 @@ export type ModalProps = {
   onClose?: () => void;
 } & React.ComponentPropsWithoutRef<'div'>;
 
+//A modal component that renders a closable, focus-trapped modal dialog.
 export const Modal: FC<ModalProps> = ({ open, onClose, children, className, ...props }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
