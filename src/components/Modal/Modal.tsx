@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import classes from './Modal.module.scss';
+import { createPortal } from 'react-dom';
 import { clsx } from '../../utils';
+import classes from './Modal.module.scss';
 import CloseButtonIcon from '../../assets/icons/closeButton.svg';
 
 export type ModalProps = {
@@ -10,19 +11,20 @@ export type ModalProps = {
 
 export const Modal: FC<ModalProps> = ({ open, onClose, children, className, ...props }) => {
   return (
-    <>
-      <div
-        onClick={onClose}
-        className={clsx(classes.modal_overlay, open && classes.modal_overlay_open)}
-      />
-      <div
-        {...props}
-        className={clsx(classes.modal, open && classes.modal_open, className)}
-        role="dialog"
-      >
-        <CloseButtonIcon onClick={onClose} className={classes.modal_close_button} />
-        {children}
-      </div>
-    </>
+    open &&
+    createPortal(
+      <>
+        <div onClick={onClose} className={classes.modal_overlay} data-testid="modal-overlay" />
+        <div {...props} className={clsx(classes.modal, className)} role="dialog">
+          <CloseButtonIcon
+            onClick={onClose}
+            className={classes.modal_close_button}
+            data-testid="modal-close-button"
+          />
+          {children}
+        </div>
+      </>,
+      document.body
+    )
   );
 };

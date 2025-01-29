@@ -9,14 +9,7 @@
   height: 100%;
   background-color: rgba(var(--color-black-rgb), 0.5);
   z-index: 2;
-  opacity: 0;
-  visibility: hidden;
   transition: opacity 0.3s ease;
-
-  &_open {
-    opacity: 1;
-    visibility: visible;
-  }
 }
 
 .modal {
@@ -38,17 +31,6 @@
     opacity 0.3s ease,
     transform 0.3s ease;
   user-select: none;
-
-  &:not(.modal_open) {
-    opacity: 0;
-    visibility: hidden;
-    transform: translate(-50%, -50%) scale(0.9);
-  }
-
-  &_open {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
 
   &_close_button {
     position: absolute;
