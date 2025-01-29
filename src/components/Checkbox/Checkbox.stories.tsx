@@ -1,15 +1,16 @@
-/// <reference path="../../declarations.d.ts" />
+/// <reference path="../../../declarations.d.ts" />
 
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox } from '../components/Checkbox';
+import { Checkbox } from '.';
 
-import AppleSvgIcon from '../assets/icons/apple.svg';
-import AirplaySvgIcon from '../assets/icons/airplay.svg';
+import AppleSvgIcon from '../../assets/icons/apple.svg';
+import AirplaySvgIcon from '../../assets/icons/airplay.svg';
 
 const meta = {
   title: 'Components/Checkbox',
   component: Checkbox,
+  tags: ['autodocs'],
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;
@@ -46,6 +47,7 @@ export const Checked: Story = {
   args: {
     label: 'I agree to the terms',
     checked: true,
+    readOnly: true,
   },
 };
 

@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '../components/Button';
+import { Button } from '.';
 
 const meta = {
   title: 'Components/Button',
   component: Button,
+  tags: ['autodocs'],
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -49,5 +50,12 @@ export const Small: Story = {
   args: {
     children: 'Some text',
     size: 'small',
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    children: 'Some text',
+    disabled: true,
   },
 };

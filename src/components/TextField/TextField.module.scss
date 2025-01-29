@@ -6,6 +6,7 @@
   flex-direction: column;
   width: max-content;
   position: relative;
+  user-select: none;
 
   &:focus-within {
     .label_text {
@@ -124,6 +125,13 @@
       &::placeholder {
         opacity: 1;
       }
+    }
+
+    &:disabled ~ .label_text,
+    &:disabled ~ .error_text,
+    &:disabled ~ .icon {
+      opacity: 0.8;
+      pointer-events: none;
     }
 
     &_outlined {

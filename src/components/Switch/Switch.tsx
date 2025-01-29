@@ -12,13 +12,14 @@ type CustomCSSProperties = React.CSSProperties & {
 };
 
 export type SwitchProps = {
+  /** Optional label for the switch */
   label?: string;
+  /** Optional size of the switch */
   size?: CheckboxSize;
-  color?: string;
-  type?: 'checkbox';
-  className?: string;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
+/** A functional component that renders a customizable switch input with an optional label.
+ * This component supports various sizes and colors, and can be disabled or checked by default. */
 export const Switch: FC<SwitchProps> = ({
   label,
   size = 'medium',
@@ -42,7 +43,11 @@ export const Switch: FC<SwitchProps> = ({
     >
       <input {...props} type={type} className={classes.switch_checkbox} role="checkbox" />
       <div className={classes.switch_slider}></div>
-      {label && <span className={clsx(classes.switch_label_text, classes[`switch_label_text_${size}`])}>{label}</span>}
+      {label && (
+        <span className={clsx(classes.switch_label_text, classes[`switch_label_text_${size}`])}>
+          {label}
+        </span>
+      )}
     </label>
   );
 };

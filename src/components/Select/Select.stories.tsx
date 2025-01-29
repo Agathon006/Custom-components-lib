@@ -1,36 +1,15 @@
 import React, { useState } from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import { Select, SelectProps } from '../components/Select';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Select } from '.';
 
-const meta: Meta<SelectProps> = {
+const meta = {
   title: 'Components/Select',
   component: Select,
-  argTypes: {
-    id: {
-      control: 'text',
-      description: 'The unique ID of the Select component.',
-    },
-    label: {
-      control: 'text',
-      description: 'The label displayed for the Select component.',
-    },
-    options: {
-      control: 'object',
-      description: 'An array of options for the Select component.',
-    },
-    value: {
-      control: 'text',
-      description: 'The current value of the Select component.',
-    },
-    onChange: {
-      action: 'changed',
-      description: 'Callback triggered when the value changes.',
-    },
-  },
-};
+  tags: ['autodocs'],
+} satisfies Meta<typeof Select>;
 
 export default meta;
-type Story = StoryObj<SelectProps>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: args => {
@@ -50,6 +29,7 @@ export const Default: Story = {
         value={selectedValue}
         onChange={value => {
           setSelectedValue(value);
+          args.onChange?.(value);
         }}
       />
     );

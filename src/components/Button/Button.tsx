@@ -6,12 +6,13 @@ type ButtonSize = 'small' | 'medium' | 'big';
 type ButtonVariant = 'text' | 'contained' | 'outlined';
 
 export type ButtonProps = {
-  children?: React.ReactNode;
+  /** The size of the button. */
   size?: ButtonSize;
+  /** The variant of the button. */
   variant?: ButtonVariant;
-  className?: string;
 } & React.ComponentPropsWithoutRef<'button'>;
 
+/** A customizable button component that supports various sizes and variants. */
 export const Button: FC<ButtonProps> = ({
   children,
   size = 'medium',

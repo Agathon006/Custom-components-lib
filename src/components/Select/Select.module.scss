@@ -8,6 +8,7 @@
   width: max-content;
   position: relative;
   z-index: 1;
+  user-select: none;
 
   &:focus-within .arrow_icon svg {
     fill: var(--color-primary);

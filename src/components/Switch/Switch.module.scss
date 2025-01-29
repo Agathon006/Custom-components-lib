@@ -19,6 +19,7 @@
   align-items: center;
   cursor: pointer;
   pointer-events: none;
+  user-select: none;
 
   .switch_checkbox {
     width: 0;
@@ -34,7 +35,8 @@
       left: var(--circle-left-checked);
     }
 
-    &:disabled + .switch_slider {
+    &:disabled + .switch_slider,
+    &:disabled ~ .switch_label_text {
       opacity: 0.8;
       pointer-events: none;
     }
@@ -47,7 +49,10 @@
     top: var(--slider-top);
     left: 0;
     background-color: var(--color-grey-light);
-    transition: background-color 0.4s, left 0.4s, top 0.4s;
+    transition:
+      background-color 0.4s,
+      left 0.4s,
+      top 0.4s;
     border-radius: calc(var(--slider-height) / 2);
     pointer-events: all;
 
@@ -59,7 +64,10 @@
       top: var(--circle-top);
       background-color: var(--color-white-dark);
       content: '';
-      transition: background-color 0.4s, left 0.4s, top 0.4s;
+      transition:
+        background-color 0.4s,
+        left 0.4s,
+        top 0.4s;
       border-radius: 50%;
     }
   }

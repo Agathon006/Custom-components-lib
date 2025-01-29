@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 
   --checkbox-fill-color: var(--color-primary);
   --checkbox-fill-text-color: var(--color-black);
@@ -23,6 +24,12 @@
     &:checked ~ .checkbox_icon_custom {
       stroke: var(--checkbox-fill-color);
       fill: var(--checkbox-fill-color);
+    }
+
+    &:disabled ~ .label_text,
+    &:disabled ~ .checkbox_icon {
+      opacity: 0.8;
+      pointer-events: none;
     }
   }
 

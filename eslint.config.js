@@ -51,11 +51,11 @@ export default [
       'node_modules/**',
       'dist/**',
       '.storybook/**',
-      'src/stories/**',
       '*.config.js',
       '.*.js',
       'declarations.d.ts',
       '**/*.test.tsx',
+      '**/*.stories.tsx',
     ],
   },
 ];
