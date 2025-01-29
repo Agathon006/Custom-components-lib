@@ -5,18 +5,21 @@ import { clsx } from '../../utils';
 type TextFieldVariant = 'outlined' | 'filled' | 'standard';
 
 export type TextFieldProps = {
+  /** Optional label text */
   label?: string;
+  /** Optional error message */
   errorText?: string;
-  type?: string;
+  /** Variant of the text field */
   variant?: TextFieldVariant;
-  className?: string;
-  placeholder?: string;
+  /** Error state of the text field */
   error?: boolean;
+  /** Optional icon to place on the left side of the text field */
   leftIcon?: React.ReactNode;
+  /** Optional icon to place on the right side of the text field */
   rightIcon?: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'input'>;
 
-// A functional component that renders a text field with customizable options.
+/** A functional component that renders a text field with customizable options. */
 export const TextField: FC<TextFieldProps> = ({
   label,
   errorText,

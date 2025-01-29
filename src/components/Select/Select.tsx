@@ -8,19 +8,24 @@ import { TextField } from '../TextField';
 import classes from './Select.module.scss';
 
 export type SelectOption = {
+  /** The unique identifier for the option. */
   id: string;
+  /** The display label for the option. */
   label: string;
 };
 
 export type SelectProps = {
+  /** The label for the select component. */
   label?: string;
+  /** The list of selectable options. */
   options?: SelectOption[];
+  /** The currently selected option's id. */
   value?: SelectOption['id'];
+  /** Callback function called when an option is selected. */
   onChange?: (value: SelectOption['id']) => void;
-  className?: string;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-// A select component with options that can be toggled open and closed with a click.
+/** A select component with options that can be toggled open and closed with a click. */
 export const Select: FC<SelectProps> = ({
   label,
   options = [],

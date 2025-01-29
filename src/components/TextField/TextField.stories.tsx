@@ -1,28 +1,19 @@
-/// <reference path="../../declarations.d.ts" />
+/// <reference path="../../../declarations.d.ts" />
 
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import { TextField, TextFieldProps } from '../components/TextField';
+import type { Meta, StoryObj } from '@storybook/react';
+import { TextField } from '.';
 
-import SvgIcon from '../assets/icons/triangleDown.svg';
+import SvgIcon from '../../assets/icons/triangleDown.svg';
 
-const meta: Meta<TextFieldProps> = {
+const meta = {
   title: 'Components/TextField',
   component: TextField,
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['outlined', 'filled', 'standard'],
-    },
-    error: {
-      control: 'boolean',
-    },
-  },
   tags: ['autodocs'],
-};
+} satisfies Meta<typeof TextField>;
 
 export default meta;
-type Story = StoryObj<TextFieldProps>;
+type Story = StoryObj<typeof meta>;
 
 export const OutlinedWithLabelWithErrorText: Story = {
   args: {
@@ -202,7 +193,6 @@ export const StandardBothIcons: Story = {
     rightIcon: <SvgIcon />,
   },
 };
-
 
 export const DisabledOutlinedWithLabelWithErrorText: Story = {
   args: {

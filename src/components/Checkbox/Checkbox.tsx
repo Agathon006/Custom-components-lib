@@ -11,15 +11,15 @@ type CustomCSSProperties = React.CSSProperties & {
 };
 
 export type CheckboxProps = {
+  /** Optional label for the checkbox. */
   label?: string;
-  type?: 'checkbox';
+  /** The size of the checkbox. */
   size?: CheckboxSize;
-  color?: string;
+  /** Optional custom icon for the checkbox. */
   customIcon?: React.ReactElement | null;
-  className?: string;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
-// A functional component that renders a customizable checkbox with an optional label and icon.
+/** A functional component that renders a customizable checkbox with an optional label and icon. */
 export const Checkbox: FC<CheckboxProps> = ({
   label,
   type = 'checkbox',

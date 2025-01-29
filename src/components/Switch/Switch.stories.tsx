@@ -1,31 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Switch } from '../components/Switch';
+import { Switch } from '.';
 
 const meta = {
   title: 'Components/Switch',
   component: Switch,
-  argTypes: {
-    color: {
-      control: 'color',
-      description: 'Switch color',
-    },
-    size: {
-      control: {
-        type: 'radio',
-        options: ['small', 'medium', 'big'],
-      },
-      description: 'Switch size',
-    },
-    label: {
-      control: 'text',
-      description: 'Label for the switch',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Disable the switch',
-    },
-  },
   tags: ['autodocs'],
 } satisfies Meta<typeof Switch>;
 
@@ -79,5 +58,6 @@ export const Checked: Story = {
     size: 'medium',
     color: 'default',
     checked: true,
+    readOnly: true,
   },
 };

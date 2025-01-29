@@ -5,11 +5,13 @@ import classes from './Modal.module.scss';
 import CloseButtonIcon from '../../assets/icons/closeButton.svg';
 
 export type ModalProps = {
+  /** Whether the modal is open or not. */
   open?: boolean;
+  /** Called when the modal is closed. */
   onClose?: () => void;
 } & React.ComponentPropsWithoutRef<'div'>;
 
-//A modal component that renders a closable, focus-trapped modal dialog.
+/** A modal component that renders a closable, focus-trapped modal dialog. */
 export const Modal: FC<ModalProps> = ({ open, onClose, children, className, ...props }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -50,34 +52,36 @@ export const Modal: FC<ModalProps> = ({ open, onClose, children, className, ...p
   }, [open]);
 
   return (
-    open &&
-    createPortal(
-      <>
-        <div onClick={onClose} className={classes.modal_overlay} data-testid="modal-overlay" />
-        <div
-          {...props}
-          ref={modalRef}
-          className={clsx(classes.modal, className)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <CloseButtonIcon
-            onClick={onClose}
-            onKeyDown={event => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                onClose?.();
-              }
-            }}
-            className={classes.modal_close_button}
-            tabIndex={0}
-            role="button"
-            data-testid="modal-close-button"
-          />
-          {children}
-        </div>
-      </>,
-      document.body
-    )
+    <>
+      {open &&
+        createPortal(
+          <>
+            <div onClick={onClose} className={classes.modal_overlay} data-testid="modal-overlay" />
+            <div
+              {...props}
+              ref={modalRef}
+              className={clsx(classes.modal, className)}
+              role="dialog"
+              aria-modal="true"
+            >
+              <CloseButtonIcon
+                onClick={onClose}
+                onKeyDown={event => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    onClose?.();
+                  }
+                }}
+                className={classes.modal_close_button}
+                tabIndex={0}
+                role="button"
+                data-testid="modal-close-button"
+              />
+              {children}
+            </div>
+          </>,
+          document.body
+        )}
+    </>
   );
 };
